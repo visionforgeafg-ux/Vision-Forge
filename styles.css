@@ -18,10 +18,10 @@
   --gold:        #b8922a;
   --gold-light:  #d4ab52;
   --gold-pale:   #faf5ea;
-  --ivory:       #fdfcf9;
+  --ivory:       #ffffff;
   --white:       #ffffff;
-  --off-white:   #f8f7f4;
-  --off-white2:  #f2f0eb;
+  --off-white:   #f5f5f5;
+  --off-white2:  #eeeeee;
   --border:      rgba(13,31,53,0.08);
   --border-mid:  rgba(13,31,53,0.14);
   --border-strong: rgba(13,31,53,0.22);
@@ -48,7 +48,7 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
   background: var(--ivory);
-  background-color: #fdfcf9 !important;
+  background-color: #ffffff !important;
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.75;
@@ -192,7 +192,7 @@ h4, h5, h6 { font-family: var(--font-body); font-weight: 600; color: var(--navy)
   transition: background 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s;
 }
 .navbar.scrolled {
-  background: rgba(253,252,249,0.97);
+  background: rgba(255,255,255,0.97);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
@@ -254,7 +254,7 @@ h4, h5, h6 { font-family: var(--font-body); font-weight: 600; color: var(--navy)
 .hero::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(253,252,249,0.8) 100%),
+    radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(255,255,255,0.8) 100%),
     radial-gradient(ellipse 40% 50% at 92% 20%, rgba(184,146,42,0.04) 0%, transparent 60%),
     radial-gradient(ellipse 50% 60% at 8% 80%, rgba(26,75,140,0.03) 0%, transparent 65%);
   z-index: 0;
@@ -1308,7 +1308,7 @@ select.auth-control option { background: #fff; color: var(--navy); }
     color-scheme: light;
   }
   html, body {
-    background: #fdfcf9 !important;
+    background: #ffffff !important;
     color: #1a2e42 !important;
   }
 }
@@ -1418,7 +1418,7 @@ section {
 /* MOVED FROM index.html */
 /* ═══════════════════════════════════════════════════════════
    VISION FORGE — Premium Theme
-   Palette: Ivory #fdfcf9 · Deep Navy #0d1f35 · Ink #1a4b8c · Gold #b8922a
+   Palette: Ivory #ffffff · Deep Navy #0d1f35 · Ink #1a4b8c · Gold #b8922a
    ═══════════════════════════════════════════════════════════ */
 :root {
   color-scheme: light;
@@ -1432,10 +1432,10 @@ section {
   --gold-light:  #d4ab52;
   --gold-pale:   #faf5ea;
   --gold-glow:   rgba(184,146,42,0.18);
-  --ivory:       #fdfcf9;
+  --ivory:       #ffffff;
   --white:       #ffffff;
-  --off-white:   #f8f7f4;
-  --off-white2:  #f2f0eb;
+  --off-white:   #f5f5f5;
+  --off-white2:  #eeeeee;
   --border:      rgba(13,31,53,0.08);
   --border-mid:  rgba(13,31,53,0.14);
   --border-strong: rgba(13,31,53,0.22);
@@ -1562,7 +1562,7 @@ h4,h5,h6 { font-family: var(--font-body); font-weight: 600; color: var(--navy); 
   transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 .navbar.scrolled {
-  background: rgba(253,252,249,0.97);
+  background: rgba(255,255,255,0.97);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
@@ -1786,7 +1786,7 @@ body:not(.panel-open) { overflow-x: hidden; overflow-y: auto !important; }
 }
 .hero::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(253,252,249,0.8) 100%),
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(255,255,255,0.8) 100%),
     radial-gradient(ellipse 40% 50% at 92% 20%, rgba(184,146,42,0.05) 0%, transparent 60%),
     radial-gradient(ellipse 50% 60% at 8% 80%, rgba(26,75,140,0.04) 0%, transparent 65%);
   z-index: 0;
@@ -2512,7 +2512,7 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 /* ── Dark mode override — always light ── */
 @media (prefers-color-scheme: dark) {
   :root { color-scheme: light; }
-  html, body { background: #fdfcf9 !important; color: #1a2e42 !important; }
+  html, body { background: #ffffff !important; color: #1a2e42 !important; }
   .btn-primary { color: #fff !important; }
   .sp-cta { color: #fff !important; }
   .slide-panel { background: #ffffff !important; color: #1a2840 !important; }
