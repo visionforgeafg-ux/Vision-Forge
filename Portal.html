@@ -1,0 +1,3420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vision Forge — Student Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   VIFO — Student Portal  ·  Vision Forge Design System
+   Ivory · Deep Navy #0d1f35 · Ink Blue #1a4b8c · Gold #b8922a
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light;
+  --navy:        #0a1a2e;
+  --navy-mid:    #142d4f;
+  --ink:         #1a4b8c;
+  --ink-light:   #2e6bbf;
+  --ink-pale:    #edf3fb;
+  --ink-pale2:   #d8e8f8;
+  --gold:        #b8922a;
+  --gold-light:  #d4ab52;
+  --gold-xlight: #e8c97a;
+  --gold-pale:   #faf4e6;
+  --ivory:       #fdfcf9;
+  --white:       #ffffff;
+  --off-white:   #f7f6f2;
+  --off-white2:  #eeece6;
+  --border:      rgba(10,26,46,0.08);
+  --border-mid:  rgba(10,26,46,0.13);
+  --border-strong: rgba(10,26,46,0.22);
+  --text:        #162438;
+  --text-mid:    #445566;
+  --text-light:  rgba(22,36,56,0.42);
+  --green:       #1f9d6c;
+  --green-pale:  #e4f5ef;
+  --purple:      #7c4ec4;
+  --purple-pale: #f0ebfa;
+  --radius:      10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --ease:        cubic-bezier(0.22, 1, 0.36, 1);
+  --sidebar-w:   272px;
+  --font-serif:  'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-body:   'Outfit', system-ui, sans-serif;
+  --shadow-xs:   0 1px 4px rgba(10,26,46,0.06);
+  --shadow-sm:   0 2px 14px rgba(10,26,46,0.08);
+  --shadow-md:   0 8px 32px rgba(10,26,46,0.11);
+  --shadow-lg:   0 20px 60px rgba(10,26,46,0.14);
+  --shadow-xl:   0 36px 90px rgba(10,26,46,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  background: var(--off-white);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(10,26,46,0.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(10,26,46,0.2); }
+
+/* ── Page enter ── */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes viewIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatUp {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes gold-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(184,146,42,0.18); }
+  50%     { box-shadow: 0 0 0 6px rgba(184,146,42,0); }
+}
+@keyframes pulse-dot {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%     { opacity:0.45; transform:scale(0.8); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.portal-layout {
+  display: flex;
+  min-height: 100vh;
+  animation: pageIn 0.65s var(--ease) both;
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 100;
+  transition: transform 0.4s var(--ease);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse at 75% 15%, rgba(26,75,140,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 85%, rgba(184,146,42,0.12) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(255,255,255,0.015) 0%, transparent 100%);
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Sidebar top: logo */
+.sidebar-head {
+  padding: 28px 22px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+}
+.sidebar-logo-mark {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(184,146,42,0.22) 0%, rgba(184,146,42,0.08) 100%);
+  border: 1px solid rgba(184,146,42,0.32);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(184,146,42,0.14), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.sidebar-logo-mark svg {
+  width: 20px; height: 20px;
+}
+.sidebar-brand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.sidebar-brand {
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.sidebar-brand em { font-style: normal; color: var(--gold-light); }
+.sidebar-brand-sub {
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.28);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+/* Student strip */
+.sidebar-student {
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.02);
+}
+.student-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+  border: 2px solid rgba(255,255,255,0.14);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1rem; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(10,26,46,0.3);
+  letter-spacing: 0.01em;
+}
+.student-info p {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.student-info span {
+  font-size: 0.64rem;
+  color: rgba(255,255,255,0.32);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Nav */
+.sidebar-nav { flex: 1; padding: 12px 0; }
+.nav-group-label {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+  padding: 16px 22px 5px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 22px;
+  cursor: pointer;
+  transition: background 0.22s, border-color 0.22s, transform 0.18s;
+  border-left: 2.5px solid transparent;
+  position: relative;
+  margin: 1px 0;
+}
+.nav-item:hover {
+  background: rgba(255,255,255,0.045);
+  transform: translateX(2px);
+}
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(184,146,42,0.12) 0%, rgba(184,146,42,0.04) 100%);
+  border-left-color: var(--gold);
+}
+.nav-item.active .nav-icon svg { stroke: var(--gold-light); }
+.nav-item.active .nav-label { color: rgba(255,255,255,0.95); font-weight: 600; }
+
+.nav-icon {
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.35);
+  transition: color 0.22s;
+}
+.nav-icon svg {
+  width: 16px; height: 16px;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;
+}
+.nav-label {
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.22s;
+  font-weight: 400;
+}
+.nav-badge {
+  margin-left: auto;
+  background: var(--gold);
+  color: #fff;
+  font-size: 0.56rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+.nav-badge.nb-green { background: var(--green); }
+.nav-badge.nb-blue  { background: var(--ink-light); }
+
+/* Sidebar footer */
+.sidebar-footer {
+  padding: 14px 22px 22px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.sidebar-logout {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.28);
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+.sidebar-logout:hover {
+  color: rgba(255,255,255,0.65);
+  background: rgba(224,82,82,0.12);
+}
+.sidebar-logout svg {
+  width: 14px; height: 14px;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Mobile toggle */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px; z-index: 200;
+  width: 38px; height: 38px;
+  background: var(--navy);
+  border: none; border-radius: 9px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px;
+  box-shadow: var(--shadow-md);
+}
+.sidebar-toggle span {
+  display: block; width: 16px; height: 1.5px;
+  background: rgba(255,255,255,0.85);
+  transition: all 0.3s var(--ease);
+}
+.sidebar-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.sidebar-toggle.open span:nth-child(2) { opacity: 0; }
+.sidebar-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(13,31,53,0.52);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.sidebar-overlay.visible { opacity: 1; }
+
+/* ══════════════════════════════════════════
+   MAIN CONTENT AREA
+══════════════════════════════════════════ */
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--off-white);
+}
+
+/* Topbar */
+.topbar {
+  background: rgba(253,252,249,0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  top: 0; z-index: 80;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 1px 0 rgba(10,26,46,0.05), 0 4px 20px rgba(10,26,46,0.04);
+}
+.topbar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.topbar-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+.topbar-sub {
+  font-size: 0.71rem;
+  color: var(--text-light);
+  letter-spacing: 0.02em;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--ink-pale);
+  border: 1px solid rgba(26,75,140,0.14);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.72rem;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ink-light);
+  animation: pulse-dot 2.2s infinite;
+}
+
+/* Page content */
+.page-content {
+  padding: 36px 38px 72px;
+  flex: 1;
+}
+
+/* Views */
+.view { display: none; animation: viewIn 0.42s var(--ease) both; }
+.view.active { display: block; }
+
+/* ══════════════════════════════════════════
+   VIEW HEADER (shared across pages)
+══════════════════════════════════════════ */
+.view-header {
+  margin-bottom: 32px;
+}
+.view-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.view-eyebrow::before {
+  content: '';
+  width: 24px; height: 1.5px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 1px;
+}
+.view-header h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.08;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+}
+.view-header p {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  max-width: 540px;
+  line-height: 1.8;
+}
+
+/* ══════════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════════ */
+.welcome-strip {
+  background: linear-gradient(128deg, var(--navy) 0%, #10243f 40%, #152e5a 80%, #1c3f72 100%);
+  border-radius: var(--radius-xl);
+  padding: 42px 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 18px 56px rgba(10,26,46,0.28), 0 6px 16px rgba(10,26,46,0.18);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.welcome-strip::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -40px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,146,42,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.welcome-strip::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: 60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,107,191,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* Fine line pattern */
+.welcome-strip-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0.6) 0px,
+    rgba(255,255,255,0.6) 1px,
+    transparent 1px,
+    transparent 44px
+  );
+  pointer-events: none;
+}
+.welcome-text {
+  position: relative; z-index: 1;
+}
+.welcome-text h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.12;
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+}
+.welcome-text h2 em {
+  font-style: italic;
+  color: var(--gold-xlight);
+}
+.welcome-text p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.46);
+  max-width: 360px;
+  line-height: 1.75;
+}
+.welcome-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 13px 26px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 4px 24px rgba(184,146,42,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+  position: relative; z-index: 1;
+  letter-spacing: 0.01em;
+  animation: gold-pulse 3s infinite;
+}
+.welcome-cta:hover {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-xlight) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(184,146,42,0.58);
+  animation: none;
+}
+.welcome-cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px 18px;
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease), border-color 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2.5px;
+  background: var(--sc-accent, var(--ink));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.38s var(--ease);
+  border-radius: 0 2px 0 0;
+}
+.stat-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--border-mid);
+}
+.stat-card:hover::after { transform: scaleX(1); }
+.stat-icon {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.stat-icon svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.si-blue   { background: var(--ink-pale);   color: var(--ink); }
+.si-gold   { background: var(--gold-pale);  color: var(--gold); }
+.si-green  { background: var(--green-pale); color: var(--green); }
+.si-purple { background: var(--purple-pale);color: var(--purple); }
+
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 5px;
+  letter-spacing: -0.025em;
+}
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Modules grid */
+.section-row-title {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  letter-spacing: -0.01em;
+}
+.section-row-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.module-card {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  cursor: pointer;
+  transition: all 0.32s var(--ease);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--mc-accent, var(--ink));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.36s var(--ease);
+  border-radius: 0 2px 0 0;
+}
+.module-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--border-mid);
+}
+.module-card:hover::before { transform: scaleX(1); }
+.mc-gold { --mc-accent: var(--gold); }
+.mc-blue { --mc-accent: var(--ink); }
+.mc-green { --mc-accent: var(--green); }
+
+.module-icon {
+  width: 44px; height: 44px;
+  border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+}
+.module-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 7px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.module-desc {
+  font-size: 0.79rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+.module-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.module-tag {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--off-white2);
+  color: var(--text-mid);
+  border: 1px solid var(--border);
+}
+.module-arrow {
+  margin-left: auto;
+  width: 28px; height: 28px;
+  background: var(--off-white2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.24s, transform 0.24s;
+  border: 1px solid var(--border);
+}
+.module-card:hover .module-arrow {
+  background: var(--navy);
+  transform: translateX(2px);
+  border-color: var(--navy);
+}
+.module-arrow svg { width: 12px; height: 12px; stroke: var(--navy); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.22s; }
+.module-card:hover .module-arrow svg { stroke: #fff; }
+
+/* Dashboard bottom panels */
+.dash-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.panel-card {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow 0.28s var(--ease);
+}
+.panel-card:hover { box-shadow: var(--shadow-md); }
+.panel-head {
+  padding: 18px 22px 15px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.panel-head h3 {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+}
+.panel-link {
+  font-size: 0.71rem;
+  color: var(--ink);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.panel-link:hover { color: var(--navy); }
+.panel-body { padding: 4px 0; }
+
+/* Activity items */
+.activity-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 22px;
+  transition: background 0.18s;
+}
+.activity-row:hover { background: var(--off-white); }
+.a-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.a-text { flex: 1; }
+.a-text p { font-size: 0.8rem; color: var(--text); line-height: 1.4; }
+.a-text span { font-size: 0.69rem; color: var(--text-light); }
+
+/* Announcement items */
+.ann-row {
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.ann-row:last-child { border-bottom: none; }
+.ann-row:hover { background: var(--off-white); }
+.ann-tag {
+  display: inline-block;
+  font-size: 0.59rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+.at-gold  { background: var(--gold-pale);  color: var(--gold); border: 1px solid rgba(184,146,42,0.18); }
+.at-blue  { background: var(--ink-pale);   color: var(--ink);  border: 1px solid rgba(26,75,140,0.14); }
+.at-green { background: var(--green-pale); color: var(--green); border: 1px solid rgba(31,157,108,0.16); }
+.ann-title {
+  font-size: 0.8rem;
+  color: var(--navy);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+.ann-date {
+  font-size: 0.68rem;
+  color: var(--text-light);
+}
+
+/* ══════════════════════════════════════════
+   SCHOLARSHIP VIEW
+══════════════════════════════════════════ */
+.sch-list { display: grid; gap: 20px; }
+
+.sch-card {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: box-shadow 0.32s var(--ease), transform 0.32s var(--ease);
+  box-shadow: var(--shadow-xs);
+}
+.sch-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.sch-card-top {
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(184,146,42,0.025) 0%, transparent 60%);
+}
+.sch-icon {
+  width: 50px; height: 50px;
+  border-radius: 14px;
+  background: var(--gold-pale);
+  border: 1px solid rgba(184,146,42,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(184,146,42,0.1);
+}
+.sch-top-info h3 {
+  font-family: var(--font-serif);
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.sch-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sch-pill {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sp-open   { background: var(--green-pale); color: var(--green); border: 1px solid rgba(31,157,108,0.16); }
+.sp-closed { background: var(--off-white2); color: var(--text-light); }
+.sp-date   { background: var(--gold-pale);  color: var(--gold); border: 1px solid rgba(184,146,42,0.18); }
+
+.sch-card-body {
+  padding: 22px 28px 26px;
+}
+.sch-body-text {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+.sch-grid-detail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--off-white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.sch-detail label {
+  display: block;
+  font-size: 0.59rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 5px;
+}
+.sch-detail p {
+  font-size: 0.82rem;
+  color: var(--navy);
+  font-weight: 600;
+}
+.sch-req h4 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.sch-req-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.sch-req-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.81rem;
+  color: var(--text-mid);
+}
+.sch-req-list li::before {
+  content: '';
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--ink-pale);
+  border: 1.5px solid var(--ink-pale2);
+  flex-shrink: 0;
+  margin-top: 1px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8l3 3 6-6' stroke='%231a4b8c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-size: 11px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+  background-position: center;
+}
+.sch-note {
+  margin-top: 18px;
+  padding: 13px 17px;
+  background: var(--ink-pale);
+  border-left: 3px solid var(--ink);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.79rem;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.sch-note strong { color: var(--navy); }
+
+/* ══════════════════════════════════════════
+   TRADING / ENGLISH LESSONS VIEW
+══════════════════════════════════════════ */
+.lesson-tabs {
+  display: flex;
+  gap: 3px;
+  background: var(--off-white2);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 28px;
+  width: fit-content;
+  border: 1px solid var(--border);
+}
+.l-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 7px;
+  border: none;
+  background: none;
+  font-size: 0.81rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.22s var(--ease);
+}
+.l-tab svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.l-tab.active {
+  background: var(--ivory);
+  color: var(--navy);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+.l-tab-panel { display: none; }
+.l-tab-panel.active { display: block; animation: viewIn 0.38s var(--ease) both; }
+
+.lesson-section-label {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding: 6px 0 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.lessons-list { display: grid; gap: 10px; margin-bottom: 28px; }
+
+.lesson-card {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+}
+.lesson-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3.5px;
+  background: var(--lc-accent, var(--ink));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.34s var(--ease);
+  border-radius: 0 2px 2px 0;
+}
+.lesson-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(5px);
+  border-color: var(--border-mid);
+}
+.lesson-card:hover::before { transform: scaleY(1); }
+.lc-ink   { --lc-accent: var(--ink); }
+.lc-gold  { --lc-accent: var(--gold); }
+.lc-green { --lc-accent: var(--green); }
+.lesson-num {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.ln-ink  { background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%); }
+.ln-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); }
+.ln-green { background: linear-gradient(135deg, var(--green) 0%, #3db87c 100%); }
+
+.lesson-info { flex: 1; min-width: 0; }
+.lesson-title {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 3px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.lesson-sub {
+  font-size: 0.76rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.lesson-status {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.ls-avail  { background: var(--green-pale); color: var(--green); border: 1px solid rgba(31,157,108,0.16); }
+.ls-new    { background: var(--ink-pale);   color: var(--ink); border: 1px solid rgba(26,75,140,0.14); }
+.ls-soon   { background: var(--off-white2); color: var(--text-light); }
+.lesson-dur {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  display: flex; align-items: center; gap: 4px;
+}
+.lesson-dur svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+/* ══════════════════════════════════════════
+   LESSON MODAL
+══════════════════════════════════════════ */
+.lesson-modal-wrap {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(13,31,53,0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.lesson-modal-wrap.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.lesson-modal {
+  background: var(--ivory);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 660px;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.34s var(--ease);
+  border: 1px solid var(--border);
+}
+.lesson-modal-wrap.open .lesson-modal {
+  transform: scale(1) translateY(0);
+}
+.lm-head {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--ivory);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  z-index: 2;
+}
+.lm-close {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--off-white2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.lm-close:hover { background: var(--off-white); transform: scale(1.08); }
+.lm-close svg { width: 14px; height: 14px; stroke: var(--navy); fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.lm-body { padding: 26px 28px 32px; }
+.lm-eyebrow {
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+.lm-title {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.12;
+  margin-bottom: 5px;
+  letter-spacing: -0.01em;
+}
+.lm-meta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+.lm-meta-item {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  display: flex; align-items: center; gap: 5px;
+}
+.lm-meta-item svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.lm-content {
+  font-size: 0.865rem;
+  color: var(--text-mid);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+.lm-content p { margin-bottom: 13px; }
+.lm-content p:last-child { margin-bottom: 0; }
+.lm-content strong { color: var(--navy); font-weight: 600; }
+.lm-keypoints {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.lm-keypoints h4 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--navy);
+  margin-bottom: 11px;
+}
+.lm-keypoints ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.lm-keypoints li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 0.79rem;
+  color: var(--text-mid);
+}
+.lm-keypoints li::before {
+  content: '→';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.lm-note {
+  background: var(--ink-pale);
+  border-left: 3px solid var(--ink);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 13px 17px;
+  font-size: 0.79rem;
+  color: var(--ink);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+.lm-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.lm-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  font-size: 0.81rem; font-weight: 600;
+  cursor: pointer; border: none;
+  transition: all 0.26s var(--ease);
+  letter-spacing: 0.01em;
+}
+.lm-btn-primary { background: var(--navy); color: #fff; box-shadow: 0 2px 12px rgba(13,31,53,0.18); }
+.lm-btn-primary:hover { background: var(--ink); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,75,140,0.26); }
+.lm-btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--border-strong); }
+.lm-btn-outline:hover { background: var(--off-white2); }
+.lm-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ══════════════════════════════════════════
+   MESSAGES VIEW
+══════════════════════════════════════════ */
+.msg-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 568px;
+}
+.msg-left {
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.msg-left-head {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.msg-new-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 12px 14px;
+  padding: 9px 14px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 0.79rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.22s, transform 0.22s;
+  justify-content: center;
+}
+.msg-new-btn:hover { background: var(--ink); transform: scale(1.01); }
+.msg-new-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; }
+
+.thread-list { flex: 1; overflow-y: auto; }
+.thread {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.thread:hover { background: var(--off-white); }
+.thread.active { background: var(--ink-pale); }
+.t-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--ink));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.74rem; font-weight: 700; color: #fff;
+  font-family: var(--font-serif);
+  flex-shrink: 0;
+}
+.ta-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+.t-info { flex: 1; min-width: 0; }
+.t-name { font-size: 0.8rem; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.t-preview {
+  font-size: 0.71rem;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.t-time { font-size: 0.66rem; color: var(--text-light); flex-shrink: 0; }
+.t-unread {
+  width: 7px; height: 7px;
+  background: var(--ink);
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* Chat area */
+.msg-chat { display: flex; flex-direction: column; }
+.chat-head {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+}
+.chat-head h3 {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.online-pill {
+  font-size: 0.65rem;
+  color: var(--green);
+  background: var(--green-pale);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--off-white);
+}
+.msg-bubble {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.mb-admin   { align-self: flex-start; }
+.mb-student { align-self: flex-end; align-items: flex-end; }
+.bubble-text {
+  padding: 10px 14px;
+  border-radius: 13px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+.mb-admin .bubble-text {
+  background: var(--ivory);
+  color: var(--text);
+  border-bottom-left-radius: 3px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+.mb-student .bubble-text {
+  background: var(--navy);
+  color: #fff;
+  border-bottom-right-radius: 3px;
+}
+.bubble-time {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  padding: 0 3px;
+}
+.chat-compose {
+  padding: 13px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+.compose-wrap { flex: 1; }
+#msgInput {
+  width: 100%;
+  background: var(--off-white);
+  border: 1.5px solid var(--border-mid);
+  border-radius: 9px;
+  padding: 9px 13px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--navy);
+  resize: none;
+  outline: none;
+  line-height: 1.5;
+  transition: border-color 0.22s, box-shadow 0.22s;
+  min-height: 40px; max-height: 88px;
+  overflow-y: auto;
+}
+#msgInput:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(26,75,140,0.07);
+  background: var(--ivory);
+}
+#msgInput::placeholder { color: rgba(26,46,66,0.28); }
+.msg-send-btn {
+  width: 40px; height: 40px;
+  background: var(--navy);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.22s, transform 0.22s;
+  flex-shrink: 0;
+}
+.msg-send-btn:hover { background: var(--ink); transform: scale(1.04); }
+.msg-send-btn svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .stats-row    { grid-template-columns: repeat(2, 1fr); }
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-bottom  { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay { display: block; }
+  .sidebar-toggle  { display: flex; }
+  .main-content    { margin-left: 0; }
+  .topbar          { padding: 13px 18px 13px 62px; }
+  .page-content    { padding: 22px 16px 48px; }
+  .modules-grid    { grid-template-columns: 1fr; }
+  .welcome-strip   { flex-direction: column; align-items: flex-start; padding: 28px 26px; }
+  .msg-layout      { grid-template-columns: 1fr; height: auto; }
+  .msg-left        { display: none; }
+  .sch-grid-detail { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .stats-row       { grid-template-columns: 1fr; }
+  .sch-grid-detail { grid-template-columns: 1fr; }
+  .lm-actions      { flex-direction: column; }
+  .lm-btn          { justify-content: center; }
+}
+
+/* Force light */
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: light; }
+  html, body { background: var(--off-white) !important; color: var(--text) !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* Gold accent bar at top of sidebar */
+.sidebar-gold-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-xlight) 100%);
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* sch-note refinement */
+.sch-note {
+  margin-top: 18px;
+  padding: 13px 16px;
+  background: var(--ink-pale);
+  border-left: 3px solid var(--ink);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.8rem;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.sch-note strong { font-weight: 700; }
+
+/* ═══════════════════════════════════════
+   HAMBURGER GLASSMORPHISM (when open)
+═══════════════════════════════════════ */
+.sidebar-toggle.open {
+  background: rgba(10,26,46,0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 4px 24px rgba(10,26,46,0.28), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+/* ═══════════════════════════════════════
+   PROFILE VIEW
+═══════════════════════════════════════ */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.profile-card-left {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.profile-card-banner {
+  height: 90px;
+  background: linear-gradient(128deg, var(--navy) 0%, #162d50 45%, #1a3a6a 100%);
+  position: relative;
+  overflow: hidden;
+}
+.profile-card-banner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 38px);
+}
+.profile-avatar-wrap {
+  padding: 0 22px;
+  margin-top: -28px;
+  position: relative; z-index: 1;
+}
+.profile-avatar-big {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+  border: 3px solid var(--ivory);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.4rem; font-weight: 700; color: #fff;
+  box-shadow: 0 4px 16px rgba(13,31,53,0.18);
+}
+.profile-card-body { padding: 14px 22px 22px; }
+.profile-name-large {
+  font-family: var(--font-serif);
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+.profile-role-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--ink-pale);
+  border: 1px solid var(--ink-pale2);
+  border-radius: 20px;
+  padding: 3px 11px;
+  font-size: 0.69rem;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+.profile-quick-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.pqs-item { text-align: center; }
+.pqs-num {
+  font-family: var(--font-serif);
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--navy); line-height: 1;
+}
+.pqs-label { font-size: 0.67rem; color: var(--text-light); font-weight: 500; margin-top: 2px; }
+
+.profile-edit-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  background: var(--off-white2);
+  border: 1.5px solid var(--border-mid);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  transition: all 0.24s var(--ease);
+}
+.profile-edit-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+.profile-edit-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.profile-card-right {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.profile-section-head {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.profile-section-head h3 {
+  font-family: var(--font-serif);
+  font-size: 1rem; font-weight: 600; color: var(--navy);
+}
+.profile-section-body { padding: 20px 24px; }
+
+.profile-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.profile-field-row.full { grid-template-columns: 1fr; }
+.profile-field label {
+  display: block;
+  font-size: 0.67rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 5px;
+}
+.profile-field-val {
+  font-size: 0.855rem;
+  color: var(--navy);
+  font-weight: 500;
+  padding: 9px 12px;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 38px;
+  display: flex; align-items: center;
+}
+.profile-field input,
+.profile-field textarea,
+.profile-field select {
+  width: 100%;
+  background: var(--off-white);
+  border: 1.5px solid var(--border-mid);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  font-family: var(--font-body);
+  font-size: 0.855rem;
+  color: var(--navy);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: none;
+}
+.profile-field input:focus,
+.profile-field textarea:focus,
+.profile-field select:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(26,75,140,0.07);
+  background: var(--ivory);
+}
+.profile-actions {
+  display: flex; gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--off-white);
+}
+.profile-save-btn {
+  padding: 10px 24px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.24s var(--ease);
+  display: flex; align-items: center; gap: 7px;
+}
+.profile-save-btn:hover { background: var(--ink); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(26,75,140,0.22); }
+.profile-cancel-btn {
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--text-mid);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+.profile-cancel-btn:hover { background: var(--off-white2); color: var(--navy); }
+.profile-save-btn svg, .profile-cancel-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ═══════════════════════════════════════
+   ANALYTICS VIEW
+═══════════════════════════════════════ */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.an-stat-card {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 16px;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.28s var(--ease), transform 0.28s var(--ease);
+}
+.an-stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.an-stat-accent {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--an-color, var(--ink));
+}
+.an-stat-num {
+  font-family: var(--font-serif);
+  font-size: 2rem; font-weight: 700;
+  color: var(--navy); line-height: 1;
+  margin-bottom: 4px; margin-top: 4px;
+}
+.an-stat-label { font-size: 0.72rem; color: var(--text-light); font-weight: 500; }
+.an-stat-change {
+  font-size: 0.69rem; font-weight: 600;
+  display: flex; align-items: center; gap: 3px;
+  margin-top: 6px;
+}
+.an-up { color: var(--green); }
+.an-down { color: #e05252; }
+.an-stat-change svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+.analytics-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.analytics-row.thirds { grid-template-columns: 2fr 1fr; }
+
+.an-panel {
+  background: var(--ivory);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.an-panel-head {
+  padding: 16px 22px 13px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.an-panel-head h3 {
+  font-family: var(--font-serif);
+  font-size: 0.98rem; font-weight: 600; color: var(--navy);
+}
+.an-panel-sub { font-size: 0.7rem; color: var(--text-light); }
+.an-panel-body { padding: 20px 22px; }
+
+/* Module progress bars */
+.mod-progress-item { margin-bottom: 18px; }
+.mod-progress-item:last-child { margin-bottom: 0; }
+.mod-prog-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 7px;
+}
+.mod-prog-name {
+  font-size: 0.82rem; font-weight: 600; color: var(--navy);
+  display: flex; align-items: center; gap: 8px;
+}
+.mod-prog-icon { font-size: 1rem; }
+.mod-prog-pct { font-size: 0.78rem; font-weight: 700; color: var(--text-mid); }
+.mod-prog-track {
+  height: 7px;
+  background: var(--off-white2);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.mod-prog-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: var(--mp-color, var(--ink));
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mod-prog-sub { font-size: 0.68rem; color: var(--text-light); margin-top: 4px; }
+
+/* Weekly activity bar chart */
+.week-chart { display: flex; align-items: flex-end; gap: 6px; height: 100px; }
+.week-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; height: 100%; }
+.week-bar-track { flex: 1; width: 100%; background: var(--off-white2); border-radius: 4px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+.week-bar-fill {
+  width: 100%; border-radius: 4px;
+  background: var(--wb-color, var(--ink-pale2));
+  transition: height 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.week-bar-fill.wb-active { background: var(--ink); }
+.week-day-label { font-size: 0.6rem; color: var(--text-light); font-weight: 600; letter-spacing: 0.04em; }
+.week-chart-label { font-size: 0.68rem; color: var(--text-light); margin-bottom: 10px; }
+
+/* Circular progress ring */
+.ring-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 0; gap: 12px; }
+.ring-svg { width: 120px; height: 120px; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: var(--off-white2); stroke-width: 10; }
+.ring-fill { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1); }
+.ring-label-wrap { text-align: center; }
+.ring-pct { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.ring-sub { font-size: 0.71rem; color: var(--text-light); margin-top: 3px; }
+
+/* Achievement badges */
+.badges-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.badge-item {
+  display: flex; gap: 10px; align-items: center;
+  padding: 11px 13px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--off-white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.badge-item.earned { border-color: rgba(184,146,42,0.28); background: var(--gold-pale); }
+.badge-item:hover { box-shadow: var(--shadow-xs); }
+.badge-icon { font-size: 1.35rem; flex-shrink: 0; }
+.badge-info p { font-size: 0.76rem; font-weight: 600; color: var(--navy); line-height: 1.2; }
+.badge-info span { font-size: 0.65rem; color: var(--text-light); }
+.badge-item.locked .badge-icon { filter: grayscale(1); opacity: 0.35; }
+.badge-item.locked .badge-info p { color: var(--text-light); }
+
+/* ═══════════════════════════════════════
+   LOGOUT CONFIRMATION MODAL
+═══════════════════════════════════════ */
+.logout-modal-wrap {
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(13,31,53,0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.28s;
+}
+.logout-modal-wrap.open { opacity: 1; pointer-events: all; }
+.logout-modal {
+  background: var(--ivory);
+  border-radius: var(--radius-xl);
+  width: 100%; max-width: 380px;
+  padding: 32px 30px 26px;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  transform: scale(0.94) translateY(10px);
+  transition: transform 0.3s var(--ease);
+  text-align: center;
+}
+.logout-modal-wrap.open .logout-modal { transform: scale(1) translateY(0); }
+.logout-modal-icon {
+  width: 52px; height: 52px;
+  background: rgba(224,82,82,0.09);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+  border: 1px solid rgba(224,82,82,0.18);
+}
+.logout-modal-icon svg { width: 22px; height: 22px; stroke: #e05252; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.logout-modal h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 8px;
+}
+.logout-modal p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 22px; }
+.logout-modal-actions { display: flex; gap: 10px; }
+.logout-confirm-btn {
+  flex: 1; padding: 11px;
+  background: #e05252; color: #fff;
+  border: none; border-radius: var(--radius);
+  font-family: var(--font-body); font-size: 0.83rem; font-weight: 600;
+  cursor: pointer; transition: all 0.22s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.logout-confirm-btn:hover { background: #c93c3c; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(224,82,82,0.3); }
+.logout-cancel-btn {
+  flex: 1; padding: 11px;
+  background: var(--off-white2);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-body); font-size: 0.83rem; font-weight: 500;
+  color: var(--navy); cursor: pointer; transition: all 0.22s;
+}
+.logout-cancel-btn:hover { background: var(--off-white); }
+.logout-confirm-btn svg, .logout-cancel-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ═══════════════════════════════════════
+   MESSAGES — SUPPORT ONLY UPDATES
+═══════════════════════════════════════ */
+.compose-readonly {
+  padding: 13px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--off-white);
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.compose-readonly-note {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.76rem; color: var(--text-light);
+  font-style: italic;
+}
+.compose-readonly-note svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; flex-shrink: 0; }
+.compose-switch-btn {
+  margin-left: auto;
+  padding: 6px 14px;
+  background: var(--navy); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-family: var(--font-body); font-size: 0.74rem; font-weight: 600;
+  cursor: pointer; transition: all 0.22s; white-space: nowrap;
+}
+.compose-switch-btn:hover { background: var(--ink); }
+
+/* Support Team header badge */
+.support-badge {
+  font-size: 0.65rem; background: var(--green-pale);
+  color: var(--green); padding: 2px 8px;
+  border-radius: 20px; font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   SIDEBAR LOGOUT — ENHANCED
+═══════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   RESPONSIVE ADDITIONS
+═══════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .analytics-grid { grid-template-columns: repeat(2, 1fr); }
+  .analytics-row, .analytics-row.thirds { grid-template-columns: 1fr; }
+  .profile-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .analytics-grid { grid-template-columns: repeat(2, 1fr); }
+  .badges-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .analytics-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile toggle -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Open menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="portal-layout">
+
+  <!-- ══════ SIDEBAR ══════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-gold-bar"></div>
+
+    <div class="sidebar-head" style="padding:18px 22px 14px;">
+      <div class="sidebar-logo-svg">
+        <svg width="148" height="56" viewBox="0 0 530 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sunburst mark — gold on dark -->
+          <g fill="#d4ab52">
+            <path d="M 99.06,82.02 Q 68.54,52.47 33.49,67.56 Q 32.83,52.97 46.77,48.60 Q 73.68,49.44 100.94,82.02 Z"/>
+            <path d="M 108.17,83.96 Q 96.52,43.11 58.62,38.65 Q 65.35,25.68 79.60,28.87 Q 102.49,43.05 109.80,84.90 Z"/>
+            <path d="M 115.10,90.20 Q 125.43,48.99 94.84,26.18 Q 107.15,18.31 117.90,28.20 Q 130.63,51.93 116.04,91.83 Z"/>
+            <path d="M 117.98,99.06 Q 147.53,68.54 132.44,33.49 Q 147.03,32.83 151.40,46.77 Q 150.56,73.68 117.98,100.94 Z"/>
+            <path d="M 116.04,108.17 Q 156.89,96.52 161.35,58.62 Q 174.32,65.35 171.13,79.60 Q 156.95,102.49 115.10,109.80 Z"/>
+            <path d="M 109.80,115.10 Q 151.01,125.43 173.82,94.84 Q 181.69,107.15 171.80,117.90 Q 148.07,130.63 108.17,116.04 Z"/>
+            <path d="M 100.94,117.98 Q 131.46,147.53 166.51,132.44 Q 167.17,147.03 153.23,151.40 Q 126.32,150.56 99.06,117.98 Z"/>
+            <path d="M 91.83,116.04 Q 103.48,156.89 141.38,161.35 Q 134.65,174.32 120.40,171.13 Q 97.51,156.95 90.20,115.10 Z"/>
+            <path d="M 84.90,109.80 Q 74.57,151.01 105.16,173.82 Q 92.85,181.69 82.10,171.80 Q 69.37,148.07 83.96,108.17 Z"/>
+            <path d="M 82.02,100.94 Q 52.47,131.46 67.56,166.51 Q 52.97,167.17 48.60,153.23 Q 49.44,126.32 82.02,99.06 Z"/>
+            <path d="M 83.96,91.83 Q 43.11,103.48 38.65,141.38 Q 25.68,134.65 28.87,120.40 Q 43.05,97.51 84.90,90.20 Z"/>
+            <path d="M 90.20,84.90 Q 48.99,74.57 26.18,105.16 Q 18.31,92.85 28.20,82.10 Q 51.93,69.37 91.83,83.96 Z"/>
+          </g>
+          <!-- ViFo wordmark — white & gold-blue on dark -->
+          <text x="215" y="133" font-family="Outfit,Segoe UI,Arial,sans-serif" font-size="92" font-weight="700" fill="#ffffff">V</text>
+          <text x="279" y="133" font-family="Outfit,Segoe UI,Arial,sans-serif" font-size="86" font-weight="700" fill="#7ab8f5">i</text>
+          <text x="306" y="133" font-family="Outfit,Segoe UI,Arial,sans-serif" font-size="92" font-weight="700" fill="#ffffff">F</text>
+          <text x="364" y="133" font-family="Outfit,Segoe UI,Arial,sans-serif" font-size="86" font-weight="700" fill="#7ab8f5">o</text>
+          <!-- Tagline -->
+          <text x="215" y="163" font-family="Outfit,Segoe UI,Arial,sans-serif" font-size="21" font-weight="500" fill="rgba(255,255,255,0.38)" letter-spacing="5.5">VISION FORGE</text>
+        </svg>
+        <div style="font-size:0.58rem;font-weight:500;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.18em;padding-top:1px;padding-left:2px;">Student Portal</div>
+      </div>
+    </div>
+
+    <div class="sidebar-student">
+      <div class="student-avatar" id="sAvatar">S</div>
+      <div class="student-info">
+        <p id="sName">Student</p>
+        <span>Active Learner</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Main</div>
+      <div class="nav-item active" data-view="dashboard">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </span>
+        <span class="nav-label">Dashboard</span>
+      </div>
+
+      <div class="nav-group-label">Learning</div>
+      <div class="nav-item" data-view="scholarship">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </span>
+        <span class="nav-label">Scholarship</span>
+        <span class="nav-badge nb-green">New</span>
+      </div>
+      <div class="nav-item" data-view="trading">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </span>
+        <span class="nav-label">Trading</span>
+      </div>
+      <div class="nav-item" data-view="english">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h8M4 17h8"/></svg>
+        </span>
+        <span class="nav-label">English</span>
+      </div>
+
+      <div class="nav-group-label">Account</div>
+      <div class="nav-item" data-view="profile">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span class="nav-label">My Profile</span>
+      </div>
+      <div class="nav-item" data-view="analytics">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </span>
+        <span class="nav-label">Analytics</span>
+      </div>
+
+      <div class="nav-group-label">Communication</div>
+      <div class="nav-item" data-view="messages">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </span>
+        <span class="nav-label">Messages</span>
+        <span class="nav-badge">2</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-logout" id="logoutBtn">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══════ MAIN ══════ -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-sub" id="topbarDate"></div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-pill">
+          <div class="pill-dot"></div>
+          Enrolled
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="page-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="view active" id="view-dashboard">
+
+        <div class="welcome-strip">
+          <div class="welcome-strip-lines"></div>
+          <div class="welcome-text">
+            <h2>Welcome back, <em id="welcomeName">Student</em></h2>
+            <p>Your learning journey continues. Explore your modules, check scholarship updates, and stay in touch with your instructor.</p>
+          </div>
+          <button class="welcome-cta" onclick="switchView('trading')">
+            <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            Continue Learning
+          </button>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon si-blue">
+              <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div class="stat-num">12</div>
+            <div class="stat-label">Lessons Available</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon si-gold">
+              <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="stat-num">2</div>
+            <div class="stat-label">Open Scholarships</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon si-green">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="stat-num">2</div>
+            <div class="stat-label">New Messages</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon si-purple">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-num">5</div>
+            <div class="stat-label">Days Active</div>
+          </div>
+        </div>
+
+        <div class="section-row-title">Your Modules</div>
+        <div class="modules-grid">
+
+          <div class="module-card mc-gold" onclick="switchView('scholarship')">
+            <div class="module-icon" style="background:var(--gold-pale)">🎓</div>
+            <div class="module-title">Scholarship</div>
+            <div class="module-desc">Scholarship opportunities, eligibility criteria, and admin-posted details — all in one place.</div>
+            <div class="module-foot">
+              <span class="module-tag">2 Active</span>
+              <div class="module-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+            </div>
+          </div>
+
+          <div class="module-card mc-blue" onclick="switchView('trading')">
+            <div class="module-icon" style="background:var(--ink-pale)">📈</div>
+            <div class="module-title">Trading Lessons</div>
+            <div class="module-desc">Financial markets, chart reading, technical analysis, and risk management — structured lessons.</div>
+            <div class="module-foot">
+              <span class="module-tag">6 Lessons</span>
+              <div class="module-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+            </div>
+          </div>
+
+          <div class="module-card mc-green" onclick="switchView('english')">
+            <div class="module-icon" style="background:var(--green-pale)">🔤</div>
+            <div class="module-title">English Lessons</div>
+            <div class="module-desc">Grammar, academic writing, professional communication, and IELTS preparation modules.</div>
+            <div class="module-foot">
+              <span class="module-tag">6 Lessons</span>
+              <div class="module-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="dash-bottom">
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Recent Activity</h3>
+            </div>
+            <div class="panel-body">
+              <div class="activity-row">
+                <div class="a-dot" style="background:var(--ink)"></div>
+                <div class="a-text"><p>New lesson added to Trading module</p><span>2 hours ago</span></div>
+              </div>
+              <div class="activity-row">
+                <div class="a-dot" style="background:var(--gold)"></div>
+                <div class="a-text"><p>Scholarship application deadline updated</p><span>Yesterday</span></div>
+              </div>
+              <div class="activity-row">
+                <div class="a-dot" style="background:var(--green)"></div>
+                <div class="a-text"><p>Admin replied to your message</p><span>2 days ago</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-head">
+              <h3>Announcements</h3>
+            </div>
+            <div class="panel-body">
+              <div class="ann-row" onclick="switchView('scholarship')">
+                <div class="ann-tag at-gold">Scholarship</div>
+                <div class="ann-title">Merit Excellence Award — Applications Now Open</div>
+                <div class="ann-date">Posted May 1, 2026</div>
+              </div>
+              <div class="ann-row" onclick="switchView('trading')">
+                <div class="ann-tag at-blue">Trading</div>
+                <div class="ann-title">New module: Advanced Risk Management added</div>
+                <div class="ann-date">Posted April 28, 2026</div>
+              </div>
+              <div class="ann-row" onclick="switchView('english')">
+                <div class="ann-tag at-green">English</div>
+                <div class="ann-title">IELTS Preparation series is now live</div>
+                <div class="ann-date">Posted April 24, 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── SCHOLARSHIP ── -->
+      <div class="view" id="view-scholarship">
+        <div class="view-header">
+          <div class="view-eyebrow">Opportunities</div>
+          <h1>Scholarship Board</h1>
+          <p>Scholarship opportunities are posted here by the administration. Read through the details carefully and contact admin through Messages to apply.</p>
+        </div>
+
+        <div class="sch-list">
+
+          <div class="sch-card">
+            <div class="sch-card-top">
+              <div class="sch-icon">🏆</div>
+              <div class="sch-top-info">
+                <h3>Vifo Merit Excellence Award 2026</h3>
+                <div class="sch-pills">
+                  <span class="sch-pill sp-open">● Open</span>
+                  <span class="sch-pill sp-date">Deadline: June 15, 2026</span>
+                </div>
+              </div>
+            </div>
+            <div class="sch-card-body">
+              <p class="sch-body-text">The Vifo Merit Excellence Award recognises outstanding students who demonstrate exceptional commitment, discipline, and potential. This scholarship covers tuition and provides a monthly stipend for the full programme duration.</p>
+              <div class="sch-grid-detail">
+                <div class="sch-detail"><label>Award Value</label><p>$2,400 / year</p></div>
+                <div class="sch-detail"><label>Duration</label><p>12 months (renewable)</p></div>
+                <div class="sch-detail"><label>Seats Available</label><p>3 Students</p></div>
+              </div>
+              <div class="sch-req">
+                <h4>Eligibility</h4>
+                <ul class="sch-req-list">
+                  <li>Enrolled in Vifo for a minimum of 3 months</li>
+                  <li>Consistent attendance and lesson completion</li>
+                  <li>Good standing — no disciplinary record</li>
+                </ul>
+              </div>
+              <div class="sch-note">
+                <strong>Admin Note:</strong> To apply, send a message with the subject "Scholarship Application — Merit Excellence Award 2026" and include a short paragraph about why you deserve this scholarship. All applications are reviewed personally.
+              </div>
+            </div>
+          </div>
+
+          <div class="sch-card">
+            <div class="sch-card-top">
+              <div class="sch-icon">🌍</div>
+              <div class="sch-top-info">
+                <h3>International Access Bursary</h3>
+                <div class="sch-pills">
+                  <span class="sch-pill sp-open">● Open</span>
+                  <span class="sch-pill sp-date">Deadline: July 1, 2026</span>
+                </div>
+              </div>
+            </div>
+            <div class="sch-card-body">
+              <p class="sch-body-text">The International Access Bursary supports students from regions with limited access to quality financial and English education. Awarded based on financial need and demonstrated motivation — partial or full fee waivers available.</p>
+              <div class="sch-grid-detail">
+                <div class="sch-detail"><label>Award Value</label><p>Up to 100% fee waiver</p></div>
+                <div class="sch-detail"><label>Duration</label><p>6 months</p></div>
+                <div class="sch-detail"><label>Seats Available</label><p>5 Students</p></div>
+              </div>
+              <div class="sch-req">
+                <h4>Eligibility</h4>
+                <ul class="sch-req-list">
+                  <li>Demonstrated financial need (brief statement required)</li>
+                  <li>Active participation in at least one module</li>
+                  <li>Clear learning goals and strong motivation</li>
+                </ul>
+              </div>
+              <div class="sch-note">
+                <strong>Admin Note:</strong> If financial barriers are in the way of your learning, please reach out. Send a message titled "Bursary Application — International Access" and share your situation honestly. This is close to my heart.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── TRADING LESSONS ── -->
+      <div class="view" id="view-trading">
+        <div class="view-header">
+          <div class="view-eyebrow">Financial Education</div>
+          <h1>Trading Lessons</h1>
+          <p>Structured lessons on financial markets, technical analysis, chart reading, and professional risk management. Click any lesson to read.</p>
+        </div>
+
+        <div class="lesson-section-label">Module 1 — Foundations of Markets</div>
+        <div class="lessons-list" style="margin-bottom:24px">
+          <div class="lesson-card lc-ink" onclick="openLesson('t1')" style="animation:floatUp 0.4s var(--ease) 0.05s both">
+            <div class="lesson-num ln-ink">01</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Understanding Financial Markets</div>
+              <div class="lesson-sub">What are markets, how they work, key participants and instruments</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>25 min</span>
+            </div>
+          </div>
+          <div class="lesson-card lc-ink" onclick="openLesson('t2')" style="animation:floatUp 0.4s var(--ease) 0.12s both">
+            <div class="lesson-num ln-ink">02</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Reading Candlestick Charts</div>
+              <div class="lesson-sub">Interpreting price action, timeframes, and common patterns</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>30 min</span>
+            </div>
+          </div>
+          <div class="lesson-card lc-ink" onclick="openLesson('t3')" style="animation:floatUp 0.4s var(--ease) 0.19s both">
+            <div class="lesson-num ln-ink">03</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Support, Resistance & Trend Lines</div>
+              <div class="lesson-sub">Identifying key price levels and drawing trend lines correctly</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-new">New</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>28 min</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-section-label">Module 2 — Strategy & Risk</div>
+        <div class="lessons-list">
+          <div class="lesson-card lc-gold" onclick="openLesson('t4')" style="animation:floatUp 0.4s var(--ease) 0.05s both">
+            <div class="lesson-num ln-gold">04</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Risk Management Fundamentals</div>
+              <div class="lesson-sub">Position sizing, stop-loss placement, and protecting your capital</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>35 min</span>
+            </div>
+          </div>
+          <div class="lesson-card lc-gold" onclick="openLesson('t5')" style="animation:floatUp 0.4s var(--ease) 0.12s both">
+            <div class="lesson-num ln-gold">05</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Trading Psychology</div>
+              <div class="lesson-sub">Discipline, emotional control, and managing fear and greed</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>32 min</span>
+            </div>
+          </div>
+          <div class="lesson-card lc-gold" onclick="openLesson('t6')" style="animation:floatUp 0.4s var(--ease) 0.19s both">
+            <div class="lesson-num ln-gold">06</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Building a Trading Plan</div>
+              <div class="lesson-sub">Rules, routines, and a structured approach to consistent trading</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-soon">Coming Soon</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>40 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ENGLISH LESSONS ── -->
+      <div class="view" id="view-english">
+        <div class="view-header">
+          <div class="view-eyebrow">Language & Communication</div>
+          <h1>English Lessons</h1>
+          <p>Develop your academic and professional English through structured modules covering grammar, writing, communication, and exam preparation.</p>
+        </div>
+
+        <div class="lesson-section-label">Module 1 — Language Foundations</div>
+        <div class="lessons-list" style="margin-bottom:24px">
+          <div class="lesson-card" onclick="openLesson('e1')">
+            <div class="lesson-num ln-green">01</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Grammar Essentials</div>
+              <div class="lesson-sub">Tenses, sentence structure, articles, and common errors corrected</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>22 min</span>
+            </div>
+          </div>
+          <div class="lesson-card" onclick="openLesson('e2')">
+            <div class="lesson-num ln-green">02</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Vocabulary in Context</div>
+              <div class="lesson-sub">Building range, choosing the right word, and avoiding repetition</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>20 min</span>
+            </div>
+          </div>
+          <div class="lesson-card" onclick="openLesson('e3')">
+            <div class="lesson-num ln-green">03</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Academic Writing Structure</div>
+              <div class="lesson-sub">Essays, thesis statements, body paragraphs, and formal tone</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-new">New</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>35 min</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-section-label">Module 2 — Professional & Exam English</div>
+        <div class="lessons-list">
+          <div class="lesson-card" onclick="openLesson('e4')">
+            <div class="lesson-num ln-ink">04</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Professional Communication</div>
+              <div class="lesson-sub">Emails, formal letters, presentations, and workplace English</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>26 min</span>
+            </div>
+          </div>
+          <div class="lesson-card" onclick="openLesson('e5')">
+            <div class="lesson-num ln-ink">05</div>
+            <div class="lesson-info">
+              <div class="lesson-title">IELTS Preparation</div>
+              <div class="lesson-sub">Exam structure, Writing Tasks 1 & 2, marking criteria and strategy</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-avail">Available</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>45 min</span>
+            </div>
+          </div>
+          <div class="lesson-card" onclick="openLesson('e6')">
+            <div class="lesson-num ln-ink">06</div>
+            <div class="lesson-info">
+              <div class="lesson-title">Speaking & Presentation Skills</div>
+              <div class="lesson-sub">Clarity, confidence, structure, and delivering ideas effectively</div>
+            </div>
+            <div class="lesson-right">
+              <span class="lesson-status ls-soon">Coming Soon</span>
+              <span class="lesson-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>30 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MESSAGES ── -->
+      <div class="view" id="view-messages">
+        <div class="view-header" style="margin-bottom:20px">
+          <div class="view-eyebrow">Communication</div>
+          <h1>Messages</h1>
+          <p>Contact the Support Team for questions and assistance. We typically respond within 24 hours.</p>
+        </div>
+
+        <div class="msg-layout">
+          <!-- Left: thread list -->
+          <div class="msg-left">
+            <div class="msg-left-head">Inbox</div>
+            <div class="thread-list">
+              <div class="thread" id="thread-admin">
+                <div class="t-avatar ta-gold">A</div>
+                <div class="t-info">
+                  <div class="t-name">Admin · Vision Forge</div>
+                  <div class="t-preview">Welcome to the Vifo Student Portal...</div>
+                </div>
+                <div class="t-time">Today</div>
+              </div>
+              <div class="thread active" id="thread-support">
+                <div class="t-avatar">ST</div>
+                <div class="t-info">
+                  <div class="t-name">Support Team</div>
+                  <div class="t-preview">Your question has been received...</div>
+                </div>
+                <div class="t-time">2d ago</div>
+                <div class="t-unread"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: chat -->
+          <div class="msg-chat">
+            <!-- Admin chat head (shown when admin thread active) -->
+            <div class="chat-head" id="chatHead-admin" style="display:none">
+              <div class="t-avatar ta-gold" style="width:32px;height:32px;font-size:0.7rem">A</div>
+              <div>
+                <h3>Admin · Vision Forge</h3>
+              </div>
+              <span class="online-pill" style="background:var(--gold-pale);color:var(--gold)">● Broadcast</span>
+            </div>
+            <!-- Support chat head (shown when support thread active) -->
+            <div class="chat-head" id="chatHead-support">
+              <div class="t-avatar" style="width:32px;height:32px;font-size:0.65rem">ST</div>
+              <div>
+                <h3>Support Team</h3>
+              </div>
+              <span class="support-badge">● Available</span>
+            </div>
+
+            <!-- Admin messages -->
+            <div class="chat-messages" id="chatMessages-admin" style="display:none">
+              <div class="msg-bubble mb-admin">
+                <div class="bubble-text">Welcome to the Vifo Student Portal. This is your space to learn, ask questions, and stay updated. Don't hesitate to reach out.</div>
+                <div class="bubble-time">Admin · Today</div>
+              </div>
+              <div class="msg-bubble mb-admin">
+                <div class="bubble-text">Two new scholarship opportunities have been posted — check the Scholarship section when you get a chance.</div>
+                <div class="bubble-time">Admin · Today</div>
+              </div>
+            </div>
+
+            <!-- Support messages -->
+            <div class="chat-messages" id="chatMessages-support">
+              <div class="msg-bubble mb-admin">
+                <div class="bubble-text">Hello! Welcome to Vision Forge Support. How can we help you today?</div>
+                <div class="bubble-time">Support Team · 2 days ago</div>
+              </div>
+              <div class="msg-bubble mb-admin">
+                <div class="bubble-text">Your previous question has been received and is being reviewed. We'll follow up shortly.</div>
+                <div class="bubble-time">Support Team · 2 days ago</div>
+              </div>
+            </div>
+
+            <!-- Admin: read-only notice -->
+            <div class="compose-readonly" id="compose-readonly">
+              <div class="compose-readonly-note">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                This is a read-only broadcast channel from Admin.
+              </div>
+              <button class="compose-switch-btn" onclick="switchThread('support')">Message Support</button>
+            </div>
+
+            <!-- Support: compose area -->
+            <div class="chat-compose" id="compose-support">
+              <div class="compose-wrap">
+                <textarea id="msgInput" placeholder="Write a message to the support team…" rows="1"></textarea>
+              </div>
+              <button class="msg-send-btn" id="msgSendBtn">
+                <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── PROFILE ── -->
+      <div class="view" id="view-profile">
+        <div class="view-header">
+          <div class="view-eyebrow">Account</div>
+          <h1>My Profile</h1>
+          <p>View and update your personal details. Your information is kept private and secure.</p>
+        </div>
+
+        <div class="profile-layout">
+          <!-- Left card -->
+          <div class="profile-card-left">
+            <div class="profile-card-banner"></div>
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar-big" id="profileAvatarBig">S</div>
+            </div>
+            <div class="profile-card-body">
+              <div class="profile-name-large" id="profileNameDisplay">Student</div>
+              <div class="profile-role-pill">
+                <svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                Active Learner
+              </div>
+              <div class="profile-quick-stats">
+                <div class="pqs-item">
+                  <div class="pqs-num">12</div>
+                  <div class="pqs-label">Lessons</div>
+                </div>
+                <div class="pqs-item">
+                  <div class="pqs-num">5</div>
+                  <div class="pqs-label">Days Active</div>
+                </div>
+                <div class="pqs-item">
+                  <div class="pqs-num">2</div>
+                  <div class="pqs-label">Scholarships</div>
+                </div>
+                <div class="pqs-item">
+                  <div class="pqs-num">3</div>
+                  <div class="pqs-label">Modules</div>
+                </div>
+              </div>
+              <button class="profile-edit-btn" id="profileEditTrigger">
+                <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit Profile
+              </button>
+            </div>
+          </div>
+
+          <!-- Right detail card -->
+          <div class="profile-card-right">
+            <!-- VIEW MODE -->
+            <div id="profileViewMode">
+              <div class="profile-section-head">
+                <h3>Personal Information</h3>
+                <span style="font-size:0.7rem;color:var(--text-light)">Last updated today</span>
+              </div>
+              <div class="profile-section-body">
+                <div class="profile-field-row">
+                  <div class="profile-field">
+                    <label>First Name</label>
+                    <div class="profile-field-val" id="pv-firstName">—</div>
+                  </div>
+                  <div class="profile-field">
+                    <label>Last Name</label>
+                    <div class="profile-field-val" id="pv-lastName">—</div>
+                  </div>
+                </div>
+                <div class="profile-field-row">
+                  <div class="profile-field">
+                    <label>Email Address</label>
+                    <div class="profile-field-val" id="pv-email">—</div>
+                  </div>
+                  <div class="profile-field">
+                    <label>Phone Number</label>
+                    <div class="profile-field-val" id="pv-phone">—</div>
+                  </div>
+                </div>
+                <div class="profile-field-row">
+                  <div class="profile-field">
+                    <label>Country</label>
+                    <div class="profile-field-val" id="pv-country">—</div>
+                  </div>
+                  <div class="profile-field">
+                    <label>Enrolled Since</label>
+                    <div class="profile-field-val" id="pv-enrolled">May 2026</div>
+                  </div>
+                </div>
+                <div class="profile-field-row full">
+                  <div class="profile-field">
+                    <label>About Me</label>
+                    <div class="profile-field-val" style="align-items:flex-start;min-height:72px;padding-top:10px" id="pv-bio">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- EDIT MODE -->
+            <div id="profileEditMode" style="display:none">
+              <div class="profile-section-head">
+                <h3>Edit Information</h3>
+              </div>
+              <div class="profile-section-body">
+                <div class="profile-field-row">
+                  <div class="profile-field">
+                    <label>First Name</label>
+                    <input type="text" id="pe-firstName" placeholder="Enter first name"/>
+                  </div>
+                  <div class="profile-field">
+                    <label>Last Name</label>
+                    <input type="text" id="pe-lastName" placeholder="Enter last name"/>
+                  </div>
+                </div>
+                <div class="profile-field-row">
+                  <div class="profile-field">
+                    <label>Email Address</label>
+                    <input type="email" id="pe-email" placeholder="your@email.com"/>
+                  </div>
+                  <div class="profile-field">
+                    <label>Phone Number</label>
+                    <input type="tel" id="pe-phone" placeholder="+1 234 567 8900"/>
+                  </div>
+                </div>
+                <div class="profile-field-row">
+                  <div class="profile-field">
+                    <label>Country</label>
+                    <input type="text" id="pe-country" placeholder="Your country"/>
+                  </div>
+                </div>
+                <div class="profile-field-row full">
+                  <div class="profile-field">
+                    <label>About Me</label>
+                    <textarea id="pe-bio" rows="3" placeholder="Share a little about your learning goals…"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <button class="profile-save-btn" id="profileSaveBtn">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                  Save Changes
+                </button>
+                <button class="profile-cancel-btn" id="profileCancelBtn">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ANALYTICS ── -->
+      <div class="view" id="view-analytics">
+        <div class="view-header">
+          <div class="view-eyebrow">Insights</div>
+          <h1>My Analytics</h1>
+          <p>Track your progress, lesson completion, and activity across all modules.</p>
+        </div>
+
+        <!-- Top stats -->
+        <div class="analytics-grid">
+          <div class="an-stat-card" style="--an-color:var(--ink)">
+            <div class="an-stat-accent"></div>
+            <div class="an-stat-num">7</div>
+            <div class="an-stat-label">Lessons Completed</div>
+            <div class="an-stat-change an-up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+2 this week</div>
+          </div>
+          <div class="an-stat-card" style="--an-color:var(--gold)">
+            <div class="an-stat-accent"></div>
+            <div class="an-stat-num">58%</div>
+            <div class="an-stat-label">Overall Progress</div>
+            <div class="an-stat-change an-up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+8% this month</div>
+          </div>
+          <div class="an-stat-card" style="--an-color:var(--green)">
+            <div class="an-stat-accent"></div>
+            <div class="an-stat-num">5</div>
+            <div class="an-stat-label">Day Streak 🔥</div>
+            <div class="an-stat-change an-up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>Personal best</div>
+          </div>
+          <div class="an-stat-card" style="--an-color:var(--purple)">
+            <div class="an-stat-accent"></div>
+            <div class="an-stat-num">4.2h</div>
+            <div class="an-stat-label">Total Study Time</div>
+            <div class="an-stat-change an-up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+1.5h this week</div>
+          </div>
+        </div>
+
+        <!-- Module progress + overall ring -->
+        <div class="analytics-row thirds" style="margin-bottom:20px">
+          <div class="an-panel">
+            <div class="an-panel-head">
+              <h3>Module Progress</h3>
+              <span class="an-panel-sub">Lessons completed per module</span>
+            </div>
+            <div class="an-panel-body">
+              <div class="mod-progress-item">
+                <div class="mod-prog-head">
+                  <span class="mod-prog-name"><span class="mod-prog-icon">📈</span> Trading</span>
+                  <span class="mod-prog-pct">4 / 6</span>
+                </div>
+                <div class="mod-prog-track">
+                  <div class="mod-prog-fill" style="--mp-color:var(--ink); width:67%"></div>
+                </div>
+                <div class="mod-prog-sub">Modules 1 & 2 — 2 lessons remaining</div>
+              </div>
+              <div class="mod-progress-item">
+                <div class="mod-prog-head">
+                  <span class="mod-prog-name"><span class="mod-prog-icon">🔤</span> English</span>
+                  <span class="mod-prog-pct">3 / 6</span>
+                </div>
+                <div class="mod-prog-track">
+                  <div class="mod-prog-fill" style="--mp-color:var(--green); width:50%"></div>
+                </div>
+                <div class="mod-prog-sub">Modules 1 & 2 — 3 lessons remaining</div>
+              </div>
+              <div class="mod-progress-item">
+                <div class="mod-prog-head">
+                  <span class="mod-prog-name"><span class="mod-prog-icon">🏆</span> Scholarship</span>
+                  <span class="mod-prog-pct">Reviewed</span>
+                </div>
+                <div class="mod-prog-track">
+                  <div class="mod-prog-fill" style="--mp-color:var(--gold); width:40%"></div>
+                </div>
+                <div class="mod-prog-sub">2 opportunities reviewed, 0 applied</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="an-panel">
+            <div class="an-panel-head">
+              <h3>Completion</h3>
+            </div>
+            <div class="an-panel-body" style="padding:10px 22px">
+              <div class="ring-wrap">
+                <svg class="ring-svg" viewBox="0 0 120 120">
+                  <circle class="ring-track" cx="60" cy="60" r="50"/>
+                  <circle class="ring-fill" id="progressRing" cx="60" cy="60" r="50"
+                    stroke-dasharray="314"
+                    stroke-dashoffset="132"/>
+                </svg>
+                <div class="ring-label-wrap">
+                  <div class="ring-pct">58%</div>
+                  <div class="ring-sub">Overall Complete</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly activity + achievements -->
+        <div class="analytics-row">
+          <div class="an-panel">
+            <div class="an-panel-head">
+              <h3>Weekly Activity</h3>
+              <span class="an-panel-sub">Lessons & study sessions this week</span>
+            </div>
+            <div class="an-panel-body">
+              <div class="week-chart-label">Sessions per day</div>
+              <div class="week-chart" id="weekChart">
+                <!-- rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="an-panel">
+            <div class="an-panel-head">
+              <h3>Achievements</h3>
+              <span class="an-panel-sub">Badges earned on your journey</span>
+            </div>
+            <div class="an-panel-body">
+              <div class="badges-grid">
+                <div class="badge-item earned">
+                  <div class="badge-icon">🚀</div>
+                  <div class="badge-info"><p>First Lesson</p><span>Completed May 2026</span></div>
+                </div>
+                <div class="badge-item earned">
+                  <div class="badge-icon">🔥</div>
+                  <div class="badge-info"><p>5-Day Streak</p><span>Active now</span></div>
+                </div>
+                <div class="badge-item earned">
+                  <div class="badge-icon">📊</div>
+                  <div class="badge-info"><p>Market Reader</p><span>Trading Module 1</span></div>
+                </div>
+                <div class="badge-item locked">
+                  <div class="badge-icon">🎓</div>
+                  <div class="badge-info"><p>Graduate</p><span>Complete all modules</span></div>
+                </div>
+                <div class="badge-item locked">
+                  <div class="badge-icon">💎</div>
+                  <div class="badge-info"><p>Scholar</p><span>Apply for scholarship</span></div>
+                </div>
+                <div class="badge-item locked">
+                  <div class="badge-icon">⚡</div>
+                  <div class="badge-info"><p>Speed Learner</p><span>3 lessons in one day</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+  </main>
+</div>
+
+<!-- ══════ LOGOUT MODAL ══════ -->
+<div class="logout-modal-wrap" id="logoutModal">
+  <div class="logout-modal">
+    <div class="logout-modal-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    </div>
+    <h3>Sign Out?</h3>
+    <p>You'll be signed out of your Vision Forge student portal. Your progress and data are saved and will be here when you return.</p>
+    <div class="logout-modal-actions">
+      <button class="logout-cancel-btn" id="logoutCancelBtn">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Stay Signed In
+      </button>
+      <button class="logout-confirm-btn" id="logoutConfirmBtn">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Yes, Sign Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ LESSON MODAL ══════ -->
+<div class="lesson-modal-wrap" id="lessonModal">
+  <div class="lesson-modal">
+    <div class="lm-head">
+      <div>
+        <div class="lm-eyebrow" id="lmEyebrow"></div>
+        <div class="lm-title" id="lmTitle"></div>
+      </div>
+      <button class="lm-close" id="lmClose">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="lm-body">
+      <div class="lm-meta" id="lmMeta"></div>
+      <div class="lm-content" id="lmContent"></div>
+      <div class="lm-keypoints" id="lmKeyPoints"></div>
+      <div class="lm-note" id="lmNote"></div>
+      <div class="lm-actions">
+        <button class="lm-btn lm-btn-outline" onclick="closeLessonModal()">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Lessons
+        </button>
+        <button class="lm-btn lm-btn-primary" id="lmMsgBtn">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Ask Admin a Question
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+'use strict';
+
+/* ── Date in topbar ── */
+const d = new Date();
+document.getElementById('topbarDate').textContent =
+  d.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+/* ── Nav switching ── */
+const TITLES = {
+  dashboard:   'Dashboard',
+  scholarship: 'Scholarship',
+  trading:     'Trading Lessons',
+  english:     'English Lessons',
+  messages:    'Messages',
+  profile:     'My Profile',
+  analytics:   'Analytics'
+};
+
+function switchView(id) {
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.view === id);
+  });
+  document.querySelectorAll('.view').forEach(v => {
+    v.classList.toggle('active', v.id === 'view-' + id);
+  });
+  document.getElementById('topbarTitle').textContent = TITLES[id] || id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('visible');
+  document.getElementById('sidebarToggle').classList.remove('open');
+  document.body.style.overflow = '';
+
+  if (id === 'analytics') renderAnalytics();
+}
+window.switchView = switchView;
+
+document.querySelectorAll('.nav-item[data-view]').forEach(item => {
+  item.addEventListener('click', () => switchView(item.dataset.view));
+});
+
+/* ── Mobile sidebar ── */
+const toggle  = document.getElementById('sidebarToggle');
+const overlay = document.getElementById('sidebarOverlay');
+const sidebar = document.getElementById('sidebar');
+toggle.addEventListener('click', () => {
+  const open = sidebar.classList.toggle('open');
+  toggle.classList.toggle('open', open);
+  overlay.classList.toggle('visible', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  toggle.classList.remove('open');
+  overlay.classList.remove('visible');
+  document.body.style.overflow = '';
+});
+
+/* ── Staggered load animation ── */
+setTimeout(() => {
+  document.querySelectorAll('.stat-card, .module-card, .panel-card, .ann-row').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = `opacity 0.5s cubic-bezier(0.22,1,0.36,1) ${0.08 + i * 0.06}s, transform 0.5s cubic-bezier(0.22,1,0.36,1) ${0.08 + i * 0.06}s`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }));
+  });
+}, 50);
+
+/* ════════════════════════════════════
+   PROFILE — View / Edit logic
+════════════════════════════════════ */
+const PROFILE_KEY = 'vifo_student_profile';
+const DEFAULT_PROFILE = {
+  firstName: '', lastName: '', email: '', phone: '', country: '', bio: ''
+};
+function loadProfile() {
+  try { return JSON.parse(localStorage.getItem(PROFILE_KEY)) || DEFAULT_PROFILE; }
+  catch(e) { return DEFAULT_PROFILE; }
+}
+function saveProfile(data) {
+  localStorage.setItem(PROFILE_KEY, JSON.stringify(data));
+}
+function renderProfileView() {
+  const p = loadProfile();
+  document.getElementById('pv-firstName').textContent = p.firstName || '—';
+  document.getElementById('pv-lastName').textContent  = p.lastName  || '—';
+  document.getElementById('pv-email').textContent     = p.email     || '—';
+  document.getElementById('pv-phone').textContent     = p.phone     || '—';
+  document.getElementById('pv-country').textContent   = p.country   || '—';
+  document.getElementById('pv-bio').textContent       = p.bio       || '—';
+  const fullName = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Student';
+  document.getElementById('profileNameDisplay').textContent = fullName;
+  document.getElementById('profileAvatarBig').textContent   = (p.firstName?.[0] || 'S').toUpperCase();
+  // Also update sidebar avatar
+  document.getElementById('sAvatar').textContent   = (p.firstName?.[0] || 'S').toUpperCase();
+  document.getElementById('sName').textContent     = fullName;
+  document.getElementById('welcomeName').textContent = p.firstName || 'Student';
+}
+function enterEditMode() {
+  const p = loadProfile();
+  document.getElementById('pe-firstName').value = p.firstName || '';
+  document.getElementById('pe-lastName').value  = p.lastName  || '';
+  document.getElementById('pe-email').value     = p.email     || '';
+  document.getElementById('pe-phone').value     = p.phone     || '';
+  document.getElementById('pe-country').value   = p.country   || '';
+  document.getElementById('pe-bio').value       = p.bio       || '';
+  document.getElementById('profileViewMode').style.display = 'none';
+  document.getElementById('profileEditMode').style.display = 'block';
+}
+function exitEditMode(save) {
+  if (save) {
+    const updated = {
+      firstName: document.getElementById('pe-firstName').value.trim(),
+      lastName:  document.getElementById('pe-lastName').value.trim(),
+      email:     document.getElementById('pe-email').value.trim(),
+      phone:     document.getElementById('pe-phone').value.trim(),
+      country:   document.getElementById('pe-country').value.trim(),
+      bio:       document.getElementById('pe-bio').value.trim()
+    };
+    saveProfile(updated);
+    renderProfileView();
+    // Animate save confirmation
+    const btn = document.getElementById('profileSaveBtn');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg> Saved!';
+    setTimeout(() => {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg> Save Changes';
+    }, 1800);
+  }
+  document.getElementById('profileViewMode').style.display = 'block';
+  document.getElementById('profileEditMode').style.display = 'none';
+}
+document.getElementById('profileEditTrigger').addEventListener('click', enterEditMode);
+document.getElementById('profileSaveBtn').addEventListener('click', () => exitEditMode(true));
+document.getElementById('profileCancelBtn').addEventListener('click', () => exitEditMode(false));
+renderProfileView();
+
+/* ════════════════════════════════════
+   LOGOUT MODAL
+════════════════════════════════════ */
+const logoutModal = document.getElementById('logoutModal');
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  logoutModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+document.getElementById('logoutCancelBtn').addEventListener('click', () => {
+  logoutModal.classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('logoutConfirmBtn').addEventListener('click', () => {
+  window.location.href = 'login.html';
+});
+logoutModal.addEventListener('click', e => {
+  if (e.target === logoutModal) { logoutModal.classList.remove('open'); document.body.style.overflow = ''; }
+});
+
+/* ════════════════════════════════════
+   MESSAGES — Thread switching
+════════════════════════════════════ */
+let currentThread = 'support';
+function switchThread(threadId) {
+  currentThread = threadId;
+  // Update thread active states
+  document.getElementById('thread-admin').classList.toggle('active', threadId === 'admin');
+  document.getElementById('thread-support').classList.toggle('active', threadId === 'support');
+  // Toggle chat heads
+  document.getElementById('chatHead-admin').style.display   = threadId === 'admin' ? 'flex' : 'none';
+  document.getElementById('chatHead-support').style.display = threadId === 'support' ? 'flex' : 'none';
+  // Toggle message areas
+  document.getElementById('chatMessages-admin').style.display   = threadId === 'admin' ? 'flex' : 'none';
+  document.getElementById('chatMessages-support').style.display = threadId === 'support' ? 'flex' : 'none';
+  // Toggle compose
+  document.getElementById('compose-readonly').style.display = threadId === 'admin' ? 'flex' : 'none';
+  document.getElementById('compose-support').style.display  = threadId === 'support' ? 'flex' : 'none';
+  // Remove unread dot from support when opened
+  if (threadId === 'support') {
+    const dot = document.querySelector('#thread-support .t-unread');
+    if (dot) dot.remove();
+  }
+}
+window.switchThread = switchThread;
+// Boot with support thread active
+switchThread('support');
+document.getElementById('thread-admin').addEventListener('click', () => switchThread('admin'));
+document.getElementById('thread-support').addEventListener('click', () => switchThread('support'));
+
+/* ════════════════════════════════════
+   ANALYTICS — Render charts
+════════════════════════════════════ */
+let analyticsRendered = false;
+function renderAnalytics() {
+  if (analyticsRendered) return;
+  analyticsRendered = true;
+  // Weekly bar chart
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const vals = [2, 1, 3, 2, 3, 0, 1];
+  const todayIdx = (new Date().getDay() + 6) % 7;
+  const maxVal = Math.max(...vals);
+  const chartEl = document.getElementById('weekChart');
+  chartEl.innerHTML = days.map((day, i) => {
+    const pct = maxVal ? (vals[i] / maxVal) * 100 : 0;
+    const isToday = i === todayIdx;
+    return `
+      <div class="week-bar-wrap">
+        <div class="week-bar-track">
+          <div class="week-bar-fill${isToday ? ' wb-active' : ''}" style="height:${pct}%"></div>
+        </div>
+        <div class="week-day-label">${day}</div>
+      </div>`;
+  }).join('');
+  // Animate progress ring (58% = 0.58 * 314 = 182; dashoffset = 314 - 182 = 132)
+  setTimeout(() => {
+    const ring = document.getElementById('progressRing');
+    if (ring) ring.style.strokeDashoffset = '132';
+  }, 300);
+}
+
+/* ── Lesson data ── */
+const LESSONS = {
+  t1: {
+    eyebrow: 'Trading · Module 1',
+    title: 'Understanding Financial Markets',
+    meta: [
+      { icon: 'clock', text: '25 min read' },
+      { icon: 'book', text: 'Foundations' }
+    ],
+    content: `<p>Financial markets are organised platforms or systems where buyers and sellers come together to trade financial assets — including stocks, bonds, currencies, commodities, and derivatives. Understanding these markets is the essential first step before making any trading decision.</p>
+<p><strong>Types of Markets:</strong> The main categories are the stock market (equities), the foreign exchange market (Forex), the commodities market, and the derivatives market. Each has its own characteristics, participants, and rules. As a beginner, focus on understanding one market deeply before spreading attention across others.</p>
+<p><strong>Key Participants:</strong> Markets involve retail traders, institutional investors, central banks, market makers, and brokers. Each plays a different role. Institutional players move large volumes and can shift price — understanding their behaviour is part of reading the market professionally.</p>`,
+    keyPoints: [
+      'Markets exist to allow price discovery and transfer of risk between participants',
+      'Stock, Forex, commodities, and derivatives markets each have distinct rules and behaviours',
+      'Institutional participants move markets more than retail traders — follow the volume',
+      'Liquidity is essential: always trade in markets with sufficient volume to enter and exit cleanly'
+    ],
+    note: 'Admin Note: Before you look at a single chart, spend time understanding what you are actually trading and why prices move. Most new traders skip this step — the ones who don\'t have a genuine edge.'
+  },
+  t2: {
+    eyebrow: 'Trading · Module 1',
+    title: 'Reading Candlestick Charts',
+    meta: [
+      { icon: 'clock', text: '30 min read' },
+      { icon: 'book', text: 'Technical Analysis' }
+    ],
+    content: `<p>Candlestick charts are the most widely used price chart in trading. Each candlestick represents price movement over a specific time period — showing the open, high, low, and close (OHLC) for that period. Reading them accurately is a foundational skill.</p>
+<p><strong>Anatomy of a Candle:</strong> The body shows the difference between open and close. The wicks (shadows) show the high and low extremes. A green (or white) candle closes higher than it opened — bullish. A red (or black) candle closes lower — bearish. The size of the body and wicks carries meaning.</p>
+<p><strong>Key Patterns:</strong> Doji (indecision), Hammer (potential reversal from low), Engulfing (strong momentum shift), and Shooting Star (potential reversal from high) are patterns worth learning first. No pattern is 100% reliable — they are signals to investigate further, not commands to enter a trade.</p>`,
+    keyPoints: [
+      'Each candle = open, high, low, close for a given time period',
+      'Body = distance between open and close; wick = high/low extremes',
+      'Green/white candle = price closed higher; Red/black = closed lower',
+      'Patterns are signals — always confirm with context, volume, and key levels'
+    ],
+    note: 'Admin Note: Learn to read candles on higher timeframes (daily, 4H) before studying lower ones. The noise on 1-minute charts confuses beginners. Start with the daily chart and build downward.'
+  },
+  t3: {
+    eyebrow: 'Trading · Module 1',
+    title: 'Support, Resistance & Trend Lines',
+    meta: [
+      { icon: 'clock', text: '28 min read' },
+      { icon: 'book', text: 'Technical Analysis' }
+    ],
+    content: `<p>Support and resistance are among the most important concepts in technical analysis. Support is a price level where buying interest is strong enough to prevent further decline. Resistance is where selling pressure prevents further rise. These levels act as decision points in the market.</p>
+<p><strong>How to Identify Them:</strong> Look for price levels where the market has reversed multiple times. The more times a level has been tested and held, the more significant it is. Round numbers often act as psychological support/resistance. Previous highs and lows are natural reference points.</p>
+<p><strong>Trend Lines:</strong> A trend line connects a series of higher lows (uptrend) or lower highs (downtrend). It gives you a visual representation of the market's direction and helps you identify potential entry or exit zones. A valid trend line needs at least two points of contact — three or more confirms strength.</p>`,
+    keyPoints: [
+      'Support = price floor where buyers step in; Resistance = ceiling where sellers dominate',
+      'The more times a level is tested and holds, the more reliable it becomes',
+      'Broken support often becomes new resistance — this is called a role reversal',
+      'Trend lines require at least 2 touches; 3+ touches confirm the trend is valid'
+    ],
+    note: 'Admin Note: Don\'t draw trend lines mechanically. Think about what the line represents — where is the market finding value? Where are traders consistently making decisions? That\'s what you\'re mapping.'
+  },
+  t4: {
+    eyebrow: 'Trading · Module 2',
+    title: 'Risk Management Fundamentals',
+    meta: [
+      { icon: 'clock', text: '35 min read' },
+      { icon: 'book', text: 'Risk & Strategy' }
+    ],
+    content: `<p>Risk management is what separates long-term successful traders from those who blow accounts. Without it, even a good strategy will eventually fail. The goal of risk management is not to avoid losses — losses are part of trading — but to ensure that no single loss or series of losses destroys your account.</p>
+<p><strong>Position Sizing:</strong> Never risk more than 1–2% of your total trading capital on a single trade. This way, even a run of ten losing trades only reduces your account by 10–20%, leaving you fully capable of recovery. Many experienced traders risk even less per trade.</p>
+<p><strong>Stop-Loss Placement:</strong> A stop-loss is a pre-set price at which your trade closes automatically to limit your loss. Place it at a technically meaningful level — beyond a support zone, below a key level — not an arbitrary number. Moving your stop-loss further away to avoid being stopped out is one of the most destructive trading habits.</p>`,
+    keyPoints: [
+      'Risk no more than 1–2% of capital per trade — this protects you through losing streaks',
+      'Place stop-loss at technically meaningful levels, not random distances',
+      'Never move your stop-loss wider once a trade is open — that defeats its purpose',
+      'Risk-reward ratio matters: aim for at least 1:2 (risk $1 to potentially gain $2)'
+    ],
+    note: 'Admin Note: Most students want to learn entry strategies first. The truth is, your entry matters far less than how you manage risk once you\'re in the trade. Focus here first.'
+  },
+  t5: {
+    eyebrow: 'Trading · Module 2',
+    title: 'Trading Psychology',
+    meta: [
+      { icon: 'clock', text: '32 min read' },
+      { icon: 'book', text: 'Mindset' }
+    ],
+    content: `<p>Trading is as much a mental discipline as it is a technical one. The most common reason traders fail is not a bad strategy — it is the inability to follow their strategy consistently. Emotions like fear, greed, overconfidence, and revenge-trading destroy accounts far more reliably than poor analysis.</p>
+<p><strong>Fear and Greed:</strong> Fear causes traders to exit profitable trades too early or avoid taking valid setups. Greed causes them to hold losing trades too long, overtrade, or increase position sizes after a win. Recognising which emotion is driving a decision is the first step to controlling it.</p>
+<p><strong>The Discipline Habit:</strong> Successful trading is built on routine. A pre-market routine, a trade journal, fixed rules for entering and exiting, and a review process after each trading session. Process over outcome — judge yourself on whether you followed your plan, not whether the trade made money.</p>`,
+    keyPoints: [
+      'Most trading failures come from psychology, not strategy — this is the most important module',
+      'Fear = exiting too early or missing setups. Greed = holding losers, overtrading',
+      'Revenge trading (trying to recover losses immediately) is the fastest way to destroy a account',
+      'Judge yourself on process — did you follow your plan? Not on the outcome of a single trade'
+    ],
+    note: 'Admin Note: Keep a trade journal. Write down why you entered, where your stop was, what you expected, and how you felt. Read it back weekly. Patterns in your behaviour will become obvious very quickly.'
+  },
+  t6: {
+    eyebrow: 'Trading · Module 2',
+    title: 'Building a Trading Plan',
+    meta: [
+      { icon: 'clock', text: '40 min read' },
+      { icon: 'book', text: 'Strategy' }
+    ],
+    content: `<p>A trading plan is a written document that defines every aspect of how you trade: what you trade, when you trade, how you manage risk, what your entry criteria are, and how you review your performance. It is your business plan. Trading without one is guessing.</p>`,
+    keyPoints: [
+      'A trading plan removes emotion from decision-making — everything is decided in advance',
+      'Define: market, timeframe, entry criteria, exit criteria, maximum daily loss limit',
+      'Back-test your rules on historical data before risking real capital',
+      'Review and refine your plan monthly based on journal data'
+    ],
+    note: 'Admin Note: This lesson will be published shortly. In the meantime, start building your plan — write down your rules for entering and exiting trades. The act of writing forces clarity.'
+  },
+  e1: {
+    eyebrow: 'English · Module 1',
+    title: 'Grammar Essentials',
+    meta: [
+      { icon: 'clock', text: '22 min read' },
+      { icon: 'book', text: 'Foundations' }
+    ],
+    content: `<p>Grammar is the structural foundation of English. Without it, even a rich vocabulary produces unclear, unconvincing communication. This lesson focuses on the rules most commonly misunderstood by intermediate-level learners.</p>
+<p><strong>Tenses:</strong> English has 12 main tenses, but the most important for daily use are the simple present, simple past, present perfect, and future simple. The most frequent mistake is confusing simple past ("I went") with present perfect ("I have been"). Use present perfect when the exact time is unspecified or the action still has relevance to now.</p>
+<p><strong>Articles — The, A, An:</strong> Use "the" for specific, known nouns. Use "a/an" for non-specific, first-mention nouns. Many languages have no articles at all, making this one of the hardest rules for learners. When in doubt, ask: does your reader already know which specific thing you mean? If yes — use "the".</p>`,
+    keyPoints: [
+      'Present perfect = action connected to now; simple past = completed action at a specific time',
+      '"The" = specific/known; "A/An" = non-specific; some nouns take no article',
+      'Subject-verb agreement: singular subjects take singular verbs — always',
+      'Avoid sentence fragments: every sentence needs a subject and a verb'
+    ],
+    note: 'Admin Note: Grammar mistakes do not usually prevent understanding — but they do affect how professional you appear. In academic and business contexts, precision in grammar signals intelligence and care. It is worth the effort.'
+  },
+  e2: {
+    eyebrow: 'English · Module 1',
+    title: 'Vocabulary in Context',
+    meta: [
+      { icon: 'clock', text: '20 min read' },
+      { icon: 'book', text: 'Foundations' }
+    ],
+    content: `<p>Vocabulary range is one of the four criteria on which English proficiency is assessed — whether in IELTS, academic writing, or professional communication. It is not about knowing rare words. It is about choosing the right word for the right context.</p>
+<p><strong>Collocations:</strong> Words that naturally appear together in English — "make a decision" (not "do a decision"), "strong coffee" (not "powerful coffee"), "take a risk" (not "do a risk"). Learning words in their natural collocations is far more useful than memorising isolated definitions.</p>
+<p><strong>Avoiding Repetition:</strong> Using the same word repeatedly in a piece of writing weakens it. Build a habit of using synonyms — but check that the synonym carries the same meaning in context. "Happy" and "ecstatic" are not always interchangeable. Use a collocations dictionary or context-based resource rather than a plain thesaurus.</p>`,
+    keyPoints: [
+      'Collocations matter: "make a decision," "do research," "take a risk" — learn words in pairs',
+      'Context determines the correct word — never substitute blindly from a thesaurus',
+      'Academic vocabulary: words like "demonstrate," "analyse," "evaluate" signal sophistication',
+      'Read widely in English — vocabulary is built through exposure far more than memorisation'
+    ],
+    note: 'Admin Note: The single best vocabulary habit is reading daily in English — articles, reports, essays. Underline words you don\'t know. Look them up. Write them in a sentence of your own. Do this for 15 minutes a day and your vocabulary will expand dramatically within months.'
+  },
+  e3: {
+    eyebrow: 'English · Module 1',
+    title: 'Academic Writing Structure',
+    meta: [
+      { icon: 'clock', text: '35 min read' },
+      { icon: 'book', text: 'Academic Writing' }
+    ],
+    content: `<p>Academic writing follows a clear, logical structure: introduction, body, conclusion. Every paragraph has a purpose. Every sentence advances an argument. Deviation from this structure makes writing difficult to follow and weakens its overall impact.</p>
+<p><strong>The Thesis Statement:</strong> The thesis is the central argument of your essay — it tells the reader exactly what position you are taking and why. A strong thesis is specific, arguable, and supported by everything that follows. A weak thesis is vague ("This essay will discuss...") or merely states a fact rather than an argument.</p>
+<p><strong>Formal Tone:</strong> Academic writing avoids contractions ("do not" not "don't"), slang, and casual phrasing. It favours precision over impression. Sentences should be clear and direct — long, winding sentences with multiple clauses usually signal unclear thinking. One idea per sentence. One idea per paragraph.</p>`,
+    keyPoints: [
+      'Introduction → Body Paragraphs → Conclusion: every academic essay follows this structure',
+      'Each body paragraph: one claim, evidence, explanation of why evidence supports the claim',
+      'Thesis = your specific, arguable central position — stated clearly in the introduction',
+      'Formal tone: no contractions, no slang, no first person unless your discipline allows it'
+    ],
+    note: 'Admin Note: The most common mistake students make is writing long sentences to sound intelligent. The opposite is true — clarity signals intelligence. Write short, precise sentences. If a sentence needs multiple commas to work, break it into two.'
+  },
+  e4: {
+    eyebrow: 'English · Module 2',
+    title: 'Professional Communication',
+    meta: [
+      { icon: 'clock', text: '26 min read' },
+      { icon: 'book', text: 'Professional Skills' }
+    ],
+    content: `<p>Professional communication prioritises clarity, brevity, and the reader's time. Whether you are writing a business email, delivering a presentation, or communicating in the workplace, the ability to express ideas professionally is one of the most valued skills across every industry.</p>
+<p><strong>Business Emails:</strong> Every professional email needs: a clear subject line, a brief and purposeful opening, a body that states its main point in the first sentence, and a professional close. Avoid vague subject lines ("Question") — use specific ones ("Clarification needed on Project Deadline — 12 May"). Keep paragraphs short. Use bullet points for multiple items.</p>
+<p><strong>Formal Letters:</strong> Formal letters follow a rigid structure: your address, recipient's address, date, formal salutation, body, and formal close. "Yours sincerely" is used when you know the recipient's name. "Yours faithfully" when you used "Dear Sir/Madam." This distinction is commonly tested and professionally significant.</p>`,
+    keyPoints: [
+      'Business emails: specific subject line, purpose in sentence one, short paragraphs',
+      '"Yours sincerely" = you know their name; "Yours faithfully" = you used Dear Sir/Madam',
+      'Professional language is direct, concrete, and free of filler ("I just wanted to reach out...")',
+      'Presentation structure: tell them what you\'ll say, say it, tell them what you said'
+    ],
+    note: 'Admin Note: Study real professional correspondence whenever you can — annual reports, official letters, business articles. Notice how competent writers structure sentences. Consciously adopt those patterns in your own writing.'
+  },
+  e5: {
+    eyebrow: 'English · Module 2',
+    title: 'IELTS Preparation',
+    meta: [
+      { icon: 'clock', text: '45 min read' },
+      { icon: 'book', text: 'Exam Preparation' }
+    ],
+    content: `<p>IELTS (International English Language Testing System) is accepted by universities, employers, and immigration authorities in over 140 countries. Understanding the format and marking criteria is essential for achieving your target band score.</p>
+<p><strong>Exam Structure:</strong> Four sections — Listening (30 min), Reading (60 min), Writing (60 min), and Speaking (11–14 min). Each scored on a 0–9 band scale. Your overall score is the average of all four. The Academic version (for university applications) differs from General Training (for migration/work) primarily in Reading and Writing.</p>
+<p><strong>Writing Tasks:</strong> Task 1 (150+ words) requires describing a visual — graph, chart, diagram, or map. Task 2 (250+ words) is an essay responding to an argument or problem. Task 2 carries twice the weight of Task 1 in your Writing score. Both are assessed on: Task Response, Coherence & Cohesion, Lexical Resource, and Grammatical Range & Accuracy.</p>`,
+    keyPoints: [
+      'Four sections: Listening, Reading, Writing (60 min), Speaking — each scored 0–9',
+      'Academic vs General Training differ in Reading and Writing only',
+      'Writing Task 2 carries double the marks of Task 1 — prioritise it in preparation',
+      'Four marking criteria, each equally weighted — weakness in one limits your overall score'
+    ],
+    note: 'Admin Note: Many students underperform not because their English is weak, but because they are unfamiliar with the format. Spend at least four weeks doing timed practice tests under real exam conditions. Familiarity reduces anxiety and lets your true ability show.'
+  },
+  e6: {
+    eyebrow: 'English · Module 2',
+    title: 'Speaking & Presentation Skills',
+    meta: [
+      { icon: 'clock', text: '30 min read' },
+      { icon: 'book', text: 'Communication' }
+    ],
+    content: `<p>This lesson is coming soon. It will cover clarity, confidence, and the structural principles behind effective spoken English — whether in an IELTS Speaking test, a job interview, or a professional presentation.</p>`,
+    keyPoints: [
+      'Clarity over speed — slow, clear speech is always more impressive than fast, unclear delivery',
+      'Structure spoken content: main point first, supporting points after',
+      'Filler words ("um," "like," "you know") weaken your credibility — practise pausing instead',
+      'Confidence comes from preparation — the more you practise, the less room anxiety has'
+    ],
+    note: 'Admin Note: This module will be posted shortly. If you have specific questions about speaking or presentations in the meantime, send a message — I\'m happy to address your situation directly.'
+  }
+};
+
+/* ── Lesson modal ── */
+function openLesson(id) {
+  const d = LESSONS[id];
+  if (!d) return;
+
+  document.getElementById('lmEyebrow').textContent = d.eyebrow;
+  document.getElementById('lmTitle').textContent   = d.title;
+
+  document.getElementById('lmMeta').innerHTML = d.meta.map(m => `
+    <div class="lm-meta-item">
+      <svg viewBox="0 0 24 24">
+        ${m.icon === 'clock'
+          ? '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
+          : '<path d="M4 7h16"/><path d="M4 12h8"/><path d="M4 17h8"/>'}
+      </svg>
+      ${m.text}
+    </div>
+  `).join('');
+
+  document.getElementById('lmContent').innerHTML = d.content;
+  document.getElementById('lmKeyPoints').innerHTML =
+    `<h4>Key Takeaways</h4><ul>${d.keyPoints.map(k => `<li>${k}</li>`).join('')}</ul>`;
+  document.getElementById('lmNote').innerHTML = d.note;
+
+  document.getElementById('lmMsgBtn').onclick = function() {
+    closeLessonModal();
+    switchView('messages');
+    setTimeout(() => {
+      switchThread('support');
+      const inp = document.getElementById('msgInput');
+      if (inp) { inp.value = `Hi Support Team, I have a question about: "${d.title}". `; inp.focus(); }
+    }, 400);
+  };
+
+  document.getElementById('lessonModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+window.openLesson = openLesson;
+
+window.closeLessonModal = function() {
+  document.getElementById('lessonModal').classList.remove('open');
+  document.body.style.overflow = '';
+};
+document.getElementById('lmClose').addEventListener('click', closeLessonModal);
+document.getElementById('lessonModal').addEventListener('click', function(e) {
+  if (e.target === this) closeLessonModal();
+});
+
+/* ── Messaging ── */
+const chatMessages = document.getElementById('chatMessages-support');
+const msgInput     = document.getElementById('msgInput');
+const msgSendBtn   = document.getElementById('msgSendBtn');
+
+function sendMessage() {
+  const text = msgInput.value.trim();
+  if (!text) return;
+
+  const b = document.createElement('div');
+  b.className = 'msg-bubble mb-student';
+  b.innerHTML = `
+    <div class="bubble-text">${text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+    <div class="bubble-time">You · Just now</div>
+  `;
+  chatMessages.appendChild(b);
+  msgInput.value = '';
+  msgInput.style.height = 'auto';
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  setTimeout(() => {
+    const r = document.createElement('div');
+    r.className = 'msg-bubble mb-admin';
+    r.innerHTML = `
+      <div class="bubble-text">Thank you for reaching out. Our support team has received your message and will respond within 24 hours.</div>
+      <div class="bubble-time">Support Team · Just now</div>
+    `;
+    chatMessages.appendChild(r);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }, 1600);
+}
+
+msgSendBtn.addEventListener('click', sendMessage);
+msgInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+msgInput.addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 88) + 'px';
+});
+
+})();
+</script>
+</body>
+</html>

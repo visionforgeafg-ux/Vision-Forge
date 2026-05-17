@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="color-scheme" content="light"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Vision Forge — Building Minds • Forging Leaders • Creating Purpose</title>
+  <meta name="description" content="Vision Forge is a forward-thinking intellectual and social initiative dedicated to developing disciplined minds and purpose-driven leaders."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo" data-page="home" aria-label="Vision Forge Home"><span class="nav-logo-light"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzAgMjAwIj48ZyBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOTIpIj48cGF0aCBkPSJNIDk5LjA2LDgyLjAyIFEgNjguNTQsNTIuNDcgMzMuNDksNjcuNTYgUSAzMi44Myw1Mi45NyA0Ni43Nyw0OC42MCBRIDczLjY4LDQ5LjQ0IDEwMC45NCw4Mi4wMiBaIi8+PHBhdGggZD0iTSAxMDguMTcsODMuOTYgUSA5Ni41Miw0My4xMSA1OC42MiwzOC42NSBRIDY1LjM1LDI1LjY4IDc5LjYwLDI4Ljg3IFEgMTAyLjQ5LDQzLjA1IDEwOS44MCw4NC45MCBaIi8+PHBhdGggZD0iTSAxMTUuMTAsOTAuMjAgUSAxMjUuNDMsNDguOTkgOTQuODQsMjYuMTggUSAxMDcuMTUsMTguMzEgMTE3LjkwLDI4LjIwIFEgMTMwLjYzLDUxLjkzIDExNi4wNCw5MS44MyBaIi8+PHBhdGggZD0iTSAxMTcuOTgsOTkuMDYgUSAxNDcuNTMsNjguNTQgMTMyLjQ0LDMzLjQ5IFEgMTQ3LjAzLDMyLjgzIDE1MS40MCw0Ni43NyBRIDE1MC41Niw3My42OCAxMTcuOTgsMTAwLjk0IFoiLz48cGF0aCBkPSJNIDExNi4wNCwxMDguMTcgUSAxNTYuODksOTYuNTIgMTYxLjM1LDU4LjYyIFEgMTc0LjMyLDY1LjM1IDE3MS4xMyw3OS42MCBRIDE1Ni45NSwxMDIuNDkgMTE1LjEwLDEwOS44MCBaIi8+PHBhdGggZD0iTSAxMDkuODAsMTE1LjEwIFEgMTUxLjAxLDEyNS40MyAxNzMuODIsOTQuODQgUSAxODEuNjksMTA3LjE1IDE3MS44MCwxMTcuOTAgUSAxNDguMDcsMTMwLjYzIDEwOC4xNywxMTYuMDQgWiIvPjxwYXRoIGQ9Ik0gMTAwLjk0LDExNy45OCBRIDEzMS40NiwxNDcuNTMgMTY2LjUxLDEzMi40NCBRIDE2Ny4xNywxNDcuMDMgMTUzLjIzLDE1MS40MCBRIDEyNi4zMiwxNTAuNTYgOTkuMDYsMTE3Ljk4IFoiLz48cGF0aCBkPSJNIDkxLjgzLDExNi4wNCBRIDEwMy40OCwxNTYuODkgMTQxLjM4LDE2MS4zNSBRIDEzNC42NSwxNzQuMzIgMTIwLjQwLDE3MS4xMyBRIDk3LjUxLDE1Ni45NSA5MC4yMCwxMTUuMTAgWiIvPjxwYXRoIGQ9Ik0gODQuOTAsMTA5LjgwIFEgNzQuNTcsMTUxLjAxIDEwNS4xNiwxNzMuODIgUSA5Mi44NSwxODEuNjkgODIuMTAsMTcxLjgwIFEgNjkuMzcsMTQ4LjA3IDgzLjk2LDEwOC4xNyBaIi8+PHBhdGggZD0iTSA4Mi4wMiwxMDAuOTQgUSA1Mi40NywxMzEuNDYgNjcuNTYsMTY2LjUxIFEgNTIuOTcsMTY3LjE3IDQ4LjYwLDE1My4yMyBRIDQ5LjQ0LDEyNi4zMiA4Mi4wMiw5OS4wNiBaIi8+PHBhdGggZD0iTSA4My45Niw5MS44MyBRIDQzLjExLDEwMy40OCAzOC42NSwxNDEuMzggUSAyNS42OCwxMzQuNjUgMjguODcsMTIwLjQwIFEgNDMuMDUsOTcuNTEgODQuOTAsOTAuMjAgWiIvPjxwYXRoIGQ9Ik0gOTAuMjAsODQuOTAgUSA0OC45OSw3NC41NyAyNi4xOCwxMDUuMTYgUSAxOC4zMSw5Mi44NSAyOC4yMCw4Mi4xMCBRIDUxLjkzLDY5LjM3IDkxLjgzLDgzLjk2IFoiLz48L2c+PHRleHQgeD0iMjE1IiB5PSIxMzMiIGZvbnQtZmFtaWx5PSJPdXRmaXQsU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5MiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiI+VjwvdGV4dD48dGV4dCB4PSIyNzkiIHk9IjEzMyIgZm9udC1mYW1pbHk9Ik91dGZpdCxTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9Ijg2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjYThjOGY4Ij5pPC90ZXh0Pjx0ZXh0IHg9IjMwNiIgeT0iMTMzIiBmb250LWZhbWlseT0iT3V0Zml0LFNlZ29lIFVJLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOTIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPkY8L3RleHQ+PHRleHQgeD0iMzY0IiB5PSIxMzMiIGZvbnQtZmFtaWx5PSJPdXRmaXQsU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2E4YzhmOCI+bzwvdGV4dD48dGV4dCB4PSIyMTUiIHk9IjE2MyIgZm9udC1mYW1pbHk9Ik91dGZpdCxTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNTAwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNzIpIiBsZXR0ZXItc3BhY2luZz0iNS41Ij5WSVNJT04gRk9SR0U8L3RleHQ+PC9zdmc+" alt="Vision Forge" style="height:48px;display:block"/></span><span class="nav-logo-dark"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzAgMjAwIj48ZyBmaWxsPSIjMWEzZjdhIj48cGF0aCBkPSJNIDk5LjA2LDgyLjAyIFEgNjguNTQsNTIuNDcgMzMuNDksNjcuNTYgUSAzMi44Myw1Mi45NyA0Ni43Nyw0OC42MCBRIDczLjY4LDQ5LjQ0IDEwMC45NCw4Mi4wMiBaIi8+PHBhdGggZD0iTSAxMDguMTcsODMuOTYgUSA5Ni41Miw0My4xMSA1OC42MiwzOC42NSBRIDY1LjM1LDI1LjY4IDc5LjYwLDI4Ljg3IFEgMTAyLjQ5LDQzLjA1IDEwOS44MCw4NC45MCBaIi8+PHBhdGggZD0iTSAxMTUuMTAsOTAuMjAgUSAxMjUuNDMsNDguOTkgOTQuODQsMjYuMTggUSAxMDcuMTUsMTguMzEgMTE3LjkwLDI4LjIwIFEgMTMwLjYzLDUxLjkzIDExNi4wNCw5MS44MyBaIi8+PHBhdGggZD0iTSAxMTcuOTgsOTkuMDYgUSAxNDcuNTMsNjguNTQgMTMyLjQ0LDMzLjQ5IFEgMTQ3LjAzLDMyLjgzIDE1MS40MCw0Ni43NyBRIDE1MC41Niw3My42OCAxMTcuOTgsMTAwLjk0IFoiLz48cGF0aCBkPSJNIDExNi4wNCwxMDguMTcgUSAxNTYuODksOTYuNTIgMTYxLjM1LDU4LjYyIFEgMTc0LjMyLDY1LjM1IDE3MS4xMyw3OS42MCBRIDE1Ni45NSwxMDIuNDkgMTE1LjEwLDEwOS44MCBaIi8+PHBhdGggZD0iTSAxMDkuODAsMTE1LjEwIFEgMTUxLjAxLDEyNS40MyAxNzMuODIsOTQuODQgUSAxODEuNjksMTA3LjE1IDE3MS44MCwxMTcuOTAgUSAxNDguMDcsMTMwLjYzIDEwOC4xNywxMTYuMDQgWiIvPjxwYXRoIGQ9Ik0gMTAwLjk0LDExNy45OCBRIDEzMS40NiwxNDcuNTMgMTY2LjUxLDEzMi40NCBRIDE2Ny4xNywxNDcuMDMgMTUzLjIzLDE1MS40MCBRIDEyNi4zMiwxNTAuNTYgOTkuMDYsMTE3Ljk4IFoiLz48cGF0aCBkPSJNIDkxLjgzLDExNi4wNCBRIDEwMy40OCwxNTYuODkgMTQxLjM4LDE2MS4zNSBRIDEzNC42NSwxNzQuMzIgMTIwLjQwLDE3MS4xMyBRIDk3LjUxLDE1Ni45NSA5MC4yMCwxMTUuMTAgWiIvPjxwYXRoIGQ9Ik0gODQuOTAsMTA5LjgwIFEgNzQuNTcsMTUxLjAxIDEwNS4xNiwxNzMuODIgUSA5Mi44NSwxODEuNjkgODIuMTAsMTcxLjgwIFEgNjkuMzcsMTQ4LjA3IDgzLjk2LDEwOC4xNyBaIi8+PHBhdGggZD0iTSA4Mi4wMiwxMDAuOTQgUSA1Mi40NywxMzEuNDYgNjcuNTYsMTY2LjUxIFEgNTIuOTcsMTY3LjE3IDQ4LjYwLDE1My4yMyBRIDQ5LjQ0LDEyNi4zMiA4Mi4wMiw5OS4wNiBaIi8+PHBhdGggZD0iTSA4My45Niw5MS44MyBRIDQzLjExLDEwMy40OCAzOC42NSwxNDEuMzggUSAyNS42OCwxMzQuNjUgMjguODcsMTIwLjQwIFEgNDMuMDUsOTcuNTEgODQuOTAsOTAuMjAgWiIvPjxwYXRoIGQ9Ik0gOTAuMjAsODQuOTAgUSA0OC45OSw3NC41NyAyNi4xOCwxMDUuMTYgUSAxOC4zMSw5Mi44NSAyOC4yMCw4Mi4xMCBRIDUxLjkzLDY5LjM3IDkxLjgzLDgzLjk2IFoiLz48L2c+PHRleHQgeD0iMjE1IiB5PSIxMzMiIGZvbnQtZmFtaWx5PSJPdXRmaXQsU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5MiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzBkMWYzNSI+VjwvdGV4dD48dGV4dCB4PSIyNzkiIHk9IjEzMyIgZm9udC1mYW1pbHk9Ik91dGZpdCxTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9Ijg2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMWE0YjhjIj5pPC90ZXh0Pjx0ZXh0IHg9IjMwNiIgeT0iMTMzIiBmb250LWZhbWlseT0iT3V0Zml0LFNlZ29lIFVJLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOTIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwZDFmMzUiPkY8L3RleHQ+PHRleHQgeD0iMzY0IiB5PSIxMzMiIGZvbnQtZmFtaWx5PSJPdXRmaXQsU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzFhNGI4YyI+bzwvdGV4dD48dGV4dCB4PSIyMTUiIHk9IjE2MyIgZm9udC1mYW1pbHk9Ik91dGZpdCxTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNTAwIiBmaWxsPSIjMGQxZjM1IiBsZXR0ZXItc3BhY2luZz0iNS41Ij5WSVNJT04gRk9SR0U8L3RleHQ+PC9zdmc+" alt="Vision Forge" style="height:48px;display:block"/></span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#" data-page="home" data-anchor="about">About</a></li>
+      <li><a href="#" data-page="home" data-anchor="services">Programs</a></li>
+      <li><a href="#" data-page="explore">Explore</a></li>
+      <li><a href="#" data-page="team">Our Team</a></li>
+      <li><a href="#" data-page="home" data-anchor="contact">Contact</a></li>
+    </ul>
+    <a href="login.html" class="btn btn-primary nav-cta">Join Us</a>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="slidePanel">
+      <span class="hbars" aria-hidden="true">
+        <span class="hbar hbar-top"></span>
+        <span class="hbar hbar-mid"></span>
+        <span class="hbar hbar-bot"></span>
+      </span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ SLIDE PANEL OVERLAY ══ -->
+<div class="sp-overlay" id="spOverlay" aria-hidden="true"></div>
+
+<!-- ══ SLIDE PANEL MENU ══ -->
+<div class="slide-panel" id="slidePanel" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="sp-header">
+    <span class="sp-logo">Vision Forge</span>
+    <button class="sp-close" id="spCloseBtn" aria-label="Close menu">&#x2715;</button>
+  </div>
+  <nav class="sp-nav" aria-label="Mobile navigation">
+    <div class="sp-section-label">Navigate</div>
+    <a href="#" class="sp-link" data-page="home" data-anchor="about">
+      <div class="sp-link-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+      <div class="sp-link-text"><span class="sp-link-label">About</span><span class="sp-link-sub">Who we are</span></div>
+    </a>
+    <a href="#" class="sp-link" data-page="home" data-anchor="services">
+      <div class="sp-link-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+      <div class="sp-link-text"><span class="sp-link-label">Programs</span><span class="sp-link-sub">Curriculum &amp; courses</span></div>
+    </a>
+    <a href="#" class="sp-link" data-page="explore">
+      <div class="sp-link-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
+      <div class="sp-link-text"><span class="sp-link-label">Explore</span><span class="sp-link-sub">Events, FAQ &amp; scholarships</span></div>
+    </a>
+    <a href="#" class="sp-link" data-page="team">
+      <div class="sp-link-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <div class="sp-link-text"><span class="sp-link-label">Our Team</span><span class="sp-link-sub">The people behind the mission</span></div>
+    </a>
+    <div class="sp-divider"></div>
+    <div class="sp-section-label">Connect</div>
+    <a href="#" class="sp-link" data-page="home" data-anchor="contact">
+      <div class="sp-link-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+      <div class="sp-link-text"><span class="sp-link-label">Contact</span><span class="sp-link-sub">Get in touch</span></div>
+    </a>
+    <a href="https://wa.me/923105826985" target="_blank" rel="noopener" class="sp-link">
+      <div class="sp-link-icon"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+      <div class="sp-link-text"><span class="sp-link-label">WhatsApp</span><span class="sp-link-sub">Quick conversation</span></div>
+    </a>
+  </nav>
+  <div class="sp-footer">
+    <a href="login.html" class="sp-cta">Join Vision Forge &rarr;</a>
+  </div>
+</div>
+
+<!-- ══ FEEDBACK FAB ══ -->
+<button class="feedback-fab" id="feedbackFab" aria-label="Share feedback">
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  <div class="feedback-fab-pulse"></div>
+  <span class="fab-label">Feedback</span>
+</button>
+
+<!-- ══ FEEDBACK MODAL ══ -->
+<div class="feedback-overlay" id="feedbackOverlay" role="dialog" aria-modal="true" aria-label="Feedback form">
+  <div class="feedback-modal">
+    <button class="feedback-modal-close" id="feedbackClose" aria-label="Close">&times;</button>
+    <h3>Share Your <em>Thoughts</em></h3>
+    <p>We genuinely value your feedback — it shapes how Vision Forge grows.</p>
+    <div style="margin-bottom:20px;">
+      <p style="font-size:0.67rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);margin-bottom:10px;">Rate your experience</p>
+      <div class="fb-stars" id="fbStars">
+        <span class="fb-star" data-val="1">&#9733;</span>
+        <span class="fb-star" data-val="2">&#9733;</span>
+        <span class="fb-star" data-val="3">&#9733;</span>
+        <span class="fb-star" data-val="4">&#9733;</span>
+        <span class="fb-star" data-val="5">&#9733;</span>
+      </div>
+    </div>
+    <div style="margin-bottom:20px;">
+      <p style="font-size:0.67rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);margin-bottom:10px;">Type of Feedback</p>
+      <div class="fb-type-grid" id="fbTypeGrid">
+        <button class="fb-type-btn" data-type="Suggestion">&#128161; Suggestion</button>
+        <button class="fb-type-btn" data-type="Praise">&#128079; Praise</button>
+        <button class="fb-type-btn" data-type="Issue">&#128295; Issue</button>
+        <button class="fb-type-btn" data-type="Program">&#128218; Program</button>
+        <button class="fb-type-btn" data-type="Content">&#9999; Content</button>
+        <button class="fb-type-btn" data-type="Other">&#128172; Other</button>
+      </div>
+    </div>
+    <form class="fb-form" id="feedbackForm" novalidate>
+      <div class="form-group">
+        <label for="fb-name">Your Name (optional)</label>
+        <input id="fb-name" type="text" class="form-control" placeholder="Anonymous is fine too" autocomplete="name"/>
+      </div>
+      <div class="form-group">
+        <label for="fb-message">Your Message <span style="color:#c94b4b">*</span></label>
+        <textarea id="fb-message" class="form-control" rows="4" placeholder="Tell us what's on your mind..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Feedback &rarr;</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     HOME PAGE
+═══════════════════════════════════ -->
+<div id="page-home" class="page-view page-active">
+
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge hero-stagger"><div class="hero-badge-dot"></div>NUTECH, Islamabad &nbsp;&middot;&nbsp; Est. 2024</div>
+        <h1 class="hero-title hero-stagger">Building<br><em>Minds.</em><br>Forging <span class="gold-word">Leaders.</span></h1>
+        <p class="hero-tagline hero-stagger">Creating Purpose</p>
+        <p class="hero-desc hero-stagger">Vision Forge is an intellectual and social initiative dedicated to developing disciplined minds and purpose-driven leaders who contribute meaningfully to society.</p>
+        <div class="hero-ctas hero-stagger">
+          <a href="#" data-page="explore" class="btn btn-primary">Explore Programs &rarr;</a>
+          <a href="login.html" class="btn btn-outline">Join the Movement</a>
+        </div>
+        <div class="hero-stats hero-stagger">
+          <div class="h-stat"><div class="h-stat-num">500+</div><div class="h-stat-lbl">Members</div></div>
+          <div class="h-stat"><div class="h-stat-num">12</div><div class="h-stat-lbl">Programs</div></div>
+          <div class="h-stat"><div class="h-stat-num">8</div><div class="h-stat-lbl">Mentors</div></div>
+          <div class="h-stat"><div class="h-stat-num">6</div><div class="h-stat-lbl">Cities</div></div>
+        </div>
+      </div>
+      <div class="hero-right hero-stagger">
+        <div class="hero-img-stack">
+          <div class="hero-img-main" id="heroSlideshow">
+            <div class="hero-slideshow-inner" id="heroSlideshowInner">
+              <img class="hero-slide active" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Students in a leadership session" loading="eager" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80" alt="Collaborative workshop" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=800&q=80" alt="Young leaders in discussion" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Vision Forge mentorship session" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Education and learning" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+            </div>
+            <div class="hero-slide-dots" id="heroSlideDots"></div>
+          </div>
+          <div class="hero-card-float">
+            <div class="hero-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+            <div class="hero-card-text"><strong>Purpose-Driven Leadership</strong><span>Intellectual growth since 2024</span></div>
+          </div>
+          <div class="hero-accent-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item">Building Minds <span class="dot"></span></div>
+    <div class="marquee-item">Forging Leaders <span class="dot"></span></div>
+    <div class="marquee-item">Creating Purpose <span class="dot"></span></div>
+    <div class="marquee-item">Loyalty &amp; Integrity <span class="dot"></span></div>
+    <div class="marquee-item">Strategic Thinking <span class="dot"></span></div>
+    <div class="marquee-item">Continuous Growth <span class="dot"></span></div>
+    <div class="marquee-item">Service to Society <span class="dot"></span></div>
+    <div class="marquee-item">Disciplined Execution <span class="dot"></span></div>
+    <div class="marquee-item">Building Minds <span class="dot"></span></div>
+    <div class="marquee-item">Forging Leaders <span class="dot"></span></div>
+    <div class="marquee-item">Creating Purpose <span class="dot"></span></div>
+    <div class="marquee-item">Loyalty &amp; Integrity <span class="dot"></span></div>
+    <div class="marquee-item">Strategic Thinking <span class="dot"></span></div>
+    <div class="marquee-item">Continuous Growth <span class="dot"></span></div>
+    <div class="marquee-item">Service to Society <span class="dot"></span></div>
+    <div class="marquee-item">Disciplined Execution <span class="dot"></span></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-decorline"></div>
+        <div class="about-img-frame">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Vision Forge team" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/>
+        </div>
+        <div class="about-badge-wrap"><div class="about-badge-num">2024</div><div class="about-badge-lbl">Est. at NUTECH</div></div>
+      </div>
+      <div class="about-text">
+        <p class="eyebrow reveal">Who We Are</p>
+        <h2 class="reveal reveal-delay-1">More Than a Platform &mdash;<br><em>A Movement.</em></h2>
+        <p class="reveal reveal-delay-2">Vision Forge is a forward-thinking intellectual and social initiative dedicated to developing disciplined minds and purpose-driven leaders. We operate at the intersection of education, leadership development, and social impact.</p>
+        <p class="reveal reveal-delay-3">Our mission is to empower youth with critical thinking, strategic awareness, and a strong sense of responsibility &mdash; enabling them to contribute meaningfully to society through structured learning, mentorship, and community engagement.</p>
+        <div class="pillars">
+          <div class="pillar reveal reveal-delay-1"><div class="pillar-ico">&#129504;</div><h4>Mind</h4><p>Critical thinking, discipline, and intellectual growth</p></div>
+          <div class="pillar reveal reveal-delay-2"><div class="pillar-ico">&#9822;</div><h4>Strategy</h4><p>Leadership models, history, and decision-making</p></div>
+          <div class="pillar reveal reveal-delay-3"><div class="pillar-ico">&#127758;</div><h4>Purpose</h4><p>Social contribution and meaningful impact</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow reveal">What We Offer</p>
+      <h2 class="reveal reveal-delay-1">Programs Designed to <em>Transform</em></h2>
+      <p class="reveal reveal-delay-2">Every program at Vision Forge is built with intention &mdash; to develop the whole person: mind, strategy, and purpose.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Educational Content &amp; Publications</h3><p>Curated learning resources, in-depth articles, and structured educational content designed to elevate intellectual capacity and strategic awareness.</p></div>
+      <div class="service-card reveal reveal-delay-1"><div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><h3>Leadership Training Programs</h3><p>Intensive programs grounded in real-world leadership models, historical analysis, and applied decision-making to develop future-ready leaders.</p></div>
+      <div class="service-card reveal reveal-delay-2"><div class="s-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><h3>Mentorship &amp; Coaching</h3><p>One-on-one and group mentorship with experienced coaches who guide members through personal growth, career direction, and strategic thinking.</p></div>
+      <div class="service-card reveal"><div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div><h3>Learning Communities</h3><p>Structured discussion circles and peer learning groups that foster collaboration, accountability, and the exchange of transformative ideas.</p></div>
+      <div class="service-card reveal reveal-delay-1"><div class="s-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Social &amp; Humanitarian Initiatives</h3><p>Community-driven projects that put purpose into action &mdash; from local outreach to national campaigns creating measurable societal impact.</p></div>
+      <div class="service-card reveal reveal-delay-2"><div class="s-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><h3>Workshops &amp; Conferences</h3><p>Hands-on workshops and strategic seminars led by experts &mdash; building practical skills, expanding networks, and inspiring collective action.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="eyebrow">Get In Touch</p>
+        <h2>Ready to <em>Begin?</em></h2>
+        <p>Whether you want to join our programs, get scholarship guidance, partner with us, or simply learn more about Vision Forge &mdash; we would love to connect.</p>
+        <div class="contact-details">
+          <div class="c-detail"><div class="c-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div><div class="c-detail-text"><span>Location</span><strong>NUTECH, Islamabad, Pakistan</strong></div></div>
+          <div class="c-detail"><div class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div><div class="c-detail-text"><span>Email</span><strong>msuhailserwer@gmail.com</strong></div></div>
+          <div class="c-detail"><div class="c-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div><div class="c-detail-text"><span>Phone</span><strong>+92 310 5826985</strong></div></div>
+        </div>
+      </div>
+      <div class="contact-form-wrap reveal reveal-delay-2">
+        <form class="contact-form" data-vf novalidate>
+          <div class="form-group"><label for="c-name">Full Name</label><input id="c-name" type="text" class="form-control" placeholder="Your full name" required autocomplete="name"/></div>
+          <div class="form-group"><label for="c-email">Email Address</label><input id="c-email" type="email" class="form-control" placeholder="your@email.com" required autocomplete="email"/></div>
+          <div class="form-group"><label for="c-subject">Subject</label><input id="c-subject" type="text" class="form-control" placeholder="e.g. Scholarship guidance, joining programs..."/></div>
+          <div class="form-group"><label for="c-message">Message</label><textarea id="c-message" class="form-control" rows="5" placeholder="Share your questions, goals, or ideas..." required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message &rarr;</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /page-home -->
+
+
+<!-- ═══════════════════════════════════
+     EXPLORE PAGE
+═══════════════════════════════════ -->
+<div id="page-explore" class="page-view">
+  <div class="explore-hero">
+    <div class="container explore-hero-inner">
+      <button class="explore-back-btn" data-page="home">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Home
+      </button>
+      <div class="explore-eyebrow"><span></span>Discover More<span></span></div>
+      <h1>Explore <em>Vision Forge</em></h1>
+      <p class="explore-hero-sub">Dive deeper into our numbers, programs, impact, upcoming events, scholarship guidance, member voices, and answers to your most common questions.</p>
+      <nav class="explore-nav-grid" aria-label="Explore sections">
+        <a href="#stats" class="explore-nav-card" data-anchor="stats"><div class="enc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="enc-label">Our Numbers</div><div class="enc-sub">Stats &amp; Impact</div></a>
+        <a href="#courses" class="explore-nav-card" data-anchor="courses"><div class="enc-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div><div class="enc-label">Programs</div><div class="enc-sub">Our Curriculum</div></a>
+        <a href="#process" class="explore-nav-card" data-anchor="process"><div class="enc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="enc-label">Journey</div><div class="enc-sub">Your Path Forward</div></a>
+        <a href="#portfolio" class="explore-nav-card" data-anchor="portfolio"><div class="enc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="enc-label">Impact</div><div class="enc-sub">Stories &amp; Results</div></a>
+        <a href="#events" class="explore-nav-card" data-anchor="events"><div class="enc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="enc-label">Events</div><div class="enc-sub">Upcoming Gatherings</div></a>
+        <a href="#testimonials" class="explore-nav-card" data-anchor="testimonials"><div class="enc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="enc-label">Voices</div><div class="enc-sub">Member Stories</div></a>
+        <a href="#faq" class="explore-nav-card" data-anchor="faq"><div class="enc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="enc-label">FAQ</div><div class="enc-sub">Common Questions</div></a>
+        <a href="#scholarships" class="explore-nav-card" data-anchor="scholarships"><div class="enc-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><div class="enc-label">Scholarships</div><div class="enc-sub">Funding Opportunities</div></a>
+      </nav>
+      <div class="explore-scroll-hint"><div class="scroll-line"></div><span>Scroll to Explore</span></div>
+    </div>
+  </div>
+
+  <section id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal"><div class="stat-num"><span class="counter" data-target="500" data-suffix="+">0</span></div><div class="stat-lbl">Members Empowered</div></div>
+        <div class="stat-item reveal reveal-delay-1"><div class="stat-num"><span class="counter" data-target="12">0</span></div><div class="stat-lbl">Programs Launched</div></div>
+        <div class="stat-item reveal reveal-delay-2"><div class="stat-num"><span class="counter" data-target="8">0</span></div><div class="stat-lbl">Mentors &amp; Coaches</div></div>
+        <div class="stat-item reveal reveal-delay-3"><div class="stat-num"><span class="counter" data-target="6">0</span></div><div class="stat-lbl">Cities Reached</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses" style="background:var(--white);">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Our Curriculum</p>
+        <h2 class="reveal reveal-delay-1">Education That Goes <em>Beyond Information</em></h2>
+        <p class="reveal reveal-delay-2">At Vision Forge, learning is not passive. Every program is built around active engagement, mentored growth, and real-world application.</p>
+      </div>
+      <div class="prog-description reveal reveal-delay-1">
+        <div class="prog-desc-text">
+          <p>Our curriculum draws from the best of both classical and modern thought &mdash; the strategic reasoning of great commanders and statesmen, the psychological discipline of Stoic philosophy, the rigour of contemporary leadership science, and the depth of the Islamic intellectual tradition.</p>
+          <p>We do not simply deliver lectures or assign readings. Vision Forge members engage in structured discussion circles, work on live social projects, receive one-on-one mentorship, and are held accountable to the standards they set for themselves.</p>
+          <p>Whether you are a student beginning your academic journey, a young professional seeking direction, or someone who simply wants to grow &mdash; our programs meet you where you are and take you further than you imagined.</p>
+        </div>
+        <div class="prog-desc-aside">
+          <div class="prog-highlight">
+            <span class="prog-highlight-ico">&#128218;</span>
+            <h4>What We Cover</h4>
+            <ul class="prog-highlight-list">
+              <li>Leadership Theory &amp; Decision Frameworks</li>
+              <li>Strategic Thinking &amp; Historical Analysis</li>
+              <li>Communication, Rhetoric &amp; Persuasion</li>
+              <li>Critical Thinking &amp; Intellectual Discipline</li>
+              <li>Self-Command, Discipline &amp; Character</li>
+              <li>Community Service &amp; Social Impact</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="prog-pillars">
+        <div class="prog-pillar reveal"><div class="prog-pillar-num">01</div><div class="prog-pillar-ico">&#129504;</div><h3>Mind &amp; Intellect</h3><p>We sharpen critical thinking through rigorous reading programs, Socratic discussion circles, and deep exposure to history's greatest intellectual traditions.</p></div>
+        <div class="prog-pillar reveal reveal-delay-1"><div class="prog-pillar-num">02</div><div class="prog-pillar-ico">&#9822;</div><h3>Strategy &amp; Leadership</h3><p>From battlefield strategy to modern organisational leadership &mdash; we study how great decisions are made under pressure and build teams that navigate uncertainty.</p></div>
+        <div class="prog-pillar reveal reveal-delay-2"><div class="prog-pillar-num">03</div><div class="prog-pillar-ico">&#127758;</div><h3>Purpose &amp; Service</h3><p>Leadership without direction is dangerous. We cultivate a deep sense of responsibility &mdash; to family, community, and nation &mdash; through real-world service initiatives.</p></div>
+      </div>
+      <div class="prog-cta reveal">
+        <p>Interested in our programs?</p>
+        <a href="#" data-page="home" data-anchor="contact" class="btn btn-primary">Enquire Now &rarr;</a>
+        <a href="https://wa.me/923105826985?text=Hi%20Vision%20Forge!%20I%27d%20like%20to%20learn%20about%20your%20programs." target="_blank" rel="noopener" class="btn btn-outline">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <div class="section-head centered">
+        <p class="eyebrow reveal">The Journey</p>
+        <h2 class="reveal reveal-delay-1">Your Path to <em>Purposeful Leadership</em></h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-line" aria-hidden="true"></div>
+        <div class="process-step reveal"><div class="step-circle">01</div><h3>Join the Community</h3><p>Sign up and gain immediate access to our growing network of learners, thinkers, and aspiring leaders from across the region.</p></div>
+        <div class="process-step reveal reveal-delay-1"><div class="step-circle">02</div><h3>Learn &amp; Grow</h3><p>Engage with curated educational content, leadership frameworks, and interactive workshops crafted by expert mentors.</p></div>
+        <div class="process-step reveal reveal-delay-2"><div class="step-circle">03</div><h3>Lead with Purpose</h3><p>Apply your knowledge through real-world projects, mentorship roles, and community initiatives that create tangible impact.</p></div>
+        <div class="process-step reveal reveal-delay-3"><div class="step-circle">04</div><h3>Forge Your Legacy</h3><p>Emerge as a disciplined, purpose-driven leader ready to serve society with clarity, vision, and unwavering commitment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Our Impact</p>
+        <h2 class="reveal reveal-delay-1">Stories of <em>Transformation</em></h2>
+        <p class="reveal reveal-delay-2">From classroom circles to community campaigns &mdash; real initiatives, real people, real change.</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item reveal"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" alt="Leadership workshop" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Workshop</span><h3>Strategic Leadership Bootcamp &mdash; Islamabad</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="Mentorship program" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Mentorship</span><h3>Youth Mentorship Program</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&q=80" alt="Community service" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Initiative</span><h3>Community Service Drive</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=500&q=80" alt="Knowledge summit" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Conference</span><h3>Annual Knowledge Summit</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&q=80" alt="Learning circles" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Learning</span><h3>Discussion Circles Launch</h3></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="events" style="background:var(--white);">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow reveal">Upcoming Events</p>
+        <h2 class="reveal reveal-delay-1">Mark Your <em>Calendar</em></h2>
+        <p class="reveal reveal-delay-2">Join us for transformative gatherings &mdash; designed to inspire growth and forge meaningful connections.</p>
+      </div>
+      <div class="events-grid">
+        <div class="event-card reveal">
+          <div class="event-date-block"><span class="event-month">JUL</span><span class="event-day">15</span><span class="event-year">2025</span></div>
+          <div class="event-body">
+            <div class="event-tags"><span class="event-tag-pill">Workshop</span><span class="event-tag-pill event-tag-open">Open to All</span></div>
+            <h3>Strategic Leadership Intensive</h3>
+            <p>A full-day immersive workshop covering advanced leadership frameworks, decision-making under uncertainty, and team dynamics for modern challenges.</p>
+            <div class="event-details">
+              <div class="event-detail-row"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>NUTECH Auditorium, Islamabad</div>
+              <div class="event-detail-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>9:00 AM &ndash; 5:00 PM PKT</div>
+              <div class="event-detail-row"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Limited to 60 participants</div>
+            </div>
+            <a href="#" data-page="home" data-anchor="contact" class="btn btn-primary">Reserve Your Seat &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-head centered">
+        <p class="eyebrow reveal">Voices</p>
+        <h2 class="reveal reveal-delay-1">What Our <em>Members Say</em></h2>
+      </div>
+      <div class="testimonials-wrapper reveal reveal-delay-2">
+        <div class="testimonials-track" id="testimonialsTrack">
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">Vision Forge didn't just teach me leadership theory &mdash; it challenged me to become the person I always knew I could be. The mentorship and community here are unlike anything I've experienced before.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed Raza" loading="lazy"/></div><div class="t-info"><h4>Ahmed Raza</h4><p>Engineering Student, NUTECH</p></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">The discussion circles gave me a space to think critically and speak fearlessly. I've grown more in six months here than in years of formal education. This is where minds are truly built.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sara Mahmood" loading="lazy"/></div><div class="t-info"><h4>Sara Mahmood</h4><p>Young Professional, Islamabad</p></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">The strategic thinking frameworks I gained here transformed how I approach every decision in my career and personal life. Vision Forge sets you apart from the crowd.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Bilal Khan" loading="lazy"/></div><div class="t-info"><h4>Bilal Khan</h4><p>Graduate Researcher</p></div></div></div></div>
+        </div>
+        <div class="t-controls">
+          <button class="t-btn t-prev" aria-label="Previous testimonial">&#8592;</button>
+          <div class="testimonial-dots" id="testimonialDots" role="tablist"></div>
+          <button class="t-btn t-next" aria-label="Next testimonial">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background:var(--ivory);">
+    <div class="container">
+      <div class="section-head centered">
+        <p class="eyebrow reveal">FAQ</p>
+        <h2 class="reveal reveal-delay-1">Common <em>Questions</em></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-question">Who is Vision Forge for? <span class="faq-chevron">&#8964;</span></button><div class="faq-answer"><div class="faq-answer-inner">Vision Forge is designed for students, young professionals, thinkers, and individuals seeking growth, direction, and purpose. If you are committed to developing yourself intellectually and serving your community, you belong here.</div></div></div>
+        <div class="faq-item reveal reveal-delay-1"><button class="faq-question">Is Vision Forge free to join? <span class="faq-chevron">&#8964;</span></button><div class="faq-answer"><div class="faq-answer-inner">Core membership and access to our learning communities is free. Certain intensive programs, workshops, and conferences may have associated costs, which are kept minimal to ensure accessibility for all members.</div></div></div>
+        <div class="faq-item reveal reveal-delay-2"><button class="faq-question">How does the mentorship program work? <span class="faq-chevron">&#8964;</span></button><div class="faq-answer"><div class="faq-answer-inner">After joining, members are matched with mentors based on their goals and interests. Mentorship includes regular sessions, goal-setting, accountability check-ins, and access to our mentor network's broader expertise.</div></div></div>
+        <div class="faq-item reveal reveal-delay-3"><button class="faq-question">Can I participate remotely? <span class="faq-chevron">&#8964;</span></button><div class="faq-answer"><div class="faq-answer-inner">Yes. A significant portion of Vision Forge's programs, discussions, and educational content is available online. We are building a digital platform to serve members across Pakistan and, in the long term, globally.</div></div></div>
+        <div class="faq-item reveal"><button class="faq-question">What makes Vision Forge different? <span class="faq-chevron">&#8964;</span></button><div class="faq-answer"><div class="faq-answer-inner">Vision Forge is not just an organisation &mdash; it is a philosophy of disciplined growth. Our focus on mind, strategy, and purpose &mdash; combined with rigorous mentorship, intellectual rigour, and genuine community service &mdash; sets us apart from conventional youth platforms.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scholarships" style="background:var(--white);">
+    <div class="container">
+      <div class="sch-intro">
+        <p class="eyebrow reveal">Scholarship Support</p>
+        <h2 class="reveal reveal-delay-1">We Help You <em>Fund</em><br>Your Education</h2>
+        <p class="reveal reveal-delay-2">Navigating the scholarship landscape is one of the most overwhelming challenges a student can face. Vision Forge exists to remove that confusion entirely &mdash; we research, curate, and explain the best available opportunities, then walk with you through every step.</p>
+        <div class="sch-notice reveal reveal-delay-3">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span><strong>Please note:</strong> Vision Forge does not award scholarships directly. We are a dedicated guidance partner &mdash; providing verified links to official scholarship portals, explaining requirements clearly, and helping you prepare a competitive application from start to submission.</span>
+        </div>
+      </div>
+      <div class="sch-what-we-do reveal reveal-delay-1">
+        <div class="sch-wwd-text">
+          <h3>What Vision Forge <em>Provides</em></h3>
+          <p>We maintain an actively updated directory of verified scholarship opportunities &mdash; spanning government-funded programs through HEC and PEEF, need-based grants through Ehsaas, and prestigious international fellowships such as Fulbright, Chevening, DAAD, and institutional scholarships at universities across Turkey, China, Malaysia, and the United Kingdom.</p>
+          <p>When you reach out to us, we do not send a generic list and leave you on your own. We sit with you, understand your academic background and long-term ambitions, and match you with the opportunities that suit your specific profile.</p>
+        </div>
+        <div class="sch-wwd-types">
+          <div class="sch-type-item"><div class="sch-type-dot sch-type-dot-gold"></div><div><h4>Merit-Based Scholarships</h4><p>Full and partial funding for outstanding students at national and international universities.</p></div></div>
+          <div class="sch-type-item"><div class="sch-type-dot sch-type-dot-blue"></div><div><h4>Need-Based Grants &amp; Government Aid</h4><p>Programs through HEC, PEEF, and Ehsaas designed for students who demonstrate financial need.</p></div></div>
+          <div class="sch-type-item"><div class="sch-type-dot sch-type-dot-green"></div><div><h4>International Fellowships</h4><p>Competitive programs like Fulbright, Chevening, and DAAD for exceptional candidates.</p></div></div>
+        </div>
+      </div>
+      <div class="sch-guidance-strip reveal">
+        <div class="sch-guidance-left">
+          <h3>How Vision Forge<br><em>Guides You</em></h3>
+          <p>From identifying the right opportunity to submitting a polished final application &mdash; we are with you at every stage, at no cost.</p>
+          <a href="https://wa.me/923105826985?text=Hi%20Vision%20Forge!%20I%20need%20scholarship%20guidance." target="_blank" rel="noopener" class="btn btn-gold" style="margin-top:28px;">Get Free Guidance &rarr;</a>
+        </div>
+        <div class="sch-steps">
+          <div class="sch-step"><div class="sch-step-num">01</div><div class="sch-step-text"><h4>Share Your Profile</h4><p>Tell us your academic background, aspirations, and circumstances.</p></div></div>
+          <div class="sch-step"><div class="sch-step-num">02</div><div class="sch-step-text"><h4>Receive Curated Opportunities</h4><p>We share verified official links matched precisely to your profile.</p></div></div>
+          <div class="sch-step"><div class="sch-step-num">03</div><div class="sch-step-text"><h4>Understand Every Requirement</h4><p>We explain eligibility criteria, documents, and deadlines in plain language.</p></div></div>
+          <div class="sch-step"><div class="sch-step-num">04</div><div class="sch-step-text"><h4>Apply with Confidence</h4><p>We review your SOP, CV, and complete application before submission.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-explore -->
+
+
+<!-- ═══════════════════════════════════
+     TEAM PAGE
+═══════════════════════════════════ -->
+<div id="page-team" class="page-view">
+  <div class="team-hero">
+    <div class="container team-hero-inner">
+      <button class="explore-back-btn" data-page="home">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Home
+      </button>
+      <div class="explore-eyebrow"><span></span>The People Behind the Mission<span></span></div>
+      <h1>Meet the <em>Team</em></h1>
+      <p class="team-hero-sub">Vision Forge is powered by a dedicated group of thinkers, leaders, and builders who share one mission &mdash; developing the next generation of purposeful leaders.</p>
+    </div>
+  </div>
+
+  <section class="team-section">
+    <div class="team-mosaic">
+      <div class="tmc">
+        <div class="tmc-photo"><img src="Images/Suhail.jpeg" alt="Suhail Sarwar" loading="lazy"/></div>
+        <div class="tmc-info" style="background:#e8d5a0;color:#1a1200;">
+          <div><div class="tmc-badge" style="color:#7a5800;border-color:#7a5800;">&#11088; Founder</div><h3 class="tmc-name" style="color:#1a1200;">Suhail Sarwar</h3><p class="tmc-role" style="color:#8a6a00;">Founder &amp; President</p><p class="tmc-bio" style="color:#3a2800;">Visionary founder of Vision Forge, dedicated to building Pakistan's next generation of disciplined, purpose-driven leaders from the ground up.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="mailto:msuhailserwer@gmail.com" class="tmc-sl" style="color:#1a1200;">Email</a><a href="#" class="tmc-sl" style="color:#1a1200;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#1a1200;">Twitter</a></div><div class="tmc-sig" style="color:#1a1200;">Suhail</div></div>
+        </div>
+      </div>
+      <div class="tmc">
+        <div class="tmc-photo"><img src="Images/Komail.jpg" alt="Ahmad Komail Zafari" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-info" style="background:#1e1e2e;color:#fff;">
+          <div><div class="tmc-badge" style="color:#d4ab52;border-color:#d4ab52;">&#9000; Developer</div><h3 class="tmc-name" style="color:#fff;">Ahmad Komail<br>Zafari</h3><p class="tmc-role" style="color:#7c9ef7;">Lead Web Developer</p><p class="tmc-bio" style="color:rgba(255,255,255,0.72);">Architects and develops Vision Forge's digital ecosystem &mdash; building polished, high-performance interfaces that bring the movement's mission to life.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#fff;">GitHub</a><a href="#" class="tmc-sl" style="color:#fff;">LinkedIn</a></div><div class="tmc-sig" style="color:#7c9ef7;opacity:0.7;">Ahmad</div></div>
+        </div>
+      </div>
+      <div class="tmc">
+        <div class="tmc-photo"><img src="Images/Mujtaba .jpeg" alt="Mujtaba Shaistah" style="width:100%;height:100%;object-fit:cover;object-position:top;"/></div>
+        <div class="tmc-info" style="background:#9cccc8;color:#0a2422;">
+          <div><h3 class="tmc-name" style="color:#0a2422;">Mujtaba Shaistah</h3><p class="tmc-role" style="color:#1a6e6a;">Media & Journalism</p><p class="tmc-bio" style="color:#1a3a38;">B.A. in Journalism from Moscow State University, originally from Samangan, Afghanistan. Brings international media perspective and cross-cultural communication to Vision Forge's outreach.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"></div><div class="tmc-sig" style="color:#0a2422;">Mujtaba</div></div>
+        </div>
+      </div>
+      <div class="tmc">
+        <div class="tmc-photo"><img src="Images/Maryam .jpeg" alt="Maryam Qadis" style="width:100%;height:100%;object-fit:cover;object-position:top;"/></div>
+        <div class="tmc-info" style="background:#b2c89e;color:#122010;">
+          <div><h3 class="tmc-name" style="color:#122010;">Maryam Qadis</h3><p class="tmc-role" style="color:#3a6a28;">Legal Advisor</p><p class="tmc-bio" style="color:#243820;">LL.B. graduate from Faryab, Afghanistan, currently based in Tehran. Brings cross-cultural legal insight and a deep commitment to justice and purpose-driven leadership.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="mailto:qadismaryam@gmail.com" class="tmc-sl" style="color:#122010;">Email</a></div><div class="tmc-sig" style="color:#122010;">Maryam</div></div>
+        </div>
+      </div>
+      <div class="tmc flip">
+        <div class="tmc-photo"><img src="Images/karimi.jpeg" alt="Obeidrahman Karimi" style="width:100%;height:100%;object-fit:cover;object-position:top;"/></div>
+        <div class="tmc-info" style="background:#1a3a5c;color:#fff;">
+          <div><h3 class="tmc-name" style="color:#fff;">Obeidrahman Karimi</h3><p class="tmc-role" style="color:#d4ab52;">History & Cultural Affairs</p><p class="tmc-bio" style="color:rgba(255,255,255,0.72);">B.A. in History from Kabul University, originally from Sarpul, Afghanistan. Brings deep historical perspective and cultural insight to Vision Forge's mission of purpose-driven leadership.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="mailto:Obeidrahmankarimi415@gmail.com" class="tmc-sl" style="color:#fff;">Email</a></div><div class="tmc-sig" style="color:#d4ab52;opacity:0.55;">Obeid</div></div>
+        </div>
+      </div>
+      <div class="tmc flip">
+        <div class="tmc-photo"><img src="Images/Rahimi.jpg" alt="Habib Rahman Rahimi" style="width:100%;height:100%;object-fit:cover;object-position:top;"/></div>
+        <div class="tmc-info" style="background:#b86a50;color:#fff;">
+          <div><h3 class="tmc-name" style="color:#fff;">Habib Rahman Rahimi</h3><p class="tmc-role" style="color:rgba(255,230,200,0.9);">Economics & Research</p><p class="tmc-bio" style="color:rgba(255,255,255,0.72);">B.A. in Economics, originally from Mazar-e-Sharif, Afghanistan. Brings analytical thinking and economic insight to Vision Forge's research and strategic initiatives.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"></div><div class="tmc-sig" style="color:#fff;opacity:0.45;">Habib</div></div>
+        </div>
+      </div>
+      <div class="tmc flip">
+        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80" alt="Hamza Qureshi" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-info" style="background:#6a8258;color:#fff;">
+          <div><h3 class="tmc-name" style="color:#fff;">Hamza Qureshi</h3><p class="tmc-role" style="color:rgba(220,255,190,0.85);">Events &amp; Operations</p><p class="tmc-bio" style="color:rgba(255,255,255,0.72);">Orchestrates impactful events and workshops that bring the Vision Forge community together for growth and collective inspiration.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#fff;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#fff;">Twitter</a></div><div class="tmc-sig" style="color:#fff;opacity:0.45;">Hamza</div></div>
+        </div>
+      </div>
+      <div class="tmc">
+        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80" alt="Zainab Noor" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-info" style="background:#a0b8d4;color:#0d1f35;">
+          <div><h3 class="tmc-name" style="color:#0d1f35;">Zainab Noor</h3><p class="tmc-role" style="color:#1a4b8c;">Scholarship Guidance</p><p class="tmc-bio" style="color:#1a2e42;">Navigates the scholarship landscape for students &mdash; from identifying opportunities to crafting winning applications for academic funding.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#0d1f35;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#0d1f35;">Email</a></div><div class="tmc-sig" style="color:#0d1f35;">Zainab</div></div>
+        </div>
+      </div>
+      <div class="tmc">
+        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&q=80" alt="Ahmed Raza" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-info" style="background:#c8903a;color:#fff;">
+          <div><h3 class="tmc-name" style="color:#fff;">Ahmed Raza</h3><p class="tmc-role" style="color:rgba(255,240,200,0.9);">Head of Digital &amp; Creative</p><p class="tmc-bio" style="color:rgba(255,255,255,0.75);">Shapes Vision Forge's digital presence, ensuring the movement's message reaches and resonates with a growing nationwide audience.</p></div>
+          <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#fff;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#fff;">Instagram</a></div><div class="tmc-sig" style="color:#fff;opacity:0.45;">Ahmed</div></div>
+        </div>
+      </div>
+      <div class="tmc tmc-join-full">
+        <div class="tmc-photo-empty"><div class="tmc-photo-empty-inner"><span class="tmc-photo-empty-icon">&#10022;</span><span class="tmc-photo-empty-label">Your Seat Awaits</span></div></div>
+        <div class="tmc-info" style="background:#0d1f35;color:#fff;justify-content:center;gap:16px;">
+          <div><div class="tmc-badge" style="color:#d4ab52;border-color:#d4ab52;">Now Recruiting</div><h3 class="tmc-name" style="color:#fff;">Join the Team</h3><p class="tmc-role" style="color:#d4ab52;">Open Positions</p><p class="tmc-bio" style="color:rgba(255,255,255,0.62);">We are always looking for passionate, disciplined individuals to help build Vision Forge. Whether in operations, content, tech, or outreach &mdash; there is a place for you here.</p></div>
+          <div class="tmc-bottom"><a href="https://wa.me/923105826985?text=Hi%20Vision%20Forge!%20I%27m%20interested%20in%20joining%20the%20team." target="_blank" rel="noopener" class="btn btn-gold" style="font-size:0.78rem;padding:11px 20px;">Apply to Join &rarr;</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="team-cta-strip">
+    <p class="eyebrow" style="margin-bottom:14px;">Build something great together</p>
+    <h3>Become Part of the Vision Forge <em>Family</em></h3>
+    <p>Join a community that challenges you, shapes you, and stands with you as you grow into the leader you were meant to be.</p>
+    <div class="team-cta-btns">
+      <a href="https://wa.me/923105826985" target="_blank" rel="noopener" class="btn btn-primary">Apply to Join &rarr;</a>
+      <a href="#" class="btn btn-outline" data-page="home" data-anchor="contact">Contact Us</a>
+    </div>
+  </div>
+</div><!-- /page-team -->
+
+
+<!-- ═══════════════════════════════════
+     TERMS PAGE
+═══════════════════════════════════ -->
+<div id="page-terms" class="page-view">
+  <div class="legal-hero">
+    <div class="container legal-hero-inner">
+      <button class="explore-back-btn" data-page="home" style="margin-bottom:32px;"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to Home</button>
+      <div class="explore-eyebrow"><span></span>Legal<span></span></div>
+      <h1>Terms of <em>Service</em></h1>
+      <p>Last updated: May 2025 &middot; Vision Forge, NUTECH, Islamabad</p>
+    </div>
+  </div>
+  <div class="legal-body">
+    <div class="container"><div class="legal-content">
+      <div class="legal-highlight-box">By accessing or using Vision Forge's website, programs, or services, you agree to be bound by these Terms of Service.</div>
+      <h2>1. About Vision Forge</h2><p>Vision Forge is a non-profit intellectual and social initiative headquartered at NUTECH, Islamabad, Pakistan, established in 2024. Our mission is to develop disciplined minds and purpose-driven leaders through education, mentorship, and community engagement.</p>
+      <h2>2. Eligibility &amp; Membership</h2><p>Our Services are open to all individuals committed to personal growth and societal contribution. By registering or participating, you confirm that all information you provide is accurate and that you will not misrepresent your identity.</p>
+      <h2>3. Use of Services</h2><p>You may use our Services for lawful, personal, and non-commercial purposes. You agree not to distribute spam or harmful content, harass any member, or attempt to gain unauthorised access to our systems.</p>
+      <h2>4. Intellectual Property</h2><p>All content produced by Vision Forge is the intellectual property of Vision Forge and its contributors. You may not reproduce or distribute content without explicit written consent.</p>
+      <h2>5. Scholarship Guidance Disclaimer</h2><p>Vision Forge provides scholarship guidance as an informational and advisory service only. We do not award scholarships or guarantee admissions. Applicants are responsible for confirming details directly with relevant institutions.</p>
+      <h2>6. Limitation of Liability</h2><p>Vision Forge and its team members shall not be liable for any indirect, incidental, or consequential damages arising from your use of our Services.</p>
+      <h2>7. Contact</h2><p>Questions? Contact us at <a href="mailto:msuhailserwer@gmail.com">msuhailserwer@gmail.com</a> or at NUTECH, Islamabad, Pakistan.</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     PRIVACY PAGE
+═══════════════════════════════════ -->
+<div id="page-privacy" class="page-view">
+  <div class="legal-hero">
+    <div class="container legal-hero-inner">
+      <button class="explore-back-btn" data-page="home" style="margin-bottom:32px;"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to Home</button>
+      <div class="explore-eyebrow"><span></span>Legal<span></span></div>
+      <h1>Privacy <em>Policy</em></h1>
+      <p>Last updated: May 2025 &middot; Vision Forge, NUTECH, Islamabad</p>
+    </div>
+  </div>
+  <div class="legal-body">
+    <div class="container"><div class="legal-content">
+      <div class="legal-highlight-box">Vision Forge is committed to protecting your privacy. We do not sell your personal data &mdash; ever.</div>
+      <h2>1. Information We Collect</h2><p>We collect information you provide directly &mdash; name, email, phone number, and institution when you join &mdash; as well as contact form submissions, feedback, and event registrations.</p>
+      <h2>2. How We Use Your Information</h2><p>We use your information to provide and improve our Services, respond to enquiries, and send communications about events and programs with your consent.</p>
+      <h2>3. How We Share Your Information</h2><p>Vision Forge does not sell, rent, or trade your personal data. We may share information only with your consent or when required by applicable law.</p>
+      <h2>4. Your Rights</h2><p>You have the right to access, correct, or delete the personal data we hold about you. Contact us at <a href="mailto:msuhailserwer@gmail.com">msuhailserwer@gmail.com</a> to exercise these rights.</p>
+      <h2>5. Security</h2><p>We implement appropriate technical and organisational measures to protect your personal data.</p>
+      <h2>6. Contact</h2><p><strong>Vision Forge</strong> &mdash; NUTECH, Islamabad<br>Email: <a href="mailto:msuhailserwer@gmail.com">msuhailserwer@gmail.com</a> &middot; Phone: +92 310 5826985</p>
+    </div></div>
+  </div>
+</div>
+
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" height="40" style="display:block"><g fill="rgba(255,255,255,0.85)"><path d="M 99.06,82.02 Q 68.54,52.47 33.49,67.56 Q 32.83,52.97 46.77,48.60 Q 73.68,49.44 100.94,82.02 Z"/><path d="M 108.17,83.96 Q 96.52,43.11 58.62,38.65 Q 65.35,25.68 79.60,28.87 Q 102.49,43.05 109.80,84.90 Z"/><path d="M 115.10,90.20 Q 125.43,48.99 94.84,26.18 Q 107.15,18.31 117.90,28.20 Q 130.63,51.93 116.04,91.83 Z"/><path d="M 117.98,99.06 Q 147.53,68.54 132.44,33.49 Q 147.03,32.83 151.40,46.77 Q 150.56,73.68 117.98,100.94 Z"/><path d="M 116.04,108.17 Q 156.89,96.52 161.35,58.62 Q 174.32,65.35 171.13,79.60 Q 156.95,102.49 115.10,109.80 Z"/><path d="M 109.80,115.10 Q 151.01,125.43 173.82,94.84 Q 181.69,107.15 171.80,117.90 Q 148.07,130.63 108.17,116.04 Z"/><path d="M 100.94,117.98 Q 131.46,147.53 166.51,132.44 Q 167.17,147.03 153.23,151.40 Q 126.32,150.56 99.06,117.98 Z"/><path d="M 91.83,116.04 Q 103.48,156.89 141.38,161.35 Q 134.65,174.32 120.40,171.13 Q 97.51,156.95 90.20,115.10 Z"/><path d="M 84.90,109.80 Q 74.57,151.01 105.16,173.82 Q 92.85,181.69 82.10,171.80 Q 69.37,148.07 83.96,108.17 Z"/><path d="M 82.02,100.94 Q 52.47,131.46 67.56,166.51 Q 52.97,167.17 48.60,153.23 Q 49.44,126.32 82.02,99.06 Z"/><path d="M 83.96,91.83 Q 43.11,103.48 38.65,141.38 Q 25.68,134.65 28.87,120.40 Q 43.05,97.51 84.90,90.20 Z"/><path d="M 90.20,84.90 Q 48.99,74.57 26.18,105.16 Q 18.31,92.85 28.20,82.10 Q 51.93,69.37 91.83,83.96 Z"/></g></svg>Vision Forge</div>
+        <p>A movement dedicated to developing disciplined minds and purpose-driven leaders who serve humanity with clarity and purpose. Est. 2024 at NUTECH, Islamabad.</p>
+      </div>
+      <div class="footer-col"><h4>Navigate</h4><ul>
+        <li><a href="#" data-page="home" data-anchor="about">About Us</a></li>
+        <li><a href="#" data-page="home" data-anchor="services">Programs</a></li>
+        <li><a href="#" data-page="explore">Explore</a></li>
+        <li><a href="#" data-page="team">Our Team</a></li>
+        <li><a href="#" data-page="home" data-anchor="contact">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Programs</h4><ul>
+        <li><a href="#" data-page="home" data-anchor="services">Leadership Training</a></li>
+        <li><a href="#" data-page="home" data-anchor="services">Mentorship</a></li>
+        <li><a href="#" data-page="explore" data-anchor="courses">Courses</a></li>
+        <li><a href="#" data-page="explore" data-anchor="events">Upcoming Events</a></li>
+        <li><a href="#" data-page="explore" data-anchor="scholarships">Scholarships</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul>
+        <li><a href="login.html">Join Us</a></li>
+        <li><a href="mailto:msuhailserwer@gmail.com">Email Us</a></li>
+        <li><a href="#" data-page="explore" data-anchor="faq">FAQ</a></li>
+        <li><a href="#" data-page="home" data-anchor="contact">Partnership</a></li>
+        <li><a href="#" id="openFeedbackFooter">Share Feedback</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Vision Forge. Founded by Suhail Sarwar. Developed by Ahmad Komail Zafari.</p>
+      <div class="footer-bottom-links">
+        <a href="#" data-page="terms">Terms of Service</a>
+        <a href="#" data-page="privacy">Privacy Policy</a>
+      </div>
+      <div class="footer-socials">
+        <a href="https://wa.me/923105826985" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.524 3.655 1.435 5.163L2 22l4.956-1.41A9.954 9.954 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></a>
+        <a href="mailto:msuhailserwer@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="scripts.js" defer></script>
+
+<script>
+(function(){
+  var DARK_PAGES = ['team','explore'];
+  function updateLogo(){
+    var active = document.querySelector('.page-view.page-active');
+    if(!active) return;
+    var pageId = active.id.replace('page-','');
+    document.body.classList.toggle('dark-hero-page', DARK_PAGES.indexOf(pageId) > -1);
+  }
+  var mo = new MutationObserver(updateLogo);
+  mo.observe(document.body,{subtree:true,attributeFilter:['class']});
+  document.addEventListener('click',function(e){
+    var el = e.target.closest('[data-page]');
+    if(el){ setTimeout(updateLogo, 0); }
+  });
+  document.addEventListener('DOMContentLoaded', updateLogo);
+  updateLogo();
+})();
+</script>
+
+<script>
+(function(){
+  var btn     = document.getElementById('hamburgerBtn');
+  var panel   = document.getElementById('slidePanel');
+  var overlay = document.getElementById('spOverlay');
+  var closeBtn= document.getElementById('spCloseBtn');
+  if(!btn || !panel) return;
+
+  function openPanel(){
+    btn.setAttribute('aria-expanded','true');
+    btn.setAttribute('aria-label','Close navigation menu');
+    panel.classList.add('is-open');
+    overlay.classList.add('is-open');
+    overlay.removeAttribute('aria-hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function closePanel(){
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-label','Open navigation menu');
+    panel.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    btn.focus();
+  }
+
+  btn.addEventListener('click', function(){
+    btn.getAttribute('aria-expanded') === 'true' ? closePanel() : openPanel();
+  });
+  overlay.addEventListener('click', closePanel);
+  closeBtn.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
+  });
+
+  panel.querySelectorAll('.sp-link').forEach(function(link){
+    link.addEventListener('click', function(){
+      setTimeout(closePanel, 80);
+    });
+  });
+})();
+</script>
+</body>
+</html>
