@@ -683,11 +683,20 @@
     }
   }, { passive: true });
 
-  /* ── INIT ── */
+  /* ── INIT — split critical vs deferred to cut TBT ── */
+  function initCritical() {
+    initHeroStagger();
+    initHeroSlideshow();
+    initReveal();
+  }
+  function initDeferred() {
+    initCounters(); initTestimonials(); initFAQ();
+    initForms(); initExploreNav();
+  }
+  var ric = window.requestIdleCallback || function (cb) { setTimeout(cb, 1); };
   function init() {
-    initReveal(); initCounters(); initHeroSlideshow();
-    initTestimonials(); initFAQ(); initForms();
-    initHeroStagger(); initExploreNav();
+    initCritical();
+    ric(initDeferred, { timeout: 2000 });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
