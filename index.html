@@ -6,10 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Vision Forge — Building Minds • Forging Leaders • Creating Purpose</title>
   <meta name="description" content="Vision Forge is a forward-thinking intellectual and social initiative dedicated to developing disciplined minds and purpose-driven leaders."/>
+  <!-- Preconnect to font origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="styles.css" />
+  <!-- Preconnect to Unsplash for hero images -->
+  <link rel="preconnect" href="https://images.unsplash.com"/>
+  <link rel="dns-prefetch" href="https://images.unsplash.com"/>
+  <!-- LCP image preload — loads hero image before browser parses <body> -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" fetchpriority="high"/>
+  <!-- Non-blocking Google Fonts — eliminates render-blocking resource -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap"/></noscript>
+  <!-- Critical CSS loads synchronously; fonts are now non-blocking -->
+  <link rel="stylesheet" href="styles.css"/>
 
 </head>
 <body>
@@ -155,7 +164,7 @@
         <div class="hero-img-stack">
           <div class="hero-img-main" id="heroSlideshow">
             <div class="hero-slideshow-inner" id="heroSlideshowInner">
-              <img class="hero-slide active" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Students in a leadership session" loading="eager" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide active" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Students in a leadership session" loading="eager" fetchpriority="high" decoding="sync" width="800" height="534" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
               <img class="hero-slide" src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80" alt="Collaborative workshop" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
               <img class="hero-slide" src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=800&q=80" alt="Young leaders in discussion" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
               <img class="hero-slide" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Vision Forge mentorship session" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
