@@ -686,68 +686,237 @@
 <script src="scripts.js" defer></script>
 
 <script>
-(function(){
-  var DARK_PAGES = ['team','explore'];
-  function updateLogo(){
-    var active = document.querySelector('.page-view.page-active');
-    if(!active) return;
-    var pageId = active.id.replace('page-','');
-    document.body.classList.toggle('dark-hero-page', DARK_PAGES.indexOf(pageId) > -1);
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════
+     VISION FORGE — HAMBURGER PANEL (fully self-contained)
+     All scripts.js conflicts resolved:
+       1. Hamburger & overlay cloned on init  → strips scripts.js listeners
+       2. aggressiveUnlock polls every rAF    → overrides any re-lock
+       3. Capture-phase nav handler           → runs before scripts.js
+       4. Single source of truth for state    → no double-register
+  ═══════════════════════════════════════════════════════ */
+
+  /* ── 1. SCROLL LOCK ─────────────────────────────────── */
+  function lockScroll() {
+    document.body.classList.add('panel-open');
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   }
-  var mo = new MutationObserver(updateLogo);
-  mo.observe(document.body,{subtree:true,attributeFilter:['class']});
-  document.addEventListener('click',function(e){
-    var el = e.target.closest('[data-page]');
-    if(el){ setTimeout(updateLogo, 0); }
-  });
-  document.addEventListener('DOMContentLoaded', updateLogo);
-  updateLogo();
-})();
-</script>
 
-<script>
-(function(){
-  var btn     = document.getElementById('hamburgerBtn');
-  var panel   = document.getElementById('slidePanel');
-  var overlay = document.getElementById('spOverlay');
-  var closeBtn= document.getElementById('spCloseBtn');
-  if(!btn || !panel) return;
+  /* Hard clear — used both immediately and in the unlock poller */
+  function forceUnlock() {
+    document.body.classList.remove('panel-open');
+    document.body.style.overflow   = '';
+    document.documentElement.style.overflow = '';
+    /* Also clear any position-based scroll-lock scripts.js might use */
+    if (document.body.style.position === 'fixed') {
+      var top = parseInt(document.body.style.top || '0', 10);
+      document.body.style.position = '';
+      document.body.style.top      = '';
+      document.body.style.width    = '';
+      window.scrollTo(0, -top);
+    }
+  }
 
-  function openPanel(){
-    btn.setAttribute('aria-expanded','true');
-    btn.setAttribute('aria-label','Close navigation menu');
+  /*
+   * Polls forceUnlock on every animation frame for ~600 ms.
+   * This beats any setTimeout or rAF-based re-lock that scripts.js
+   * might fire after panel close.
+   */
+  var _unlockTimer = null;
+  function aggressiveUnlock() {
+    forceUnlock();
+    var frames = 0;
+    var MAX    = 36; /* ~600 ms @ 60 fps */
+    function tick() {
+      forceUnlock();
+      frames++;
+      if (frames < MAX) _unlockTimer = requestAnimationFrame(tick);
+    }
+    if (_unlockTimer) cancelAnimationFrame(_unlockTimer);
+    _unlockTimer = requestAnimationFrame(tick);
+  }
+
+  /* ── 2. PANEL STATE ─────────────────────────────────── */
+  var btn, panel, overlay, closeBtn;
+  var panelReady = false;
+
+  /*
+   * Clone both the hamburger button and the overlay to strip any
+   * event listeners that scripts.js may have attached before this
+   * inline script runs (scripts.js uses defer, so it fires first).
+   */
+  function stripExternalListeners() {
+    var oldBtn = document.getElementById('hamburgerBtn');
+    if (oldBtn) {
+      var newBtn = oldBtn.cloneNode(true);
+      oldBtn.parentNode.replaceChild(newBtn, oldBtn);
+    }
+    var oldOv = document.getElementById('spOverlay');
+    if (oldOv) {
+      var newOv = oldOv.cloneNode(true);
+      oldOv.parentNode.replaceChild(newOv, oldOv);
+    }
+  }
+
+  function initPanel() {
+    /* Strip scripts.js listeners first */
+    stripExternalListeners();
+
+    btn      = document.getElementById('hamburgerBtn');
+    panel    = document.getElementById('slidePanel');
+    overlay  = document.getElementById('spOverlay');
+    closeBtn = document.getElementById('spCloseBtn');
+
+    if (!btn || !panel || !overlay || !closeBtn) return;
+    panelReady = true;
+
+    btn.addEventListener('click', function () {
+      panel.classList.contains('is-open') ? closePanel() : openPanel();
+    });
+
+    overlay.addEventListener('click', closePanel);
+    closeBtn.addEventListener('click', closePanel);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panelReady && panel.classList.contains('is-open')) {
+        closePanel();
+      }
+    });
+  }
+
+  function openPanel() {
+    if (!panelReady) return;
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Close navigation menu');
     panel.classList.add('is-open');
     overlay.classList.add('is-open');
     overlay.removeAttribute('aria-hidden');
-    document.body.style.overflow = 'hidden';
+    lockScroll();
     closeBtn.focus();
   }
-  function closePanel(){
-    btn.setAttribute('aria-expanded','false');
-    btn.setAttribute('aria-label','Open navigation menu');
+
+  function closePanel() {
+    if (!panelReady) return;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open navigation menu');
     panel.classList.remove('is-open');
     overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    btn.focus();
+    overlay.setAttribute('aria-hidden', 'true');
+    /* Use aggressive unlock so scripts.js can never re-lock the page */
+    aggressiveUnlock();
   }
 
-  btn.addEventListener('click', function(){
-    btn.getAttribute('aria-expanded') === 'true' ? closePanel() : openPanel();
-  });
-  overlay.addEventListener('click', closePanel);
-  closeBtn.addEventListener('click', closePanel);
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
-  });
-
-  panel.querySelectorAll('.sp-link').forEach(function(link){
-    link.addEventListener('click', function(){
-      setTimeout(closePanel, 80);
+  /* ── 3. SPA NAVIGATION ──────────────────────────────── */
+  function navigateTo(pageId, anchor) {
+    if (!pageId) return;
+    document.querySelectorAll('.page-view').forEach(function (p) {
+      p.classList.remove('page-active');
     });
+    var target = document.getElementById('page-' + pageId);
+    if (target) target.classList.add('page-active');
+
+    /*
+     * scrollTo must run AFTER aggressiveUnlock restores overflow,
+     * so we defer it one frame.
+     */
+    requestAnimationFrame(function () {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      if (anchor) {
+        setTimeout(function () {
+          var el = document.getElementById(anchor);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    });
+  }
+
+  /* ── 4. LOGO DARK / LIGHT SWITCHER ─────────────────── */
+  var DARK_PAGES = ['team', 'explore'];
+  function updateLogo() {
+    var active = document.querySelector('.page-view.page-active');
+    if (!active) return;
+    var pageId = active.id.replace('page-', '');
+    document.body.classList.toggle('dark-hero-page', DARK_PAGES.indexOf(pageId) > -1);
+  }
+  new MutationObserver(updateLogo).observe(document.body, {
+    subtree: true, attributeFilter: ['class']
   });
-})();
+
+  /* ── 5. CAPTURE-PHASE CLICK HANDLER ────────────────── */
+  /*
+   * Runs before any scripts.js bubble-phase handler.
+   * stopImmediatePropagation prevents scripts.js from seeing the
+   * click at all, so it cannot re-lock scroll or double-navigate.
+   */
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-page]');
+    if (!el) return;
+
+    /* Let real file links and external URLs pass through */
+    var href = el.getAttribute('href') || '';
+    if (href && href !== '#' && !href.startsWith('#')) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    /* Close panel first, then navigate */
+    var wasOpen = panelReady && panel && panel.classList.contains('is-open');
+    if (wasOpen) closePanel();
+
+    var pageId = el.getAttribute('data-page');
+    var anchor = el.getAttribute('data-anchor');
+
+    /*
+     * If we just closed the panel, wait one frame so closePanel's
+     * aggressiveUnlock has already fired before we switch pages
+     * (avoids the "scroll stuck at 0" flash on slow devices).
+     */
+    if (wasOpen) {
+      requestAnimationFrame(function () {
+        navigateTo(pageId, anchor);
+        updateLogo();
+      });
+    } else {
+      navigateTo(pageId, anchor);
+      updateLogo();
+    }
+
+  }, true /* capture phase */);
+
+  /* ── 6. FAQ ACCORDION ───────────────────────────────── */
+  function initFAQ() {
+    document.querySelectorAll('.faq-question').forEach(function (q) {
+      q.addEventListener('click', function () {
+        var item   = q.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (o) {
+          o.classList.remove('open');
+        });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  }
+
+  /* ── 7. BOOT ────────────────────────────────────────── */
+  function boot() {
+    initPanel();
+    initFAQ();
+    updateLogo();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  window.vfNavigate   = navigateTo;
+  window.vfClosePanel = closePanel;
+
+}());
 </script>
 </body>
 </html>
