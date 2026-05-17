@@ -377,6 +377,11 @@
   var _scrollY     = 0;
 
   function openMobileMenu() {
+    /* Guard: #mobileMenu doesn't exist in the slide-panel build —
+       exit immediately so the inline script in index.html owns the
+       hamburger. Without this guard, body gets position:fixed / overflow:hidden
+       set and then the script crashes on mobileMenu.classList → page freezes. */
+    if (!mobileMenu) return;
     if (menuOpen) return;
     menuOpen = true;
     _scrollY = window.scrollY || window.pageYOffset;
@@ -391,6 +396,7 @@
   }
 
   function closeMobileMenu() {
+    if (!mobileMenu) return;
     if (!menuOpen) return;
     menuOpen = false;
     document.body.style.position = '';
@@ -404,7 +410,10 @@
     hamburgerBtn.setAttribute('aria-label', 'Open menu');
   }
 
-  if (hamburgerBtn) {
+  /* Only attach this legacy click handler when #mobileMenu actually exists.
+     When it doesn't (slide-panel build), index.html's inline script owns
+     the hamburger — attaching here would double-fire and re-lock the page. */
+  if (hamburgerBtn && mobileMenu) {
     hamburgerBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       menuOpen ? closeMobileMenu() : openMobileMenu();
@@ -737,6 +746,11 @@
     }, 60);
   }
 
+  /* PAGE ROUTER — disabled: index.html's inline script (capture phase,
+     stopImmediatePropagation) is the single source of truth for [data-page]
+     navigation. Leaving a second bubble-phase router here caused double
+     navigation calls and scroll-lock conflicts. */
+  /*
   document.addEventListener('click', function (e) {
     var el = e.target.closest('[data-page]');
     if (!el) return;
@@ -745,5 +759,6 @@
     e.preventDefault();
     showPage(el.dataset.page || 'home', el.dataset.anchor || null);
   });
+  */
 
 })();
