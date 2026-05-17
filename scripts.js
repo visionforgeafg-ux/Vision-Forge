@@ -701,6 +701,14 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
+  /* ── Deferred hero slides: inject data-src images after page load ── */
+  window.addEventListener('load', function () {
+    document.querySelectorAll('.hero-slide[data-src]').forEach(function (img) {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+    });
+  }, { once: true, passive: true });
+
 })();
 
 
