@@ -717,6 +717,7 @@ h4, h5, h6 { font-family: var(--font-body); font-weight: 600; color: var(--navy)
 }
 .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--ink); }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease); }
+.faq-item.open .faq-answer { max-height: 600px; }
 .faq-answer-inner {
   padding: 0 24px 22px;
   font-size: 0.9rem; color: var(--text-mid); line-height: 1.85;
@@ -1611,23 +1612,26 @@ h4,h5,h6 { font-family: var(--font-body); font-weight: 600; color: var(--navy); 
   transition: background 0.22s ease;
   position: relative; z-index: 1100;
 }
-.nav-hamburger:hover { background: rgba(255,255,255,0.10); }
-.nav-hamburger:active { background: rgba(255,255,255,0.16); }
-.dark-hero-page .nav-hamburger:hover { background: rgba(13,31,53,0.08); }
+.nav-hamburger:hover { background: rgba(13,31,53,0.08); }
+.nav-hamburger:active { background: rgba(13,31,53,0.14); }
+.dark-hero-page .nav-hamburger:hover { background: rgba(255,255,255,0.12); }
 .hbars {
   display: flex; flex-direction: column; justify-content: space-between;
   width: 22px; height: 14px; pointer-events: none;
 }
 .hbar {
   display: block; width: 100%; height: 2px;
-  background: #ffffff;
+  background: var(--navy);    /* visible on light navbar */
   border-radius: 9px;
   transform-origin: center;
   transition: transform 0.42s cubic-bezier(0.77,0,0.18,1),
               opacity 0.28s ease,
               width 0.38s cubic-bezier(0.77,0,0.18,1);
 }
-.dark-hero-page .hbar { background: var(--navy); }
+.dark-hero-page .hbar { background: #ffffff; } /* visible on dark pages */
+/* When navbar scrolls on a dark page its background turns light-ivory —
+   switch bars back to navy so they don't disappear against it */
+.dark-hero-page .navbar.scrolled .hbar { background: var(--navy); }
 .nav-hamburger[aria-expanded="true"] .hbar-top {
   transform: translateY(6px) rotate(45deg);
 }
@@ -1641,6 +1645,13 @@ h4,h5,h6 { font-family: var(--font-body); font-weight: 600; color: var(--navy); 
 /* ══════════════════════════════════════
    SLIDE PANEL OVERLAY
 ══════════════════════════════════════ */
+
+/* Scroll lock when panel open — overflow only, touch-action intentionally
+   omitted so taps on panel links still register on mobile */
+body.panel-open { overflow: hidden; }
+/* Safety override: once panel-open is removed the page must scroll again */
+body:not(.panel-open) { overflow-x: hidden; overflow-y: auto !important; }
+
 .sp-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0);
@@ -2120,6 +2131,7 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 .faq-chevron { flex-shrink: 0; font-size: 0.9rem; color: var(--text-light); transition: transform 0.4s var(--ease), color 0.22s; display: block; line-height: 1; }
 .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--ink); }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease); }
+.faq-item.open .faq-answer { max-height: 600px; }
 .faq-answer-inner { padding: 0 24px 22px; font-size: 0.9rem; color: var(--text-mid); line-height: 1.85; }
 
 /* ── COURSES / PROGRAMS ── */
