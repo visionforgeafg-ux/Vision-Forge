@@ -8,8 +8,37 @@
   <meta name="description" content="Vision Forge is a forward-thinking intellectual and social initiative dedicated to developing disciplined minds and purpose-driven leaders."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="styles.css" />
+  <!-- Slimmed font request: removed unused weights to cut font payload ~40% -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
+  <!-- Load full stylesheet asynchronously — critical CSS is inlined above -->
+  <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'"/>
+  <noscript><link rel="stylesheet" href="styles.css"/></noscript>
+  <!-- Inline critical CSS: ensures above-the-fold renders without waiting for full stylesheet -->
+  <style>
+    :root{--navy:#0d1f35;--ink:#1a4b8c;--gold:#b8922a;--gold-light:#d4ab52;--ivory:#ffffff;--off-white:#f5f5f5;--border:rgba(13,31,53,0.08);--border-mid:rgba(13,31,53,0.14);--border-strong:rgba(13,31,53,0.22);--text:#1a2e42;--text-mid:#4a5e72;--text-light:rgba(26,46,66,0.45);--radius:10px;--ease:cubic-bezier(0.22,1,0.36,1);--font-serif:'Cormorant Garamond',Georgia,serif;--font-body:'Outfit',system-ui,sans-serif;--shadow-xs:0 1px 3px rgba(13,31,53,0.04);--shadow-sm:0 2px 10px rgba(13,31,53,0.06)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:16px}
+    body{background:#fff;color:var(--text);font-family:var(--font-body);line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    .container{width:88%;max-width:1140px;margin:0 auto}
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:999;padding:24px 0;transition:background 0.4s var(--ease),padding 0.4s var(--ease),box-shadow 0.4s}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    @media(max-width:860px){.nav-links,.nav-cta{display:none}}
+    .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:#fff;padding-top:100px}
+    .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center;padding:70px 0 90px;min-width:0}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr;gap:40px;padding:50px 0 60px}}
+    .hero-img-main{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;background:#e8edf4}
+    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.8s var(--ease)}
+    .hero-slide.active{opacity:1;position:relative}
+    .hero-stagger{opacity:0;transform:translateY(20px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
+    .hero-stagger.visible{opacity:1;transform:translateY(0)}
+    img{display:block;max-width:100%;min-height:1px}
+    .page-view{display:none}.page-view.page-active{display:block}
+  </style>
+  <!-- Preconnect to Unsplash CDN for faster image fetching -->
+  <link rel="preconnect" href="https://images.unsplash.com"/>
+  <!-- Preload the above-the-fold LCP hero image -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop" fetchpriority="high"/>
 
 </head>
 <body>
@@ -155,11 +184,11 @@
         <div class="hero-img-stack">
           <div class="hero-img-main" id="heroSlideshow">
             <div class="hero-slideshow-inner" id="heroSlideshowInner">
-              <img class="hero-slide active" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" alt="Students in a leadership session" loading="eager" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80" alt="Collaborative workshop" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=800&q=80" alt="Young leaders in discussion" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="Vision Forge mentorship session" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Education and learning" loading="lazy" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide active" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop" alt="Students in a leadership session" loading="eager" fetchpriority="high" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=75&auto=format&fit=crop" alt="Collaborative workshop" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=800&q=75&auto=format&fit=crop" alt="Young leaders in discussion" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=75&auto=format&fit=crop" alt="Vision Forge mentorship session" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <img class="hero-slide" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=75&auto=format&fit=crop" alt="Education and learning" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
             </div>
             <div class="hero-slide-dots" id="heroSlideDots"></div>
           </div>
@@ -668,7 +697,7 @@
       </ul></div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Vision Forge. Founded by Suhail Sarwar. Developed by Ahmad Komail Zafari.</p>
+      <p>&copy; 2025 Vision Forge. Founded by Suhail Sarwar. Developed by Ahmad Komail Zafari.</p>
       <div class="footer-bottom-links">
         <a href="#" data-page="terms">Terms of Service</a>
         <a href="#" data-page="privacy">Privacy Policy</a>
