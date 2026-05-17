@@ -8,25 +8,403 @@
   <meta name="description" content="Sign in or create your Vision Forge account and join the movement."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+  <!-- Fonts match index.html exactly -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
+
+  <style>
+    /* ── Login-page enhancement overrides ────────────────────────────── */
+
+    /* Right panel: same academic grid as hero section */
+    .auth-right {
+      position: relative;
+    }
+    .auth-right::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.3;
+    }
+    .auth-right::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 40%, transparent 30%, rgba(255,255,255,0.9) 100%);
+    }
+    .auth-right-inner { position: relative; z-index: 1; }
+
+    /* Left panel: strengthen the gold accent bar at top */
+    .auth-left-content::before {
+      content: '';
+      position: absolute; top: 0; left: 52px; right: 52px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+      border-radius: 0 0 2px 2px;
+    }
+
+    /* Tagline beneath h2 on left panel — Dancing Script matches index hero feel */
+    .auth-left-tagline {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 36px;
+      margin-top: -12px;
+      font-style: normal;
+      letter-spacing: 0.02em;
+    }
+
+    /* Gold underline on left panel h2 em (matches index hero gold-word) */
+    .auth-middle h2 em {
+      position: relative;
+    }
+    .auth-middle h2 em::after {
+      content: '';
+      position: absolute; bottom: 2px; left: 0; right: 0;
+      height: 2px; background: var(--gold-light); opacity: 0.4;
+      border-radius: 1px;
+    }
+
+    /* Back link styled like index.html's nav CTA */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-light);
+      margin-bottom: 44px; transition: color 0.22s, gap 0.22s;
+      padding: 8px 14px 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--white);
+      box-shadow: var(--shadow-xs);
+    }
+    .back-link:hover { color: var(--ink); gap: 12px; border-color: var(--border-mid); }
+    .back-link svg { flex-shrink: 0; }
+
+    /* Panel heading — matches index section h2 scale */
+    .auth-panel h3 {
+      font-size: clamp(1.7rem, 3vw, 2.1rem);
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+    }
+
+    /* Tabs — crisper pill indicator */
+    .auth-tabs {
+      border-radius: var(--radius);
+      gap: 4px;
+    }
+    .auth-tab.active {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 3px 14px rgba(13,31,53,0.22);
+      letter-spacing: 0.01em;
+    }
+
+    /* Input focus: gold glow on focused state for brand harmony */
+    .auth-control:focus {
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px rgba(26,75,140,0.09), 0 1px 4px rgba(26,75,140,0.06);
+    }
+
+    /* Submit button: matches .btn-primary exactly */
+    .btn-navy {
+      background: var(--navy);
+      letter-spacing: 0.03em;
+      font-size: 0.88rem;
+      padding: 14px;
+    }
+    .btn-navy:hover {
+      background: var(--ink);
+      box-shadow: 0 6px 22px rgba(26,75,140,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Left panel eyebrow matching index .eyebrow */
+    .auth-left-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body);
+      font-size: 0.64rem; font-weight: 600;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 22px;
+    }
+    .auth-left-eyebrow::before {
+      content: ''; display: block;
+      width: 24px; height: 1px; background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* Value dots: brighter, matches index pillars */
+    .auth-value-dot { opacity: 0.85; }
+    .auth-value span { color: rgba(255,255,255,0.6); font-size: 0.82rem; }
+
+    /* Stats: cleaner separator matching hero-stats */
+    .auth-stats {
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .auth-stat { border-right: 1px solid rgba(255,255,255,0.08); padding-right: 24px; }
+    .auth-stat:last-child { border-right: none; padding-right: 0; }
+
+    /* Footer: matches index footer bottom line style */
+    .auth-foot {
+      font-size: 0.67rem;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.07em;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Success message: gold tint instead of plain blue */
+    .auth-success {
+      background: rgba(184,146,42,0.06);
+      border-color: rgba(184,146,42,0.25);
+      color: var(--gold);
+    }
+    .auth-success svg { stroke: var(--gold); }
+
+    /* Form labels match index .eyebrow style */
+    .auth-form-group label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+    }
+
+    /* ── Forgot Password Modal ──────────────────────────────────── */
+    .fp-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(13,31,53,0.52);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fp-overlay.open {
+      opacity: 1; pointer-events: all;
+    }
+    .fp-modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 44px 40px 36px;
+      width: 100%; max-width: 420px;
+      box-shadow: 0 32px 80px rgba(13,31,53,0.22), 0 2px 12px rgba(13,31,53,0.08);
+      border: 1px solid var(--border);
+      position: relative;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fp-overlay.open .fp-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    /* Gold accent line at top of modal — matches left panel */
+    .fp-modal::before {
+      content: '';
+      position: absolute; top: 0; left: 32px; right: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+      border-radius: 0 0 2px 2px;
+    }
+
+    .fp-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--off-white);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 1rem; line-height: 1;
+      transition: all 0.2s;
+    }
+    .fp-close:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    .fp-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--ink-pale); margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fp-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .fp-modal h4 {
+      font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px; letter-spacing: -0.01em;
+    }
+    .fp-modal p.fp-sub {
+      font-size: 0.85rem; color: var(--text-mid); line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    /* Step states */
+    .fp-step { display: none; }
+    .fp-step.active { display: block; }
+
+    /* Success state */
+    .fp-success-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(26,75,140,0.07);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .fp-success-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+    .fp-success-title {
+      font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
+      color: var(--navy); text-align: center; margin-bottom: 10px;
+    }
+    .fp-success-body {
+      font-size: 0.84rem; color: var(--text-mid); text-align: center;
+      line-height: 1.75; margin-bottom: 28px;
+    }
+    .fp-success-body strong { color: var(--ink); }
+    .fp-back-btn {
+      width: 100%; padding: 12px; border-radius: var(--radius);
+      background: transparent; border: 1.5px solid var(--border-mid);
+      color: var(--text-mid); font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: all 0.25s; letter-spacing: 0.02em;
+    }
+    .fp-back-btn:hover { border-color: var(--navy); color: var(--navy); background: var(--off-white); }
+
+    /* ── Legal Modals (Terms & Privacy) ────────────────────────── */
+    .legal-trigger {
+      color: var(--ink); font-weight: 600;
+      border-bottom: 1px solid rgba(26,75,140,0.25);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .legal-trigger:hover { color: var(--navy); border-color: var(--navy); }
+
+    .legal-overlay {
+      position: fixed; inset: 0; z-index: 2100;
+      background: rgba(13,31,53,0.55);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .legal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .legal-modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      width: 100%; max-width: 640px;
+      max-height: 82vh;
+      display: flex; flex-direction: column;
+      box-shadow: 0 32px 80px rgba(13,31,53,0.24), 0 2px 12px rgba(13,31,53,0.08);
+      border: 1px solid var(--border);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+      overflow: hidden;
+    }
+    .legal-overlay.open .legal-modal { transform: translateY(0) scale(1); }
+
+    /* Coloured header band */
+    .legal-modal-header {
+      padding: 28px 36px 24px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .legal-modal-header::before {
+      content: '';
+      position: absolute; top: 0; left: 36px; right: 36px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+      border-radius: 0 0 2px 2px;
+    }
+    .legal-modal-eyebrow {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+    }
+    .legal-modal-eyebrow::before {
+      content: ''; width: 20px; height: 1px; background: var(--gold);
+    }
+    .legal-modal-header h3 {
+      font-family: var(--font-serif); font-size: 1.7rem; font-weight: 700;
+      color: var(--navy); line-height: 1.15; letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .legal-modal-header h3 em { font-style: italic; color: var(--ink); }
+    .legal-modal-meta {
+      font-size: 0.75rem; color: var(--text-light); margin-top: 6px;
+    }
+    .legal-modal-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--off-white);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 1.1rem; line-height: 1;
+      transition: all 0.2s;
+    }
+    .legal-modal-close:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* Scrollable body */
+    .legal-modal-body {
+      padding: 28px 36px 32px;
+      overflow-y: auto; flex: 1;
+      scrollbar-width: thin;
+      scrollbar-color: var(--ink-pale2) transparent;
+    }
+    .legal-modal-body::-webkit-scrollbar { width: 4px; }
+    .legal-modal-body::-webkit-scrollbar-thumb { background: var(--ink-pale2); border-radius: 2px; }
+
+    /* Highlight box */
+    .legal-highlight {
+      background: var(--ink-pale); border-left: 3px solid var(--ink);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 18px; font-size: 0.88rem; color: var(--ink);
+      line-height: 1.65; margin-bottom: 28px; font-weight: 500;
+    }
+
+    /* Section headings inside modal */
+    .legal-modal-body h4 {
+      font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--navy); margin: 24px 0 8px;
+      padding-bottom: 6px; border-bottom: 1px solid var(--border);
+    }
+    .legal-modal-body h4:first-of-type { margin-top: 0; }
+    .legal-modal-body p {
+      font-size: 0.88rem; color: var(--text-mid); line-height: 1.8;
+      margin-bottom: 0;
+    }
+    .legal-modal-body a { color: var(--ink); border-bottom: 1px solid rgba(26,75,140,0.25); }
+    .legal-modal-body a:hover { color: var(--navy); }
+
+    /* Footer strip */
+    .legal-modal-footer {
+      padding: 16px 36px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-shrink: 0;
+      background: var(--off-white);
+    }
+    .legal-modal-footer span {
+      font-size: 0.75rem; color: var(--text-light);
+    }
+    .legal-modal-footer button {
+      padding: 9px 22px; border-radius: var(--radius);
+      background: var(--navy); color: #fff;
+      border: none; cursor: pointer; font-size: 0.83rem; font-weight: 600;
+      letter-spacing: 0.03em; transition: all 0.25s;
+    }
+    .legal-modal-footer button:hover { background: var(--ink); transform: translateY(-1px); }
+  </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div id="cursor" aria-hidden="true"></div>
-
 <div class="auth-page">
 
-  <!-- ── LEFT: Academic brand panel ── -->
+  <!-- ══ LEFT: Brand panel ══ -->
   <div class="auth-left">
     <div class="auth-left-bg" style="background-image:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=900&q=80');"></div>
     <div class="auth-left-pattern"></div>
     <div class="auth-left-gradient"></div>
     <div class="auth-left-content">
 
+      <!-- Logo — matches index.html nav-logo-light exactly -->
       <a href="index.html" class="auth-logo" aria-label="Vision Forge Home">
-        <img src="ViFo_dark_mode.png" alt="Vifo Logo" style="height: 88px; width: auto; display: block; margin: -20px 0;"/>
+        <img
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MzAgMjAwIj48ZyBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuOTIpIj48cGF0aCBkPSJNIDk5LjA2LDgyLjAyIFEgNjguNTQsNTIuNDcgMzMuNDksNjcuNTYgUSAzMi44Myw1Mi45NyA0Ni43Nyw0OC42MCBRIDczLjY4LDQ5LjQ0IDEwMC45NCw4Mi4wMiBaIi8+PHBhdGggZD0iTSAxMDguMTcsODMuOTYgUSA5Ni41Miw0My4xMSA1OC42MiwzOC42NSBRIDY1LjM1LDI1LjY4IDc5LjYwLDI4Ljg3IFEgMTAyLjQ5LDQzLjA1IDEwOS44MCw4NC45MCBaIi8+PHBhdGggZD0iTSAxMTUuMTAsOTAuMjAgUSAxMjUuNDMsNDguOTkgOTQuODQsMjYuMTggUSAxMDcuMTUsMTguMzEgMTE3LjkwLDI4LjIwIFEgMTMwLjYzLDUxLjkzIDExNi4wNCw5MS44MyBaIi8+PHBhdGggZD0iTSAxMTcuOTgsOTkuMDYgUSAxNDcuNTMsNjguNTQgMTMyLjQ0LDMzLjQ5IFEgMTQ3LjAzLDMyLjgzIDE1MS40MCw0Ni43NyBRIDE1MC41Niw3My42OCAxMTcuOTgsMTAwLjk0IFoiLz48cGF0aCBkPSJNIDExNi4wNCwxMDguMTcgUSAxNTYuODksOTYuNTIgMTYxLjM1LDU4LjYyIFEgMTc0LjMyLDY1LjM1IDE3MS4xMyw3OS42MCBRIDE1Ni45NSwxMDIuNDkgMTE1LjEwLDEwOS44MCBaIi8+PHBhdGggZD0iTSAxMDkuODAsMTE1LjEwIFEgMTUxLjAxLDEyNS40MyAxNzMuODIsOTQuODQgUSAxODEuNjksMTA3LjE1IDE3MS44MCwxMTcuOTAgUSAxNDguMDcsMTMwLjYzIDEwOC4xNywxMTYuMDQgWiIvPjxwYXRoIGQ9Ik0gMTAwLjk0LDExNy45OCBRIDEzMS40NiwxNDcuNTMgMTY2LjUxLDEzMi40NCBRIDE2Ny4xNywxNDcuMDMgMTUzLjIzLDE1MS40MCBRIDEyNi4zMiwxNTAuNTYgOTkuMDYsMTE3Ljk4IFoiLz48cGF0aCBkPSJNIDkxLjgzLDExNi4wNCBRIDEwMy40OCwxNTYuODkgMTQxLjM4LDE2MS4zNSBRIDEzNC42NSwxNzQuMzIgMTIwLjQwLDE3MS4xMyBRIDk3LjUxLDE1Ni45NSA5MC4yMCwxMTUuMTAgWiIvPjxwYXRoIGQ9Ik0gODQuOTAsMTA5LjgwIFEgNzQuNTcsMTUxLjAxIDEwNS4xNiwxNzMuODIgUSA5Mi44NSwxODEuNjkgODIuMTAsMTcxLjgwIFEgNjkuMzcsMTQ4LjA3IDgzLjk2LDEwOC4xNyBaIi8+PHBhdGggZD0iTSA4Mi4wMiwxMDAuOTQgUSA1Mi40NywxMzEuNDYgNjcuNTYsMTY2LjUxIFEgNTIuOTcsMTY3LjE3IDQ4LjYwLDE1My4yMyBRIDQ5LjQ0LDEyNi4zMiA4Mi4wMiw5OS4wNiBaIi8+PHBhdGggZD0iTSA4My45Niw5MS44MyBRIDQzLjExLDEwMy40OCAzOC42NSwxNDEuMzggUSAyNS42OCwxMzQuNjUgMjguODcsMTIwLjQwIFEgNDMuMDUsOTcuNTEgODQuOTAsOTAuMjAgWiIvPjxwYXRoIGQ9Ik0gOTAuMjAsODQuOTAgUSA0OC45OSw3NC41NyAyNi4xOCwxMDUuMTYgUSAxOC4zMSw5Mi44NSAyOC4yMCw4Mi4xMCBRIDUxLjkzLDY5LjM3IDkxLjgzLDgzLjk2IFoiLz48L2c+PHRleHQgeD0iMjE1IiB5PSIxMzMiIGZvbnQtZmFtaWx5PSJPdXRmaXQsU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSI5MiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiI+VjwvdGV4dD48dGV4dCB4PSIyNzkiIHk9IjEzMyIgZm9udC1mYW1pbHk9Ik91dGZpdCxTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9Ijg2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjYThjOGY4Ij5pPC90ZXh0Pjx0ZXh0IHg9IjMwNiIgeT0iMTMzIiBmb250LWZhbWlseT0iT3V0Zml0LFNlZ29lIFVJLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOTIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPkY8L3RleHQ+PHRleHQgeD0iMzY0IiB5PSIxMzMiIGZvbnQtZmFtaWx5PSJPdXRmaXQsU2Vnb2UgVUksQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2E4YzhmOCI+bzwvdGV4dD48dGV4dCB4PSIyMTUiIHk9IjE2MyIgZm9udC1mYW1pbHk9Ik91dGZpdCxTZWdvZSBVSSxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIxIiBmb250LXdlaWdodD0iNTAwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuNzIpIiBsZXR0ZXItc3BhY2luZz0iNS41Ij5WSVNJT04gRk9SR0U8L3RleHQ+PC9zdmc+"
+          alt="Vision Forge"
+          style="height:46px;display:block"
+        />
       </a>
 
       <div class="auth-middle">
@@ -34,14 +412,21 @@
           <p>Strong minds build strong societies. Leadership begins with self-mastery, vision, and disciplined execution.</p>
           <span>— Vision Forge Core Philosophy</span>
         </div>
+
+        <div class="auth-left-eyebrow">Est. 2024 &nbsp;·&nbsp; NUTECH, Islamabad</div>
+
         <h2>Build Your Mind.<br>Forge Your <em>Purpose.</em></h2>
-        <p>Join Vision Forge and become part of a movement dedicated to developing disciplined thinkers, strategic leaders, and purpose-driven individuals who shape a better world.</p>
+        <p class="auth-left-tagline">Creating Purpose · Forging Leaders</p>
+
+        <p>Join a movement dedicated to developing disciplined thinkers, strategic leaders, and purpose-driven individuals who shape a better world.</p>
+
         <div class="auth-values">
           <div class="auth-value"><div class="auth-value-dot"></div><span>Loyalty &amp; Integrity</span></div>
           <div class="auth-value"><div class="auth-value-dot"></div><span>Strategic Thinking &amp; Discipline</span></div>
           <div class="auth-value"><div class="auth-value-dot"></div><span>Service &amp; Continuous Growth</span></div>
           <div class="auth-value"><div class="auth-value-dot"></div><span>Intellectual Rigor</span></div>
         </div>
+
         <div class="auth-stats">
           <div class="auth-stat">
             <div class="auth-stat-num">500+</div>
@@ -59,19 +444,19 @@
       </div>
 
       <div class="auth-foot">
-        &copy; 2025 Vision Forge &nbsp;·&nbsp; NUTECH, Islamabad &nbsp;·&nbsp; Building Minds • Forging Leaders
+        &copy; 2025 Vision Forge &nbsp;·&nbsp; NUTECH, Islamabad &nbsp;·&nbsp; Building Minds &bull; Forging Leaders
       </div>
 
     </div>
   </div>
 
-  <!-- ── RIGHT: Auth forms ── -->
+  <!-- ══ RIGHT: Auth forms ══ -->
   <div class="auth-right">
     <div class="auth-right-inner">
 
       <a href="index.html" class="back-link">
-        <svg width="14" height="14" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to home
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Home
       </a>
 
       <!-- Tabs -->
@@ -235,7 +620,7 @@
             </div>
             <div class="auth-form-group">
               <label for="s-province">Province / State</label>
-              <input id="s-province" type="text" class="auth-control" placeholder="e.g. Punjab" required autocomplete="address-level1" value="Kabul"/>
+              <input id="s-province" type="text" class="auth-control" placeholder="e.g. Kabul" required autocomplete="address-level1" value="Kabul"/>
             </div>
           </div>
 
@@ -246,7 +631,7 @@
 
           <label class="checkbox-group">
             <input type="checkbox" required id="s-terms"/>
-            <span>I agree to Vision Forge's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+            <span>I agree to Vision Forge's <a href="#" id="open-terms" class="legal-trigger">Terms of Service</a> and <a href="#" id="open-privacy" class="legal-trigger">Privacy Policy</a>.</span>
           </label>
 
           <div class="auth-actions">
@@ -264,6 +649,262 @@
   </div>
 </div>
 
+<!-- ══ TERMS OF SERVICE MODAL ══ -->
+<div class="legal-overlay" id="termsOverlay" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+  <div class="legal-modal">
+    <div class="legal-modal-header">
+      <div class="legal-modal-eyebrow">Legal</div>
+      <h3 id="termsTitle">Terms of <em>Service</em></h3>
+      <p class="legal-modal-meta">Last updated: May 2025 &middot; Vision Forge, NUTECH, Islamabad</p>
+      <button class="legal-modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="legal-modal-body">
+      <div class="legal-highlight">By accessing or using Vision Forge's website, programs, or services, you agree to be bound by these Terms of Service.</div>
+      <h4>1. About Vision Forge</h4>
+      <p>Vision Forge is a non-profit intellectual and social initiative headquartered at NUTECH, Islamabad, Pakistan, established in 2024. Our mission is to develop disciplined minds and purpose-driven leaders through education, mentorship, and community engagement.</p>
+      <h4>2. Eligibility &amp; Membership</h4>
+      <p>Our Services are open to all individuals committed to personal growth and societal contribution. By registering or participating, you confirm that all information you provide is accurate and that you will not misrepresent your identity.</p>
+      <h4>3. Use of Services</h4>
+      <p>You may use our Services for lawful, personal, and non-commercial purposes. You agree not to distribute spam or harmful content, harass any member, or attempt to gain unauthorised access to our systems.</p>
+      <h4>4. Intellectual Property</h4>
+      <p>All content produced by Vision Forge is the intellectual property of Vision Forge and its contributors. You may not reproduce or distribute content without explicit written consent.</p>
+      <h4>5. Scholarship Guidance Disclaimer</h4>
+      <p>Vision Forge provides scholarship guidance as an informational and advisory service only. We do not award scholarships or guarantee admissions. Applicants are responsible for confirming details directly with relevant institutions.</p>
+      <h4>6. Limitation of Liability</h4>
+      <p>Vision Forge and its team members shall not be liable for any indirect, incidental, or consequential damages arising from your use of our Services.</p>
+      <h4>7. Contact</h4>
+      <p>Questions? Contact us at <a href="mailto:msuhailserwer@gmail.com">msuhailserwer@gmail.com</a> or at NUTECH, Islamabad, Pakistan.</p>
+    </div>
+    <div class="legal-modal-footer">
+      <span>&copy; 2025 Vision Forge</span>
+      <button onclick="closeLegal('termsOverlay')">Got It</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRIVACY POLICY MODAL ══ -->
+<div class="legal-overlay" id="privacyOverlay" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+  <div class="legal-modal">
+    <div class="legal-modal-header">
+      <div class="legal-modal-eyebrow">Legal</div>
+      <h3 id="privacyTitle">Privacy <em>Policy</em></h3>
+      <p class="legal-modal-meta">Last updated: May 2025 &middot; Vision Forge, NUTECH, Islamabad</p>
+      <button class="legal-modal-close" aria-label="Close">&times;</button>
+    </div>
+    <div class="legal-modal-body">
+      <div class="legal-highlight">Vision Forge is committed to protecting your privacy. We do not sell your personal data &mdash; ever.</div>
+      <h4>1. Information We Collect</h4>
+      <p>We collect information you provide directly &mdash; name, email, phone number, and institution when you join &mdash; as well as contact form submissions, feedback, and event registrations.</p>
+      <h4>2. How We Use Your Information</h4>
+      <p>We use your information to provide and improve our Services, respond to enquiries, and send communications about events and programs with your consent.</p>
+      <h4>3. How We Share Your Information</h4>
+      <p>Vision Forge does not sell, rent, or trade your personal data. We may share information only with your consent or when required by applicable law.</p>
+      <h4>4. Your Rights</h4>
+      <p>You have the right to access, correct, or delete the personal data we hold about you. Contact us at <a href="mailto:msuhailserwer@gmail.com">msuhailserwer@gmail.com</a> to exercise these rights.</p>
+      <h4>5. Security</h4>
+      <p>We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, alteration, or destruction.</p>
+      <h4>6. Contact</h4>
+      <p><strong>Vision Forge</strong> &mdash; NUTECH, Islamabad<br>Email: <a href="mailto:msuhailserwer@gmail.com">msuhailserwer@gmail.com</a> &middot; Phone: +92 310 5826985</p>
+    </div>
+    <div class="legal-modal-footer">
+      <span>&copy; 2025 Vision Forge</span>
+      <button onclick="closeLegal('privacyOverlay')">Got It</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORGOT PASSWORD MODAL ══ -->
+<div class="fp-overlay" id="fpOverlay" role="dialog" aria-modal="true" aria-labelledby="fpTitle">
+  <div class="fp-modal">
+    <button class="fp-close" id="fpClose" aria-label="Close">&times;</button>
+
+    <!-- Step 1: Enter email -->
+    <div class="fp-step active" id="fp-step1">
+      <div class="fp-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h4 id="fpTitle">Reset Password</h4>
+      <p class="fp-sub">Enter the email address linked to your Vision Forge account. We'll send you a reset link.</p>
+
+      <form id="fp-form" novalidate>
+        <div class="auth-form-group">
+          <label for="fp-email">Email Address</label>
+          <input id="fp-email" type="email" class="auth-control" placeholder="your@email.com" required autocomplete="email"/>
+        </div>
+        <div id="fp-error" style="display:none;font-size:0.8rem;color:#c94b4b;margin-top:-6px;margin-bottom:12px;">
+          Please enter a valid email address.
+        </div>
+        <div class="auth-actions" style="margin-top:16px;">
+          <button type="submit" class="btn-full btn-navy" id="fp-submit-btn">Send Reset Link</button>
+          <button type="button" class="fp-back-btn" onclick="closeFP()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 2: Confirmation -->
+    <div class="fp-step" id="fp-step2">
+      <div style="text-align:center;padding:8px 0 4px;">
+        <div class="fp-success-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="fp-success-title">Check Your Inbox</div>
+        <p class="fp-success-body">
+          We've sent a password reset link to<br>
+          <strong id="fp-sent-email"></strong><br><br>
+          Check your spam folder if it doesn't arrive within a few minutes.
+        </p>
+        <button class="fp-back-btn" onclick="closeFP()">Back to Sign In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="scripts.js"></script>
+<script>
+/* ── Legal Modals ─────────────────────────────────────── */
+(function () {
+  function openLegal(id) {
+    var overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    /* Focus close button for a11y */
+    var closeBtn = overlay.querySelector('.legal-modal-close');
+    if (closeBtn) setTimeout(function(){ closeBtn.focus(); }, 300);
+  }
+
+  window.closeLegal = function (id) {
+    var overlay = document.getElementById(id);
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    /* Only restore scroll if no other modal is open */
+    var anyOpen = document.querySelector('.legal-overlay.open, .fp-overlay.open');
+    if (!anyOpen) document.body.style.overflow = '';
+  };
+
+  /* Terms link */
+  var termsLink = document.getElementById('open-terms');
+  if (termsLink) {
+    termsLink.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      openLegal('termsOverlay');
+    });
+  }
+
+  /* Privacy link */
+  var privacyLink = document.getElementById('open-privacy');
+  if (privacyLink) {
+    privacyLink.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      openLegal('privacyOverlay');
+    });
+  }
+
+  /* Close on backdrop click & Escape */
+  document.querySelectorAll('.legal-overlay').forEach(function (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeLegal(overlay.id);
+    });
+    overlay.querySelector('.legal-modal-close').addEventListener('click', function () {
+      closeLegal(overlay.id);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.legal-overlay.open').forEach(function (o) {
+      closeLegal(o.id);
+    });
+  });
+}());
+
+/* ── Forgot Password Modal ────────────────────────────── */
+(function () {
+  var overlay  = document.getElementById('fpOverlay');
+  var closeBtn = document.getElementById('fpClose');
+  var form     = document.getElementById('fp-form');
+  var emailInp = document.getElementById('fp-email');
+  var errMsg   = document.getElementById('fp-error');
+  var submitBtn= document.getElementById('fp-submit-btn');
+  var step1    = document.getElementById('fp-step1');
+  var step2    = document.getElementById('fp-step2');
+  var sentLbl  = document.getElementById('fp-sent-email');
+
+  /* Open modal when "Forgot password?" is clicked */
+  document.querySelectorAll('.forgot-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      openFP();
+    });
+  });
+
+  function openFP() {
+    /* Reset to step 1 */
+    step1.classList.add('active');
+    step2.classList.remove('active');
+    if (form) form.reset();
+    emailInp.classList.remove('invalid');
+    errMsg.style.display = 'none';
+    submitBtn.textContent = 'Send Reset Link';
+    submitBtn.disabled = false;
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() { emailInp.focus(); }, 350);
+  }
+
+  window.closeFP = function() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  /* Close on overlay backdrop click */
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeFP();
+  });
+
+  /* Close on Escape */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeFP();
+  });
+
+  closeBtn.addEventListener('click', closeFP);
+
+  /* Form submit */
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var email = emailInp.value.trim();
+    var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!valid) {
+      emailInp.classList.add('invalid');
+      errMsg.style.display = 'block';
+      emailInp.focus();
+      return;
+    }
+
+    emailInp.classList.remove('invalid');
+    errMsg.style.display = 'none';
+
+    /* Loading state */
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+
+    /* Simulate async email send (replace with real API call) */
+    setTimeout(function() {
+      sentLbl.textContent = email;
+      step1.classList.remove('active');
+      step2.classList.add('active');
+    }, 1200);
+  });
+
+  /* Clear invalid state on typing */
+  emailInp.addEventListener('input', function() {
+    emailInp.classList.remove('invalid');
+    errMsg.style.display = 'none';
+  });
+}());
+</script>
 </body>
 </html>
