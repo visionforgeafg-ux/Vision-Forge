@@ -13,8 +13,12 @@
   <link rel="stylesheet" href="styles.css"/>
   <!-- Preconnect to Unsplash CDN for faster image fetching -->
   <link rel="preconnect" href="https://images.unsplash.com"/>
-  <!-- Preload the above-the-fold LCP hero image -->
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop" fetchpriority="high"/>
+  <!-- Preload the above-the-fold LCP hero image — responsive for mobile vs desktop -->
+  <link rel="preload" as="image"
+    imagesrcset="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=75&auto=format&fit=crop 400w,
+                 https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop 800w"
+    imagesizes="(max-width:640px) 400px, 800px"
+    fetchpriority="high"/>
 
 </head>
 <body>
@@ -160,11 +164,19 @@
         <div class="hero-img-stack">
           <div class="hero-img-main" id="heroSlideshow">
             <div class="hero-slideshow-inner" id="heroSlideshowInner">
-              <img class="hero-slide active" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop" alt="Students in a leadership session" loading="eager" fetchpriority="high" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=75&auto=format&fit=crop" alt="Collaborative workshop" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=800&q=75&auto=format&fit=crop" alt="Young leaders in discussion" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=75&auto=format&fit=crop" alt="Vision Forge mentorship session" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
-              <img class="hero-slide" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=75&auto=format&fit=crop" alt="Education and learning" loading="lazy" decoding="async" width="800" height="600" crossorigin="anonymous" onerror="this.style.opacity='0'"/>
+              <!-- Slide 1: LCP — loaded immediately with responsive srcset -->
+              <img class="hero-slide active"
+                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop"
+                srcset="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=75&auto=format&fit=crop 400w,
+                        https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=75&auto=format&fit=crop 800w"
+                sizes="(max-width:640px) 400px, 800px"
+                alt="Students in a leadership session"
+                loading="eager" fetchpriority="high" decoding="async" width="800" height="600"/>
+              <!-- Slides 2–5: data-src only — injected after window.load, never block initial paint -->
+              <img class="hero-slide" data-src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=70&auto=format&fit=crop" alt="Collaborative workshop" decoding="async" width="800" height="600"/>
+              <img class="hero-slide" data-src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=800&q=70&auto=format&fit=crop" alt="Young leaders in discussion" decoding="async" width="800" height="600"/>
+              <img class="hero-slide" data-src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=70&auto=format&fit=crop" alt="Vision Forge mentorship session" decoding="async" width="800" height="600"/>
+              <img class="hero-slide" data-src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=70&auto=format&fit=crop" alt="Education and learning" decoding="async" width="800" height="600"/>
             </div>
             <div class="hero-slide-dots" id="heroSlideDots"></div>
           </div>
@@ -206,7 +218,7 @@
       <div class="about-visual reveal">
         <div class="about-decorline"></div>
         <div class="about-img-frame">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Vision Forge team" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/>
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=75&auto=format&fit=crop" alt="Vision Forge team" loading="lazy" decoding="async" width="600" height="450" onerror="this.style.display='none'"/>
         </div>
         <div class="about-badge-wrap"><div class="about-badge-num">2024</div><div class="about-badge-lbl">Est. at NUTECH</div></div>
       </div>
@@ -374,11 +386,11 @@
         <p class="reveal reveal-delay-2">From classroom circles to community campaigns &mdash; real initiatives, real people, real change.</p>
       </div>
       <div class="portfolio-grid">
-        <div class="portfolio-item reveal"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" alt="Leadership workshop" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Workshop</span><h3>Strategic Leadership Bootcamp &mdash; Islamabad</h3></div></div>
-        <div class="portfolio-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="Mentorship program" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Mentorship</span><h3>Youth Mentorship Program</h3></div></div>
-        <div class="portfolio-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&q=80" alt="Community service" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Initiative</span><h3>Community Service Drive</h3></div></div>
-        <div class="portfolio-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=500&q=80" alt="Knowledge summit" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Conference</span><h3>Annual Knowledge Summit</h3></div></div>
-        <div class="portfolio-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&q=80" alt="Learning circles" loading="lazy" crossorigin="anonymous" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Learning</span><h3>Discussion Circles Launch</h3></div></div>
+        <div class="portfolio-item reveal"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=70&auto=format&fit=crop" alt="Leadership workshop" loading="lazy" decoding="async" width="600" height="400" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Workshop</span><h3>Strategic Leadership Bootcamp &mdash; Islamabad</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&q=70&auto=format&fit=crop" alt="Mentorship program" loading="lazy" decoding="async" width="400" height="300" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Mentorship</span><h3>Youth Mentorship Program</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&q=70&auto=format&fit=crop" alt="Community service" loading="lazy" decoding="async" width="400" height="300" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Initiative</span><h3>Community Service Drive</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-1"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=70&auto=format&fit=crop" alt="Knowledge summit" loading="lazy" decoding="async" width="400" height="300" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Conference</span><h3>Annual Knowledge Summit</h3></div></div>
+        <div class="portfolio-item reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&q=70&auto=format&fit=crop" alt="Learning circles" loading="lazy" decoding="async" width="400" height="300" onerror="this.style.display='none'"/><div class="portfolio-overlay"><span class="tag">Learning</span><h3>Discussion Circles Launch</h3></div></div>
       </div>
     </div>
   </section>
@@ -417,9 +429,9 @@
       </div>
       <div class="testimonials-wrapper reveal reveal-delay-2">
         <div class="testimonials-track" id="testimonialsTrack">
-          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">Vision Forge didn't just teach me leadership theory &mdash; it challenged me to become the person I always knew I could be. The mentorship and community here are unlike anything I've experienced before.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Ahmed Raza" loading="lazy"/></div><div class="t-info"><h4>Ahmed Raza</h4><p>Engineering Student, NUTECH</p></div></div></div></div>
-          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">The discussion circles gave me a space to think critically and speak fearlessly. I've grown more in six months here than in years of formal education. This is where minds are truly built.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80" alt="Sara Mahmood" loading="lazy"/></div><div class="t-info"><h4>Sara Mahmood</h4><p>Young Professional, Islamabad</p></div></div></div></div>
-          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">The strategic thinking frameworks I gained here transformed how I approach every decision in my career and personal life. Vision Forge sets you apart from the crowd.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Bilal Khan" loading="lazy"/></div><div class="t-info"><h4>Bilal Khan</h4><p>Graduate Researcher</p></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">Vision Forge didn't just teach me leadership theory &mdash; it challenged me to become the person I always knew I could be. The mentorship and community here are unlike anything I've experienced before.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=70&auto=format&fit=crop" alt="Ahmed Raza" loading="lazy" decoding="async" width="80" height="80"/></div><div class="t-info"><h4>Ahmed Raza</h4><p>Engineering Student, NUTECH</p></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">The discussion circles gave me a space to think critically and speak fearlessly. I've grown more in six months here than in years of formal education. This is where minds are truly built.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=70&auto=format&fit=crop" alt="Sara Mahmood" loading="lazy" decoding="async" width="80" height="80"/></div><div class="t-info"><h4>Sara Mahmood</h4><p>Young Professional, Islamabad</p></div></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="t-quote-mark">&ldquo;</div><p class="testimonial-quote">The strategic thinking frameworks I gained here transformed how I approach every decision in my career and personal life. Vision Forge sets you apart from the crowd.</p><div class="testimonial-author"><div class="t-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=70&auto=format&fit=crop" alt="Bilal Khan" loading="lazy" decoding="async" width="80" height="80"/></div><div class="t-info"><h4>Bilal Khan</h4><p>Graduate Researcher</p></div></div></div></div>
         </div>
         <div class="t-controls">
           <button class="t-btn t-prev" aria-label="Previous testimonial">&#8592;</button>
@@ -548,21 +560,21 @@
         </div>
       </div>
       <div class="tmc flip">
-        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80" alt="Hamza Qureshi" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=70&auto=format&fit=crop" alt="Hamza Qureshi" loading="lazy" decoding="async" width="400" height="400"/></div>
         <div class="tmc-info" style="background:#6a8258;color:#fff;">
           <div><h3 class="tmc-name" style="color:#fff;">Hamza Qureshi</h3><p class="tmc-role" style="color:rgba(220,255,190,0.85);">Events &amp; Operations</p><p class="tmc-bio" style="color:rgba(255,255,255,0.72);">Orchestrates impactful events and workshops that bring the Vision Forge community together for growth and collective inspiration.</p></div>
           <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#fff;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#fff;">Twitter</a></div><div class="tmc-sig" style="color:#fff;opacity:0.45;">Hamza</div></div>
         </div>
       </div>
       <div class="tmc">
-        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80" alt="Zainab Noor" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=70&auto=format&fit=crop" alt="Zainab Noor" loading="lazy" decoding="async" width="400" height="400"/></div>
         <div class="tmc-info" style="background:#a0b8d4;color:#0d1f35;">
           <div><h3 class="tmc-name" style="color:#0d1f35;">Zainab Noor</h3><p class="tmc-role" style="color:#1a4b8c;">Scholarship Guidance</p><p class="tmc-bio" style="color:#1a2e42;">Navigates the scholarship landscape for students &mdash; from identifying opportunities to crafting winning applications for academic funding.</p></div>
           <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#0d1f35;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#0d1f35;">Email</a></div><div class="tmc-sig" style="color:#0d1f35;">Zainab</div></div>
         </div>
       </div>
       <div class="tmc">
-        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&q=80" alt="Ahmed Raza" loading="lazy" crossorigin="anonymous"/></div>
+        <div class="tmc-photo"><img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&q=70&auto=format&fit=crop" alt="Ahmed Raza" loading="lazy" decoding="async" width="400" height="400"/></div>
         <div class="tmc-info" style="background:#c8903a;color:#fff;">
           <div><h3 class="tmc-name" style="color:#fff;">Ahmed Raza</h3><p class="tmc-role" style="color:rgba(255,240,200,0.9);">Head of Digital &amp; Creative</p><p class="tmc-bio" style="color:rgba(255,255,255,0.75);">Shapes Vision Forge's digital presence, ensuring the movement's message reaches and resonates with a growing nationwide audience.</p></div>
           <div class="tmc-bottom"><div class="tmc-socials"><a href="#" class="tmc-sl" style="color:#fff;">LinkedIn</a><a href="#" class="tmc-sl" style="color:#fff;">Instagram</a></div><div class="tmc-sig" style="color:#fff;opacity:0.45;">Ahmed</div></div>
