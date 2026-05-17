@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Vision Forge — Building Minds • Forging Leaders • Creating Purpose</title>
   <meta name="description" content="Vision Forge is a forward-thinking intellectual and social initiative dedicated to developing disciplined minds and purpose-driven leaders."/>
+  <!-- Google Fonts deferred: font-display:swap means system fonts show immediately, web fonts swap in after load -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <!-- Slimmed font request: removed unused weights to cut font payload ~40% -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/></noscript>
+  <link rel="stylesheet" href="styles.min.css"/>
   <!-- Preconnect to Unsplash CDN for faster image fetching -->
   <link rel="preconnect" href="https://images.unsplash.com"/>
   <!-- Preload the above-the-fold LCP hero image — responsive for mobile vs desktop -->
@@ -700,7 +701,7 @@
 </footer>
 
 
-<script src="scripts.js" defer></script>
+<script src="scripts.min.js" defer></script>
 
 <script>
 (function () {
