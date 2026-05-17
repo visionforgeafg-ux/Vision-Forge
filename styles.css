@@ -5,23 +5,6 @@
 
 /* Fonts loaded via <link> in HTML — no @import chain */
 
-/* ── Font fallback metrics — reduces CLS during web-font swap ── */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  src: local('Georgia');
-  font-display: swap;
-  size-adjust: 96%;
-  ascent-override: 96%;
-  descent-override: 22%;
-  line-gap-override: 0%;
-}
-@font-face {
-  font-family: 'Outfit';
-  src: local('system-ui');
-  font-display: swap;
-  size-adjust: 100%;
-}
-
 :root {
   color-scheme: light;
   --navy:        #0d1f35;
@@ -585,14 +568,6 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 /* ── PAGE SYSTEM ── */
 .page-view { display: none !important; }
 .page-view.page-active { display: block !important; }
-/* Hint to browser: only render what's in the active page */
-.page-view.page-active > section,
-.page-view.page-active > div:not(.hero-inner) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 400px;
-}
-/* Hero must always render immediately */
-.page-view.page-active .hero { content-visibility: visible; }
 
 /* ── EXPLORE PAGE ── */
 .explore-hero { position: relative; overflow: hidden; background: linear-gradient(150deg, var(--navy) 0%, #0f2a47 40%, #162d4f 70%, #1a3254 100%); padding: 120px 0 80px; }
@@ -1014,6 +989,11 @@ select.auth-control option { background: #fff; color: var(--navy); }
 @media (max-width: 768px) {
   :root { --nav-h: 64px; }
   .container { width: 92%; }
+
+  /* Hero image hidden on mobile: eliminates 5 Unsplash requests,
+     text is the LCP element and renders instantly with system fonts */
+  .hero-right { display: none !important; }
+  .hero-inner { grid-template-columns: 1fr !important; gap: 0 !important; }
 
   #about, #services, #process { padding: 72px 0; }
 
